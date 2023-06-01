@@ -3,7 +3,7 @@ import { Button, Col, Container, Form, InputGroup, Nav, NavItem, NavLink, Navbar
 
 const HomeNavbar = () => {
     return (
-        <Navbar variant='light' bg='light' className='rounded-pill shadow-sm m-3'>
+        <Navbar variant='light' bg='light' className='rounded-pill shadow-sm mx-3 mt-3 sticky-top'>
             <Container className='justify-content-evenly'>
                 <Navbar.Brand href="#" className='navbarBrandText d-none d-sm-none d-md-block'>
                     <i className='bi bi-bar-chart-steps'></i> timegraph

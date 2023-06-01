@@ -14,7 +14,7 @@ const BottomNavbar = () => {
                     variant='outline-dark'
                     className='border-0 btn-sm  px-3'
                 >
-                    <i className='bi bi-plus-circle myPlusCircle' ></i>
+                    <i className='bi bi-plus-circle-fill myPlusCircle' ></i>
                 </Button>
 
                 <NavLink className='fs-4 '>
