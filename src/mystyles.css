@@ -46,3 +46,26 @@
 .titleRouterLink {
     text-decoration: none;
 }
+
+.cardTitleDivider {
+    visibility: hidden;
+    width: 0;
+    height: 5px;
+    transition: width .3s;
+    opacity: 60%;
+}
+
+.cardTitle:hover .cardTitleDivider {
+    visibility: visible;
+    width: 100%;
+    transition: width .3s;
+}
+
+.titleRouterLinkIcon {
+    font-size: 1rem;
+    /* transition: 0.1s all; */
+}
+
+/* .titleRouterLinkIcon:hover {
+    opacity: 100% !important;
+} */

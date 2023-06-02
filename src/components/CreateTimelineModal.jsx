@@ -14,7 +14,7 @@ const CreateTimelineModal = ({ show, handleClose }) => {
 
     return (
         <Modal show={show} onHide={handleClose} className='' scrollable='true'>
-            <Modal.Header closeButton>
+            <Modal.Header closeButton className='bg-success text-light'>
                 <Modal.Title>New Timeline</Modal.Title>
             </Modal.Header>
             <Modal.Body>
@@ -101,8 +101,8 @@ const CreateTimelineModal = ({ show, handleClose }) => {
                 <Button variant="danger" onClick={handleClose}>
                     Cancel
                 </Button>
-                <Button variant="success" onClick={handleSubmit}>
-                    Create
+                <Button variant="success" onClick={handleSubmit} >
+                    Create <i className='ps-1  bi bi-plus-lg'></i>
                 </Button>
             </Modal.Footer>
         </Modal>
