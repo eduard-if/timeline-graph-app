@@ -42,3 +42,7 @@
     box-shadow: 1px 1px 10px 10px rgba(139, 139, 139, 0.151);
 
 }
+
+.titleRouterLink {
+    text-decoration: none;
+}

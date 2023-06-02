@@ -6,6 +6,7 @@ import HomeTimelineContainer from '../components/HomeTimelineContainer';
 import HomeToolbar from '../components/HomeToolbar';
 
 const HomePage = () => {
+    // implement the modal create timeline here to keep in sync with toolbar and bottom navbar
     return (
         <div >
             <HomeNavbar />
