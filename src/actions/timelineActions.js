@@ -18,7 +18,7 @@ export const listTimelines = () => async (dispatch) => {
     try {
         dispatch({ type: TIMELINE_LIST_REQUEST });
         const { data } = await axios.get('/api/timelines/');
-
+        console.log(data)
         dispatch({
             type: TIMELINE_LIST_SUCCESS,
             payload: data

@@ -35,9 +35,9 @@ const HomeTimelineComponent = ({ data }) => {
                 text={variant === 'light' ? 'dark' : 'white'}
                 border={border}
             >
-                {data.img && (
+                {data.imageUrl && (
                     <Link to={`timeline/${title}`}>
-                        <CardImg src={data.img} className='overflow-hidden homeCardImg shadow-sm' />
+                        <CardImg src={data.imageUrl} className='overflow-hidden homeCardImg shadow-sm' />
                     </Link>
                 )}
                 <Card.Body>

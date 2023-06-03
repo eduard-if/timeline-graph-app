@@ -47,12 +47,12 @@ export const timelineOpenReducer = (state = { timeline: { items: [], groups: [],
 export const timelineListReducer = (state = { timelines: [] }, action) => {
     switch (action.type) {
         case TIMELINE_LIST_REQUEST:
-            return { loading: true, ...state };
+            return { loading: true, timelines: [] };
         case TIMELINE_LIST_SUCCESS:
-            return { loading: false, error: action.payload };
+            return { loading: false, timelines: action.payload };
         case TIMELINE_LIST_FAIL:
             return { loading: false, error: action.payload };
         default:
             return state;
-    }
-}
+    };
+};
