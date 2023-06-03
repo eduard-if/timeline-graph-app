@@ -1,9 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Col, Container, Form, Modal, Row } from 'react-bootstrap';
 
 
 const CardFooterEditModals = ({ data, showEdit, handleCloseEdit, showDelete, handleCloseDelete }) => {
-  const { title, description } = data;
+  const { title, description, variant, border, text, img } = data;
+
+  const [editTitle, setEditTitle] = useState(title)
+  const [editDescription, setEditDescription] = useState(description ? description : '');
+  const [editBackgroundColor, setEditBackgroundColor] = useState('');
+  const [editBorderColor, setEditBorderColor] = useState('');
+  const [editTextColor, setEditTextColor] = useState('');
+  const [editImage, setEditImage] = useState(img ? img : '');
+
+  const handleSubmitEdit = () => {
+    console.log('submitted edit!')
+  }
+
+  const handleSubmitDelete = () => {
+    console.log('submitted delete!')
+  }
+
+  // backend call to update data if it changed, update state with response, call to rerender timeline container
 
   return (
     <div>
@@ -20,7 +37,8 @@ const CardFooterEditModals = ({ data, showEdit, handleCloseEdit, showDelete, han
               <Form.Label>Title</Form.Label>
               <Form.Control
                 type='text'
-                placeholder={title}
+                value={editTitle}
+                onChange={(e) => setEditTitle(e.target.value)}
               />
             </Form.Group>
             <Form.Group
@@ -28,14 +46,22 @@ const CardFooterEditModals = ({ data, showEdit, handleCloseEdit, showDelete, han
               controlId='description'
             >
               <Form.Label>Description</Form.Label>
-              <Form.Control as='textarea' rows={3} placeholder={description} />
+              <Form.Control
+                as='textarea'
+                rows={3}
+                placeholder='Details or keywords for easier searching'
+                value={editDescription}
+                onChange={(e) => setEditDescription(e.target.value)}
+              />
             </Form.Group>
 
             <Form.Group className='mb-3' controlId='image'>
               <Form.Label>Image</Form.Label>
               <Form.Control
                 type='text'
-                placeholder=''
+                placeholder='Your URL goes here'
+                value={editImage}
+                onChange={(e) => setEditImage(e.target.value)}
               />
             </Form.Group>
 
@@ -96,13 +122,13 @@ const CardFooterEditModals = ({ data, showEdit, handleCloseEdit, showDelete, han
           <Button variant="danger" onClick={handleCloseEdit}>
             Cancel
           </Button>
-          <Button variant="info" onClick={handleCloseEdit}>
-            Save Changes
+          <Button variant="info" onClick={handleSubmitEdit}>
+            Save Changes <i className='ps-1 bi bi-check2-circle'></i>
           </Button>
         </Modal.Footer>
       </Modal>
 
-      <Modal show={showDelete} onHide={handleCloseDelete} className='' scrollable='true' centered>
+      <Modal show={showDelete} onHide={handleCloseDelete} scrollable='true' centered>
         <Modal.Header closeButton className='bg-danger text-light'>
           <Modal.Title  >
             <i className='bi bi-trash3-fill pe-2' ></i>
@@ -129,7 +155,7 @@ const CardFooterEditModals = ({ data, showEdit, handleCloseEdit, showDelete, han
           <Button variant="outline-info" onClick={handleCloseDelete}>
             Cancel
           </Button>
-          <Button variant="danger" onClick={handleCloseDelete}>
+          <Button variant="danger" onClick={handleSubmitDelete}>
             Delete!
           </Button>
         </Modal.Footer>

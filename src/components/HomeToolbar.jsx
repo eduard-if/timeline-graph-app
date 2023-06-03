@@ -2,13 +2,7 @@ import React, { useState } from 'react';
 import { Button, Nav, NavDropdown } from 'react-bootstrap';
 import CreateTimelineModal from './CreateTimelineModal';
 
-const HomeToolbar = () => {
-    const [show, setShow] = useState(false);
-
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-
-
+const HomeToolbar = ({ handleShow }) => {
     return (
         <>
             <Nav className='justify-content-center mb-4 mt-1 ' >
@@ -25,15 +19,8 @@ const HomeToolbar = () => {
                             <i className='bi bi-plus-circle-fill fs-4 align-middle'></i>
                         </Button>
                     </Nav.Item>
-                    {/* 
-                    <NavDropdown title="Sort" id="nav-dropdown">
-                        <NavDropdown.Item eventKey="4.1">Last Updated Descending</NavDropdown.Item>
-                        <NavDropdown.Item eventKey="4.2">Last Updated Ascending</NavDropdown.Item>
-                    </NavDropdown> */}
-
                 </div>
             </Nav >
-            <CreateTimelineModal show={show} handleClose={handleClose} />
         </>
     );
 };

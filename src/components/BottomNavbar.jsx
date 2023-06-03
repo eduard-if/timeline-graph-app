@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Col, Container, Form, InputGroup, Nav, NavItem, NavLink, Navbar, Row } from 'react-bootstrap';
 
-const BottomNavbar = () => {
+const BottomNavbar = ({ handleShow }) => {
     return (
         <Navbar variant='light' bg='light' className='shadow px-3 fixed-bottom  d-md-none d-lg-none'>
             <Container className='justify-content-between'>
@@ -10,6 +10,7 @@ const BottomNavbar = () => {
                 </Navbar.Brand>
 
                 <Button
+                    onClick={handleShow}
                     type='button'
                     variant='outline-dark'
                     className='border-0 btn-sm  px-3'

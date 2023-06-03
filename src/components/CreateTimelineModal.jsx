@@ -3,8 +3,15 @@ import { Button, Col, Container, Form, Modal, Row } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
 const CreateTimelineModal = ({ show, handleClose }) => {
-    const [title, setTitle] = useState('1');
+    const [title, setTitle] = useState('Example title');
     let id = title
+    // perfrom backend request to create and receive the id from there
+
+    const [description, setDescription] = useState('');
+    const [backgroundColor, setBackgroundColor] = useState();
+    const [borderColor, setBorderColor] = useState();
+    const [textColor, setTextColor] = useState();
+    const [image, setImage] = useState('');
 
     const navigate = useNavigate();
 
@@ -15,7 +22,10 @@ const CreateTimelineModal = ({ show, handleClose }) => {
     return (
         <Modal show={show} onHide={handleClose} className='' scrollable='true'>
             <Modal.Header closeButton className='bg-success text-light'>
-                <Modal.Title>New Timeline</Modal.Title>
+                <Modal.Title>
+                    <i className='bi bi-calendar-range-fill pe-2' ></i>
+                    New Timeline
+                </Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <Form>
@@ -24,6 +34,8 @@ const CreateTimelineModal = ({ show, handleClose }) => {
                         <Form.Control
                             type='text'
                             placeholder=''
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
                             autoFocus
                             required
                         />
@@ -33,14 +45,22 @@ const CreateTimelineModal = ({ show, handleClose }) => {
                         controlId='description'
                     >
                         <Form.Label>Description</Form.Label>
-                        <Form.Control as='textarea' rows={3} />
+                        <Form.Control
+                            as='textarea'
+                            rows={3}
+                            placeholder='Details or keywords for easier searching'
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
+                        />
                     </Form.Group>
 
-                    <Form.Group className='mb-3' controlId='title'>
+                    <Form.Group className='mb-3' controlId='image'>
                         <Form.Label>Image</Form.Label>
                         <Form.Control
                             type='text'
-                            placeholder=''
+                            placeholder='Your URL goes here'
+                            value={image}
+                            onChange={(e) => setImage(e.target.value)}
                         />
                     </Form.Group>
 
