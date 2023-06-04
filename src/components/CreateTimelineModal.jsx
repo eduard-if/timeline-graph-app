@@ -1,22 +1,26 @@
 import React, { useState } from 'react';
 import { Button, Col, Container, Form, Modal, Row } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { createTimeline, listTimelines } from '../actions/timelineActions';
 
 const CreateTimelineModal = ({ show, handleClose }) => {
-    const [title, setTitle] = useState('Example title');
-    let id = title
-    // perfrom backend request to create and receive the id from there
-
+    const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
-    const [backgroundColor, setBackgroundColor] = useState();
+    const [imageUrl, setImageUrl] = useState('');
+    const [bgColor, setBgColor] = useState();
     const [borderColor, setBorderColor] = useState();
     const [textColor, setTextColor] = useState();
-    const [image, setImage] = useState('');
+    const [titleColor, setTitleColor] = useState();
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const handleSubmit = () => {
-        navigate(`/timeline/${id}`);
+        let timelineData = { title, description, imageUrl, bgColor, borderColor, textColor, titleColor }
+        dispatch(createTimeline(timelineData));
+        dispatch(listTimelines());
+        // navigate(`/timeline/${id}`);
     }
 
     return (
@@ -54,13 +58,13 @@ const CreateTimelineModal = ({ show, handleClose }) => {
                         />
                     </Form.Group>
 
-                    <Form.Group className='mb-3' controlId='image'>
+                    <Form.Group className='mb-3' controlId='imageUrl'>
                         <Form.Label>Image</Form.Label>
                         <Form.Control
                             type='text'
                             placeholder='Your URL goes here'
-                            value={image}
-                            onChange={(e) => setImage(e.target.value)}
+                            value={imageUrl}
+                            onChange={(e) => setImageUrl(e.target.value)}
                         />
                     </Form.Group>
 
@@ -76,7 +80,10 @@ const CreateTimelineModal = ({ show, handleClose }) => {
                             <Col xs={1}>
                                 <Form.Control
                                     type='color'
-                                    rows={3} />
+                                    value={bgColor}
+                                    onChange={(e) => setBgColor(e.target.value)}
+                                />
+
                             </Col>
                         </Row>
                     </Form.Group>
@@ -93,7 +100,29 @@ const CreateTimelineModal = ({ show, handleClose }) => {
                             <Col xs={1}>
                                 <Form.Control
                                     type='color'
-                                    rows={3} />
+                                    value={textColor}
+                                    onChange={(e) => setTextColor(e.target.value)}
+                                />
+                            </Col>
+                        </Row>
+                    </Form.Group>
+
+                    <Form.Group
+                        className='mb-3'
+                        controlId='titleColor'
+                    >
+                        <Row className='justify-content-start'>
+                            <Col xs={4}>
+                                <Form.Label className='mt-2'>Title color</Form.Label>
+
+                            </Col>
+                            <Col xs={1}>
+                                <Form.Control
+                                    type='color'
+                                    value={titleColor}
+                                    onChange={(e) => setTitleColor(e.target.value)}
+
+                                />
                             </Col>
                         </Row>
                     </Form.Group>
@@ -110,7 +139,9 @@ const CreateTimelineModal = ({ show, handleClose }) => {
                             <Col xs={1}>
                                 <Form.Control
                                     type='color'
-                                    rows={3} />
+                                    value={borderColor}
+                                    onChange={(e) => setBorderColor(e.target.value)}
+                                />
                             </Col>
                         </Row>
                     </Form.Group>
@@ -118,7 +149,7 @@ const CreateTimelineModal = ({ show, handleClose }) => {
                 </Form>
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="danger" onClick={handleClose}>
+                <Button variant="danger" type='submit' onClick={handleClose}>
                     Cancel
                 </Button>
                 <Button variant="success" onClick={handleSubmit} >

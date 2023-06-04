@@ -21,16 +21,20 @@ const HomeTimelineContainer = () => {
 
 
     return (
+        <>
+            <Row className=''>
+                {timelines.map((timeline, index) => (
 
-        <Row className=''>
-            {timelines.map((timeline, index) => (
-                <Col xs={12} sm={12} md={4} lg={3} className='mb-4' key={index} >
-                    <HomeTimelineComponent data={timeline} />
-                </Col>
-            ))}
+                    <Col xs={12} sm={12} md={4} lg={3} className='mb-4' key={index} >
+                        <HomeTimelineComponent data={timeline} />
+                    </Col>
 
-        </Row>
 
+                ))}
+
+            </Row>
+
+        </>
     );
 };
 

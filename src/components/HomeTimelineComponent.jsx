@@ -23,17 +23,19 @@ const HomeTimelineComponent = ({ data }) => {
     //     console.log(data);
     // }, [data]);
 
-    const { title, description, variant, border, updated, created } = data;
+    const { title, description, bgColor, textColor, titleColor, borderColor, lastUpdated } = data;
 
-    let color = variant ? variant : undefined
+
     return (
         <>
             <Card
                 className='homeCardHover overflow-hidden'
                 as='div'
-                bg={variant}
-                text={variant === 'light' ? 'dark' : 'white'}
-                border={border}
+                style={{
+                    backgroundColor: bgColor,
+                    color: textColor,
+                    borderColor: borderColor
+                }}
             >
                 {data.imageUrl && (
                     <Link to={`timeline/${title}`}>
@@ -41,13 +43,16 @@ const HomeTimelineComponent = ({ data }) => {
                     </Link>
                 )}
                 <Card.Body>
-                    <Link to={`timeline/${title}`} className='titleRouterLink ' style={{ color: `${variant === 'light' ? 'dark' : 'white'}` }}>
+                    <Link to={`timeline/${title}`}
+                        className='titleRouterLink '
+                        style={{ color: `${titleColor}` }}>
                         <Card.Title className='mb-0 cardTitle'>
                             {title}
                             <hr className='m-0 mt-1 cardTitleDivider' />
                             {/* <i className='bi bi-link-45deg opacity-25 align-middle titleRouterLinkIcon text-nowrap'></i> */}
                         </Card.Title>
                     </Link>
+
 
                     <Card.Text>
                         {description}
@@ -57,12 +62,11 @@ const HomeTimelineComponent = ({ data }) => {
                     <Row className='justify-content-between fst-italic fw-light opacity-50 homeCardFooter'>
                         <Col xs={8}
                             className='pt-1'>
-                            Last Updated: {updated}
+                            Last Updated: {new Date(lastUpdated).toLocaleString('en-US', { hour12: false })}
                         </Col>
                         <Col xs={3} className='d-flex  ps-3 pe-1 justify-content-end'>
                             <Button
                                 onClick={handleShowDelete}
-                                variant={`${variant}`}
                                 className='rounded'
                                 style={{
                                     paddingTop: 0,
@@ -70,14 +74,16 @@ const HomeTimelineComponent = ({ data }) => {
                                     paddingLeft: '0.5rem',
                                     paddingRight: '0.5rem',
                                     fontSize: 'large',
-                                    marginRight: '0.3rem'
+                                    marginRight: '0.3rem',
+                                    backgroundColor: 'transparent',
+                                    border: 'none',
+                                    color: textColor
                                 }}
                             >
                                 <i className='bi bi-x-lg' ></i>
                             </Button>
                             <Button
                                 onClick={handleShowEdit}
-                                variant={`${variant}`}
                                 className='rounded'
                                 style={{
                                     paddingTop: 0,
@@ -85,6 +91,9 @@ const HomeTimelineComponent = ({ data }) => {
                                     paddingLeft: '0.5rem',
                                     paddingRight: '0.5rem',
                                     fontSize: 'large',
+                                    backgroundColor: 'transparent',
+                                    border: 'none',
+                                    color: textColor
                                 }}
                             >
                                 <i className='bi bi-three-dots' ></i>
