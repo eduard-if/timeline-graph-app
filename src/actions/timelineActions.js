@@ -56,6 +56,9 @@ export const createTimeline = ({
             type: TIMELINE_CREATE_SUCCESS,
             payload: data
         });
+
+        dispatch(listTimelines());
+
     } catch (error) {
         dispatch({
             type: TIMELINE_CREATE_FAIL,
@@ -65,3 +68,9 @@ export const createTimeline = ({
         });
     };
 };
+
+// export const deleteTimeline = (id) => async (dispatch) =>{
+//     dispatch({
+//         type:
+//     })
+// }

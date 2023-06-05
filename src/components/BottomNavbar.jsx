@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Col, Container, Form, InputGroup, Nav, NavItem, NavLink, Navbar, Row } from 'react-bootstrap';
 
-const BottomNavbar = ({ handleShow }) => {
+const BottomNavbar = ({ handleShowCreateTimelineModal }) => {
     return (
         <Navbar variant='light' bg='light' className='shadow px-3 fixed-bottom  d-md-none d-lg-none'>
             <Container className='justify-content-between'>
@@ -10,7 +10,7 @@ const BottomNavbar = ({ handleShow }) => {
                 </Navbar.Brand>
 
                 <Button
-                    onClick={handleShow}
+                    onClick={handleShowCreateTimelineModal}
                     type='button'
                     variant='outline-dark'
                     className='border-0 btn-sm  px-3'

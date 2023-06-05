@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { Button, Card, CardImg, Col, Row } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import CardFooterEditModals from './CardFooterEditModals';
+import { useMediaQuery } from 'react-responsive';
 
 
-const HomeTimelineComponent = ({ data }) => {
-    // fix the title LINK color conflict
+const HomeTimelineCard = ({ data }) => {
+    const md = useMediaQuery({ maxWidth: 992 })
 
     const [showEdit, setShowEdit] = useState(false);
 
@@ -23,7 +24,7 @@ const HomeTimelineComponent = ({ data }) => {
     //     console.log(data);
     // }, [data]);
 
-    const { title, description, bgColor, textColor, titleColor, borderColor, lastUpdated } = data;
+    const { title, description, bgColor, textColor, titleColor, borderColor, lastUpdated, id } = data;
 
 
     return (
@@ -38,18 +39,22 @@ const HomeTimelineComponent = ({ data }) => {
                 }}
             >
                 {data.imageUrl && (
-                    <Link to={`timeline/${title}`}>
-                        <CardImg src={data.imageUrl} className='overflow-hidden homeCardImg shadow-sm' />
+                    <Link to={`timeline/${id}`}>
+                        <CardImg src={data.imageUrl}
+                            className='overflow-hidden homeCardImg shadow-sm'
+                            style={{
+                                height: md ? '100%' : '15vw'
+                            }}
+                        />
                     </Link>
                 )}
                 <Card.Body>
-                    <Link to={`timeline/${title}`}
+                    <Link to={`timeline/${id}`}
                         className='titleRouterLink '
                         style={{ color: `${titleColor}` }}>
                         <Card.Title className='mb-0 cardTitle'>
                             {title}
                             <hr className='m-0 mt-1 cardTitleDivider' />
-                            {/* <i className='bi bi-link-45deg opacity-25 align-middle titleRouterLinkIcon text-nowrap'></i> */}
                         </Card.Title>
                     </Link>
 
@@ -62,7 +67,7 @@ const HomeTimelineComponent = ({ data }) => {
                     <Row className='justify-content-between fst-italic fw-light opacity-50 homeCardFooter'>
                         <Col xs={8}
                             className='pt-1'>
-                            Last Updated: {new Date(lastUpdated).toLocaleString('en-US', { hour12: false })}
+                            Last Updated: {new Date(lastUpdated).toLocaleString('en-GB', { hour12: false })}
                         </Col>
                         <Col xs={3} className='d-flex  ps-3 pe-1 justify-content-end'>
                             <Button
@@ -115,4 +120,4 @@ const HomeTimelineComponent = ({ data }) => {
     );
 };
 
-export default HomeTimelineComponent;
+export default HomeTimelineCard;

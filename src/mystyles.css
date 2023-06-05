@@ -10,6 +10,10 @@
     transition: 0.2s all ease-out;
 }
 
+.homeListCardHover {
+    transition: 0.2s all ease-out;
+}
+
 .homeCardHover:hover {
     transition: 0.2s all ease-in-out;
     box-shadow: 1px 1px 5px 5px rgba(139, 139, 139, 0.151);
@@ -17,9 +21,15 @@
 
 }
 
+.homeListCardHover:hover {
+    transition: 0.2s all ease-in-out;
+    box-shadow: 1px 1px 5px 5px rgba(139, 139, 139, 0.151);
+    scale: 1.009;
+}
+
+
 .homeCardImg {
     width: 100%;
-    height: 15vw;
     object-fit: cover;
     transition: 0.2s scale ease-out;
 }
@@ -28,6 +38,22 @@
     transition: 0.2s scale ease-in;
     scale: 1.1;
 }
+
+
+.homeListCardImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.2s scale ease-out;
+}
+
+
+.homeListCardHover:hover .homeListCardImg {
+    transition: 0.2s scale ease-in;
+    scale: 1.1;
+}
+
+
 
 .homeCardFooter {
     font-size: small;
