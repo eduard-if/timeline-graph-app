@@ -9,8 +9,9 @@ import Loader from './Loader';
 import HomeTimelineList from './HomeTimelineList';
 import HomeTimelineCard from './HomeTimelineCard';
 import { useMediaQuery } from 'react-responsive';
+import TimelineTableView from './TimelineTableView';
 
-const HomeTimelineContainer = ({ showListView }) => {
+const HomeTimelineContainer = () => {
     const dispatch = useDispatch();
     const location = useLocation();
 
@@ -19,19 +20,21 @@ const HomeTimelineContainer = ({ showListView }) => {
     const timelineList = useSelector(state => state.timelineList);
     const { error, loading, timelines } = timelineList;
 
+    const { viewModeHome } = useSelector(state => state.viewModeHome)
+
+
     useEffect(() => {
         // console.log(data)
 
         dispatch(listTimelines());
     }, [dispatch]);
 
-    {/* if showListView is true, show list, otherwise grid */ }
     return (
         <>
             {loading ? <Loader /> :
 
 
-                (showListView ?
+                (viewModeHome === 'list' ?
                     <div className='d-flex justify-content-center'>
                         <ListGroup variant='flush' className={!md ? 'w-50' : 'w-100'} >
                             {timelines.map((timeline, index) => (
@@ -42,18 +45,21 @@ const HomeTimelineContainer = ({ showListView }) => {
 
                         </ListGroup>
                     </div>
-                    :
-                    <Row className=''>
-                        {timelines.map((timeline, index) => (
+                    : viewModeHome === 'grid' ?
+                        <Row className=''>
+                            {timelines.map((timeline, index) => (
 
-                            <Col xs={12} sm={12} md={4} lg={3} className='mb-4' key={index} >
-                                <HomeTimelineCard data={timeline} />
-                            </Col>
+                                <Col xs={12} sm={12} md={4} lg={3} className='mb-4' key={index} >
+                                    <HomeTimelineCard data={timeline} />
+                                </Col>
 
 
-                        ))}
+                            ))}
 
-                    </Row>
+                        </Row>
+                        : viewModeHome === 'table' ?
+                            <TimelineTableView />
+                            : <h1>error</h1>
                 )
             }
 

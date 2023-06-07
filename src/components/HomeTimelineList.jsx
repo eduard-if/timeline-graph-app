@@ -16,12 +16,7 @@ const HomeTimelineList = ({ data }) => {
 
     // redux state when component is changed/deleted to rerender timeline container
 
-    // useEffect(() => {
-    //     console.log(data);
-    // }, [data]);
-
     const { title, description, bgColor, textColor, titleColor, borderColor, lastUpdated, id } = data;
-
 
     return (
         <>
@@ -57,7 +52,7 @@ const HomeTimelineList = ({ data }) => {
 
 
                             <Card.Text>
-                                {description}
+                                {description && description.length > 200 ? description.slice(0, 200) + '...' : description}
                             </Card.Text>
                         </Card.Body>
 
@@ -105,9 +100,7 @@ const HomeTimelineList = ({ data }) => {
                             </Button>
                         </Col>
                     </Row>
-
                 </Card.Footer>
-
             </Card>
 
             <CardFooterEditModals

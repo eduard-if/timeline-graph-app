@@ -2,6 +2,27 @@
     font-family: 'Monomaniac One', sans-serif;
 }
 
+/* .homeNavbar {
+    background: linear-gradient(-45deg, #ffffff, #d3f3ff, #d3f3ff, #ffffff);
+    background-size: 100% 100%;
+    animation: gradient 15s ease infinite;
+    opacity: 100%;
+} */
+
+/* @keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+} */
+
 .myPlusCircle {
     font-size: x-large;
 }
@@ -95,3 +116,16 @@
 /* .titleRouterLinkIcon:hover {
     opacity: 100% !important;
 } */
+
+.floatCreateEventButton {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 40px;
+    right: 40px;
+    background-color: #0C9;
+    color: #FFF;
+    border-radius: 50px;
+    text-align: center;
+    box-shadow: 2px 2px 3px #999;
+}

@@ -6,6 +6,7 @@ import { useMediaQuery } from 'react-responsive';
 
 
 const HomeTimelineCard = ({ data }) => {
+    // truncate description, max 3 rows, 12-13~ words 
     const md = useMediaQuery({ maxWidth: 992 })
 
     const [showEdit, setShowEdit] = useState(false);
@@ -60,7 +61,7 @@ const HomeTimelineCard = ({ data }) => {
 
 
                     <Card.Text>
-                        {description}
+                        {description && description.length > 100 ? description.slice(0, 100) + '...' : description}
                     </Card.Text>
                 </Card.Body>
                 <Card.Footer className='py-1'>
