@@ -11,6 +11,15 @@ import {
     TIMELINE_LIST_REQUEST,
     TIMELINE_LIST_SUCCESS,
     TIMELINE_LIST_FAIL,
+
+    TIMELINE_DELETE_REQUEST,
+    TIMELINE_DELETE_SUCCESS,
+    TIMELINE_DELETE_FAIL,
+
+    TIMELINE_UPDATE_REQUEST,
+    TIMELINE_UPDATE_SUCCESS,
+    TIMELINE_UPDATE_FAIL,
+
 } from '../constants/timelineConstants';
 import axios from 'axios';
 
@@ -52,12 +61,15 @@ export const createTimeline = ({
             }
         );
 
+
         dispatch({
             type: TIMELINE_CREATE_SUCCESS,
             payload: data
         });
 
-        dispatch(listTimelines());
+        console.log(data)
+
+        // dispatch(listTimelines());
 
     } catch (error) {
         dispatch({
@@ -69,8 +81,64 @@ export const createTimeline = ({
     };
 };
 
-// export const deleteTimeline = (id) => async (dispatch) =>{
-//     dispatch({
-//         type:
-//     })
-// }
+export const deleteTimeline = (id) => async (dispatch) => {
+    try {
+        dispatch({
+            type: TIMELINE_DELETE_REQUEST
+        })
+
+        const { data } = await axios.delete(
+            `api/timelines/${id}/delete/`
+        )
+
+        dispatch({
+            type: TIMELINE_DELETE_SUCCESS,
+            payload: id
+        })
+
+    } catch (error) {
+        dispatch({
+            type: TIMELINE_DELETE_FAIL,
+            payload: error.response && error.response.data.details
+                ? error.response.data.details
+                : error.message,
+        });
+    }
+}
+
+export const updateTimeline = ({
+    id, title, description, imageUrl, bgColor, textColor, titleColor, borderColor
+}) => async (dispatch) => {
+    try {
+        dispatch({ type: TIMELINE_UPDATE_REQUEST });
+
+        const config = {
+            headers: {
+                'Content-type': 'application/json'
+            }
+        };
+        console.log('data is:', id, title)
+        const { data } = await axios.put(
+            `api/timelines/${id}/update/`,
+            {
+                id, title, description, imageUrl, bgColor, textColor, titleColor, borderColor,
+            }
+        );
+
+        console.log(data)
+        dispatch({
+            type: TIMELINE_UPDATE_SUCCESS,
+            payload: data
+        });
+
+
+
+    } catch (error) {
+        dispatch({
+            type: TIMELINE_UPDATE_FAIL,
+            payload: error.response && error.response.data.details
+                ? error.response.data.details
+                : error.message,
+        });
+    };
+};

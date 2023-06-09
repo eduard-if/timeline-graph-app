@@ -8,27 +8,30 @@ import CreateTimelineModal from '../components/CreateTimelineModal';
 import { useSelector } from 'react-redux';
 
 const HomePage = () => {
-    const [showCreateTimelineModal, setShowCreateTimelineModal] = useState(false);
+  const [showCreateTimelineModal, setShowCreateTimelineModal] = useState(false);
 
-    const handleCloseCreateTimelineModal = () => setShowCreateTimelineModal(false);
-    const handleShowCreateTimelineModal = () => setShowCreateTimelineModal(true);
+  const handleCloseCreateTimelineModal = () => setShowCreateTimelineModal(false);
+  const handleShowCreateTimelineModal = () => setShowCreateTimelineModal(true);
 
-    return (
-        <div >
-            <HomeNavbar />
-            <HomeToolbar
-                handleShowCreateTimelineModal={handleShowCreateTimelineModal} />
-            <BottomNavbar
-                handleShowCreateTimelineModal={handleShowCreateTimelineModal} />
-            <Container>
-                <HomeTimelineContainer />
-            </Container>
-            <CreateTimelineModal
-                showCreateTimelineModal={showCreateTimelineModal}
-                handleShowCreateTimelineModal={handleShowCreateTimelineModal}
-                handleCloseCreateTimelineModal={handleCloseCreateTimelineModal} />
-        </div>
-    );
+  return (
+    <div >
+      <HomeNavbar />
+      <HomeToolbar
+        handleShowCreateTimelineModal={handleShowCreateTimelineModal} />
+      <BottomNavbar
+        handleShowCreateTimelineModal={handleShowCreateTimelineModal} />
+      <main className='pb-5 '>
+        <Container className='pt-4 px-4 pb-4 border border-secondary border-opacity-25 rounded shadow-lg homeContainer'>
+          <HomeTimelineContainer />
+        </Container>
+      </main>
+
+      <CreateTimelineModal
+        showCreateTimelineModal={showCreateTimelineModal}
+        handleShowCreateTimelineModal={handleShowCreateTimelineModal}
+        handleCloseCreateTimelineModal={handleCloseCreateTimelineModal} />
+    </div>
+  );
 };
 
 export default HomePage;

@@ -4,6 +4,7 @@ import './index.css';
 import './bootstrap.min.css';
 import '../node_modules/bootstrap-icons/font/bootstrap-icons.min.css';
 import './mystyles.css';
+import './styles.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';

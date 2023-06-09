@@ -2,29 +2,37 @@ import React from 'react';
 import { Button, Col, Container, Form, InputGroup, Nav, NavItem, NavLink, Navbar, Row } from 'react-bootstrap';
 
 const BottomNavbar = ({ handleShowCreateTimelineModal }) => {
-    return (
-        <Navbar variant='light' bg='light' className='shadow px-3 fixed-bottom  d-md-none d-lg-none'>
-            <Container className='justify-content-between'>
-                <Navbar.Brand href="#" className='navbarBrandText'>
-                    <i className='bi bi-bar-chart-steps'></i>
-                </Navbar.Brand>
+  return (
+    <Navbar variant='light' bg='light' className='shadow px-1 fixed-bottom  d-md-none d-lg-none'>
+      <Container className='justify-content-between' fluid>
+        <Navbar.Brand href='/' className='navbarBrandText'>
+          <i className='bi bi-bar-chart-steps'></i>
+        </Navbar.Brand>
 
-                <Button
-                    onClick={handleShowCreateTimelineModal}
-                    type='button'
-                    variant='outline-dark'
-                    className='border-0 btn-sm  px-3'
-                >
-                    <i className='bi bi-plus-circle-fill myPlusCircle' ></i>
-                </Button>
+        {/* <Button
+          onClick={handleShowCreateTimelineModal}
+          type='button'
+          variant='outline-dark'
+          className='border-0 btn-sm '
+        >
+          <i className='bi bi-plus-circle-fill myPlusCircle' ></i>
+        </Button> */}
 
-                <NavLink className='fs-4 '>
-                    <i className='bi bi-person-circle '></i>
-                </NavLink>
+        <Button
+          onClick={handleShowCreateTimelineModal}
+          variant='outline-dark'
+          className='fs-4 py-0 px-5 rounded border-0 '
+        >
+          <i className='bi bi-plus-circle-fill' ></i>
+        </Button>
 
-            </Container>
-        </Navbar>
-    );
+        <NavLink className='fs-4 py-0 px-2 rounded border-0'>
+          <i className='bi bi-person-circle '></i>
+        </NavLink>
+
+      </Container>
+    </Navbar>
+  );
 };
 
 export default BottomNavbar;

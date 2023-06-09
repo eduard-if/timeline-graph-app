@@ -1,23 +1,57 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Col, Container, Form, Modal, Row } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteTimeline, updateTimeline } from '../actions/timelineActions';
 
 
-const CardFooterEditModals = ({ data, showEdit, handleCloseEdit, showDelete, handleCloseDelete }) => {
-  const { title, description, variant, border, text, img } = data;
+const DeleteEditModals = ({ itemId, showEdit, handleCloseEdit, showDelete, handleCloseDelete }) => {
+  const dispatch = useDispatch();
 
-  const [editTitle, setEditTitle] = useState(title)
-  const [editDescription, setEditDescription] = useState(description ? description : '');
+  const timelineList = useSelector(state => state.timelineList);
+  const { timelines } = timelineList;
+  const timeline = timelines.filter(timeline => timeline.id === itemId);
+  const { title, description, imageUrl, id, bgColor, textColor, titleColor, borderColor } = timeline[0];
+
+  const [editTitle, setEditTitle] = useState('')
+  const [editDescription, setEditDescription] = useState('');
   const [editBackgroundColor, setEditBackgroundColor] = useState('');
   const [editBorderColor, setEditBorderColor] = useState('');
   const [editTextColor, setEditTextColor] = useState('');
-  const [editImage, setEditImage] = useState(img ? img : '');
+  const [editTitleColor, setEditTitleColor] = useState('');
+  const [editImage, setEditImage] = useState('');
+
+  useEffect(() => {
+    if (timeline) {
+      setEditTitle(title);
+      setEditDescription(description);
+      setEditBackgroundColor(bgColor);
+      setEditBorderColor(borderColor);
+      setEditTextColor(textColor);
+      setEditTitleColor(titleColor);
+      setEditImage(imageUrl);
+    }
+
+  }, [itemId])
 
   const handleSubmitEdit = () => {
     console.log('submitted edit!')
+    console.log(timeline)
+    dispatch(updateTimeline({
+      id,
+      'title': editTitle,
+      'description': editDescription,
+      'imageUrl': editImage,
+      'bgColor': editBackgroundColor,
+      'borderColor': editBorderColor,
+      'textColor': editTextColor,
+      'titleColor': editTitleColor
+    }))
+    handleCloseEdit();
   }
 
   const handleSubmitDelete = () => {
-    console.log('submitted delete!')
+    dispatch(deleteTimeline(id));
+    handleCloseDelete();
   }
 
   // backend call to update data if it changed, update state with response, call to rerender timeline container
@@ -77,7 +111,9 @@ const CardFooterEditModals = ({ data, showEdit, handleCloseEdit, showDelete, han
                 <Col xs={1}>
                   <Form.Control
                     type='color'
-                    rows={3} />
+                    onChange={(e) => setEditBackgroundColor(e.target.value)}
+                  />
+
                 </Col>
               </Row>
             </Form.Group>
@@ -94,7 +130,27 @@ const CardFooterEditModals = ({ data, showEdit, handleCloseEdit, showDelete, han
                 <Col xs={1}>
                   <Form.Control
                     type='color'
-                    rows={3} />
+                    onChange={(e) => setEditTextColor(e.target.value)}
+                  />
+                </Col>
+              </Row>
+            </Form.Group>
+
+
+            <Form.Group
+              className='mb-3'
+              controlId='textColor'
+            >
+              <Row className='justify-content-start'>
+                <Col xs={4}>
+                  <Form.Label className='mt-2'>Title color</Form.Label>
+
+                </Col>
+                <Col xs={1}>
+                  <Form.Control
+                    type='color'
+                    onChange={(e) => setEditTitleColor(e.target.value)}
+                  />
                 </Col>
               </Row>
             </Form.Group>
@@ -111,7 +167,8 @@ const CardFooterEditModals = ({ data, showEdit, handleCloseEdit, showDelete, han
                 <Col xs={1}>
                   <Form.Control
                     type='color'
-                    rows={3} />
+                    onChange={(e) => setEditBorderColor(e.target.value)}
+                  />
                 </Col>
               </Row>
             </Form.Group>
@@ -165,4 +222,4 @@ const CardFooterEditModals = ({ data, showEdit, handleCloseEdit, showDelete, han
   );
 };
 
-export default CardFooterEditModals;
+export default DeleteEditModals;

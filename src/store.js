@@ -1,12 +1,14 @@
 import { legacy_createStore as createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { timelineListReducer } from './reducers/timelineReducers';
+import { timelineCreateReducer, timelineListReducer, timelineUpdateReducer } from './reducers/timelineReducers';
 import { viewModeHomeReducer } from './reducers/uiReducers';
 
 const reducer = combineReducers({
     timelineList: timelineListReducer,
     viewModeHome: viewModeHomeReducer,
+    timelineCreate: timelineCreateReducer,
+    timelineUpdate: timelineUpdateReducer
 });
 
 const getViewModeHomeLocalStorage = () => {
