@@ -24,7 +24,7 @@ const HomeTimelineContainer = () => {
 
   useEffect(() => {
     dispatch(listTimelines());
-  }, [dispatch,]);
+  }, [dispatch, location]);
 
   return (
     <>

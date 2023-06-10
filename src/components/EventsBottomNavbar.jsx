@@ -8,7 +8,7 @@ const EventsBottomNavbar = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   return (
-    <Navbar variant='light' bg='light' className='shadow-lg px-1 fixed-bottom text-light'>
+    <Navbar variant='light' bg='' className=' px-1 fixed-bottom text-light'>
       <Container className='justify-content-between' fluid>
         <Navbar.Brand href="/" className='navbarBrandText'>
           <i className='bi bi-bar-chart-steps'></i>

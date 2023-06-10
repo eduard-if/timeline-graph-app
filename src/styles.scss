@@ -1,8 +1,8 @@
-// Colors
+
 $bg-color: hsl(0, 0%, 92%);
 $dot-color: hsla(0, 0%, 0%, 0.466);
 
-// Dimensions
+
 $dot-size: 1px;
 $dot-space: 44px;
 
@@ -13,3 +13,14 @@ body {
 		$dot-color;
 	background-size: $dot-space $dot-space;
 }
+
+// $bg-color2: hsl(0, 0%, 23%);
+// $dot-color2: hsla(0, 0%, 69%, 0.466);
+
+// .eventPage{
+//     background:
+//     linear-gradient(90deg, $bg-color2 ($dot-space - $dot-size), transparent 1%) center,
+//     linear-gradient($bg-color2 ($dot-space - $dot-size), transparent 1%) center,
+//     $dot-color2;
+// background-size: $dot-space $dot-space;
+// }

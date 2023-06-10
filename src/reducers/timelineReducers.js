@@ -35,7 +35,7 @@ export const timelineCreateReducer = (state = {}, action) => {
   };
 };
 
-export const timelineOpenReducer = (state = { timeline: { items: [], groups: [], options: [] } }, action) => {
+export const timelineOpenReducer = (state = { timeline: {}, items: [], groups: [], options: [] }, action) => {
   switch (action.type) {
     case TIMELINE_OPEN_REQUEST:
       return { loading: true, ...state };

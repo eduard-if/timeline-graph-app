@@ -42,6 +42,30 @@ export const listTimelines = () => async (dispatch) => {
     };
 };
 
+
+export const openTimeline = (id) => async (dispatch) => {
+    try {
+        dispatch({ type: TIMELINE_OPEN_CLEAR })
+
+        dispatch({ type: TIMELINE_OPEN_REQUEST });
+        const { data } = await axios.get(`/api/timelines/${id}/items/`);
+
+        dispatch({
+            type: TIMELINE_OPEN_SUCCESS,
+            payload: data
+        });
+
+    } catch (error) {
+        dispatch({
+            type: TIMELINE_OPEN_FAIL,
+            payload: error.response && error.response.data.details
+                ? error.response.data.details
+                : error.message,
+        });
+    };
+};
+
+
 export const createTimeline = ({
     title, description, imageUrl, bgColor, textColor, titleColor, borderColor
 }) => async (dispatch) => {
