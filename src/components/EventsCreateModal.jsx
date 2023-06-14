@@ -1,31 +1,32 @@
+
 import React, { useState } from 'react';
 import { Button, Col, Container, Form, Modal, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-// import { createTimeline, listTimelines } from '../actions/timelineActions';
+import { createEvent } from '../actions/timelineActions';
 
 const EventsCreateModal = ({ showEventsCreateModal, handleCloseEventsCreateModal }) => {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [imageUrl, setImageUrl] = useState('');
-  const [bgColor, setBgColor] = useState('');
-  const [borderColor, setBorderColor] = useState('');
-  const [textColor, setTextColor] = useState('');
-  const [titleColor, setTitleColor] = useState('');
+  const [title, setTitle] = useState('asdasd');
+  const [content, setContent] = useState('sdsd');
+  const [start, setStart] = useState('2023-06-13');
+  const [end, setEnd] = useState('2023-06-13');
+  const [type, setType] = useState('box');
+  const [style, setStyle] = useState('');
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const timelineList = useSelector(state => state.timelineList);
-  const { error, loading, timelines } = timelineList;
+  const data = useSelector(state => state.timelineOpen);
+  const { loading, error } = data
 
   const handleSubmit = () => {
-    let timelineData = { title, description, imageUrl, bgColor, borderColor, textColor, titleColor }
-    dispatch(createTimeline(timelineData));
+    const id = data.timeline.timeline.id
+    console.log(id)
+
+    dispatch(createEvent(title, content, start, end, type, id))
     if (!loading) {
-      handleCloseEventsCreateModal();
+      handleCloseEventsCreateModal()
     }
-    // add a toast/notification with success message 
   }
 
   return (
@@ -44,103 +45,29 @@ const EventsCreateModal = ({ showEventsCreateModal, handleCloseEventsCreateModal
       <Modal.Body>
         <Form>
           <Form.Group className='mb-3' controlId='title'>
-            <Form.Label>Title</Form.Label>
+            <Form.Label>Content</Form.Label>
             <Form.Control
               type='text'
-              placeholder='Your title here'
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              autoFocus
+              placeholder='Your content here'
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+
               required
             />
           </Form.Group>
-          <Form.Group
-            className="mb-3"
-            controlId='description'
-          >
-            <Form.Label>Details</Form.Label>
+          <Form.Group className='mb-3' controlId='title'>
+            <Form.Label>Start Date</Form.Label>
             <Form.Control
-              as='textarea'
-              rows={3}
-              placeholder='Details or keywords for easier searching'
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
+              type='date'
+              placeholder='Your title here'
+              value={start}
+              onChange={(e) => setStart(e.target.value)}
+
+              required
             />
-          </Form.Group>
-
-          <Form.Group className='mb-3' controlId='imageUrl'>
-            <Form.Label>Image</Form.Label>
-            <Form.Control
-              type='text'
-              placeholder='Your URL goes here'
-              value={imageUrl}
-              onChange={(e) => setImageUrl(e.target.value)}
-            />
-          </Form.Group>
-
-          <Form.Group
-            className='mb-3'
-            controlId='bgColor'
-          >
-            <Row className='justify-content-start'>
-              <Col xs={4}>
-                <Form.Label className='mt-2'>Background color</Form.Label>
-
-              </Col>
-              <Col xs={1}>
-                <Form.Control
-                  type='color'
-                  value={bgColor}
-                  onChange={(e) => setBgColor(e.target.value)}
-                />
-
-              </Col>
-            </Row>
-          </Form.Group>
-
-
-          <Form.Group
-            className='mb-3'
-            controlId='titleColor'
-          >
-            <Row className='justify-content-start'>
-              <Col xs={4}>
-                <Form.Label className='mt-2'>Title color</Form.Label>
-
-              </Col>
-              <Col xs={1}>
-                <Form.Control
-                  type='color'
-                  value={titleColor}
-                  onChange={(e) => setTitleColor(e.target.value)}
-
-                />
-              </Col>
-            </Row>
-          </Form.Group>
-
-          <Form.Group
-            className='mb-3'
-            controlId='borderColor'
-          >
-            <Row className='justify-content-start'>
-              <Col xs={4}>
-                <Form.Label className='mt-2'>Border color</Form.Label>
-
-              </Col>
-              <Col xs={1}>
-                <Form.Control
-                  type='color'
-                  value={borderColor}
-                  onChange={(e) => setBorderColor(e.target.value)}
-                />
-              </Col>
-            </Row>
           </Form.Group>
         </Form>
-
       </Modal.Body>
-
       <Modal.Footer>
         <Button variant="danger" type='submit' onClick={handleCloseEventsCreateModal}>
           Cancel

@@ -54,8 +54,6 @@ const DeleteEditModals = ({ itemId, showEdit, handleCloseEdit, showDelete, handl
     handleCloseDelete();
   }
 
-  // backend call to update data if it changed, update state with response, call to rerender timeline container
-
   return (
     <div>
       <Modal show={showEdit} onHide={handleCloseEdit} className='' scrollable='true'>

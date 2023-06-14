@@ -25,7 +25,7 @@ const CreateTimelineModal = ({ showCreateTimelineModal, handleCloseCreateTimelin
     if (!loading) {
       handleCloseCreateTimelineModal();
     }
-    // add a toast/notification with success message & open timeline link
+
   }
 
   return (

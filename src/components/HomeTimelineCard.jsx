@@ -8,7 +8,6 @@ import { deleteTimeline } from '../actions/timelineActions';
 
 
 const HomeTimelineCard = ({ data }) => {
-  // data and useEffect in HomeTimelineContainer
   const md = useMediaQuery({ maxWidth: 992 })
 
   const [showEdit, setShowEdit] = useState(false);
@@ -21,16 +20,7 @@ const HomeTimelineCard = ({ data }) => {
   const handleCloseDelete = () => setShowDelete(false);
   const handleShowDelete = () => setShowDelete(true);
 
-
-
-  // redux state when component is changed/deleted to rerender timeline container
-
-  // useEffect(() => {
-  //     console.log(data);
-  // }, [data]);
-
   const { title, description, bgColor, textColor, titleColor, borderColor, lastUpdated, id } = data;
-
 
   return (
     <>

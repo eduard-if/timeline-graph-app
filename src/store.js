@@ -1,7 +1,7 @@
 import { legacy_createStore as createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { timelineCreateReducer, timelineListReducer, timelineOpenReducer, timelineUpdateReducer } from './reducers/timelineReducers';
+import { eventCreateReducer, eventDeleteReducer, eventUpdateReducer, timelineCreateReducer, timelineListReducer, timelineOpenReducer, timelineUpdateReducer } from './reducers/timelineReducers';
 import { viewModeHomeReducer } from './reducers/uiReducers';
 
 const reducer = combineReducers({
@@ -9,7 +9,10 @@ const reducer = combineReducers({
     viewModeHome: viewModeHomeReducer,
     timelineCreate: timelineCreateReducer,
     timelineUpdate: timelineUpdateReducer,
-    timelineOpen: timelineOpenReducer
+    timelineOpen: timelineOpenReducer,
+    eventCreate: eventCreateReducer,
+    eventDelete: eventDeleteReducer,
+    eventupdate: eventUpdateReducer,
 });
 
 const getViewModeHomeLocalStorage = () => {

@@ -8,7 +8,6 @@ const HomeToolbar = ({ handleShowCreateTimelineModal }) => {
 
   let { viewModeHome } = useSelector(state => state.viewModeHome);
 
-
   const handleListGridView = () => {
     if (viewModeHome === 'grid') {
       dispatch(listView())

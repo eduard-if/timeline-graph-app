@@ -5,8 +5,6 @@ const HomeNavbar = () => {
   return (
     <Navbar
       variant='light'
-
-      // className='rounded-pill shadow-sm mx-3 mt-3 sticky-top homeNavbar'
       className=' homeNavbar'
     >
       <Container className='justify-content-evenly'>

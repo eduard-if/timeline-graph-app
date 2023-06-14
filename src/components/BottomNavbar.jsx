@@ -9,15 +9,6 @@ const BottomNavbar = ({ handleShowCreateTimelineModal }) => {
           <i className='bi bi-bar-chart-steps'></i>
         </Navbar.Brand>
 
-        {/* <Button
-          onClick={handleShowCreateTimelineModal}
-          type='button'
-          variant='outline-dark'
-          className='border-0 btn-sm '
-        >
-          <i className='bi bi-plus-circle-fill myPlusCircle' ></i>
-        </Button> */}
-
         <Button
           onClick={handleShowCreateTimelineModal}
           variant='outline-dark'

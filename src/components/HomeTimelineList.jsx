@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import DeleteEditModals from './DeleteEditModals';
 
 const HomeTimelineList = ({ data }) => {
-  // data and useEffect in HomeTimelineContainer
   const [showEdit, setShowEdit] = useState(false);
 
   const handleCloseEdit = () => setShowEdit(false);
@@ -14,8 +13,6 @@ const HomeTimelineList = ({ data }) => {
 
   const handleCloseDelete = () => setShowDelete(false);
   const handleShowDelete = () => setShowDelete(true);
-
-  // redux state when component is changed/deleted to rerender timeline container
 
   const { title, description, bgColor, textColor, titleColor, borderColor, lastUpdated, id } = data;
 
