@@ -16,7 +16,7 @@ const EventsBottomNavbar = () => {
 
   return (
     <>
-      <Navbar variant='light' bg='' className=' px-1 fixed-bottom text-light'>
+      <Navbar variant='light' bg='' className=' px-1 fixed-bottom text-light '>
         <Container className='justify-content-between' fluid>
           <Navbar.Brand href="/" className='navbarBrandText'>
             <i className='bi bi-bar-chart-steps'></i>
@@ -49,34 +49,6 @@ const EventsBottomNavbar = () => {
               have chosen. Like, text, images, lists, etc.
             </Offcanvas.Body>
           </Offcanvas>
-
-          {/* <ButtonGroup>
-          <Button
-            // onClick={handleShowCreateTimelineModal}
-            type='button'
-            variant='outline-light'
-            className='border-0'
-          >
-            <i className='bi bi-zoom-in' ></i>
-          </Button>
-          <Button
-            // onClick={handleShowCreateTimelineModal}
-            type='button'
-            variant='outline-light'
-            className='border-0'
-          >
-            Fit
-          </Button>
-          <Button
-            // onClick={handleShowCreateTimelineModal}
-            type='button'
-            variant='outline-light'
-            className='border-0'
-          >
-            <i className='bi bi-zoom-out' ></i>
-          </Button>
-        </ButtonGroup> */}
-
         </Container>
       </Navbar>
       <EventsCreateModal

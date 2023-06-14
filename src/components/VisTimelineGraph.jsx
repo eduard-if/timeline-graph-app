@@ -4,10 +4,12 @@ import { DataSet } from 'vis-data';
 import { useRef } from 'react';
 import { useState } from 'react';
 import 'vis-timeline/styles/vis-timeline-graph2d.min.css'
+import { Button, ButtonGroup } from 'react-bootstrap';
 
 const VisTimelineGraph = ({ items, options }) => {
     const timelineRef = useRef('null')
     const [timeline, setTimeline] = useState('');
+
 
     useEffect(() => {
         const container = timelineRef.current;
@@ -22,6 +24,7 @@ const VisTimelineGraph = ({ items, options }) => {
             newTimeline.focus(selectedItem.id, { animation: true, zoom: false });
         });
 
+
         return () => {
             if (newTimeline) {
                 newTimeline.destroy();
@@ -29,22 +32,72 @@ const VisTimelineGraph = ({ items, options }) => {
         };
     }, [options, items]);
 
-    // const handleItemClick = itemId => {
-
-    //     timeline.focus(itemId, { animation: true });
-    // };
 
     const handleItemClick = useCallback(
         (itemId) => {
             if (timeline) {
                 timeline.focus(itemId, { animation: true });
+
             }
         },
         [timeline]
     );
 
+    const zoomIn = () => {
+        if (timeline) {
+            timeline.zoomIn(1, { animation: true });
+        }
+    };
+
+    const zoomOut = () => {
+        if (timeline) {
+            timeline.zoomOut(1, { animation: true });
+        }
+    };
+
+    const fit = () => {
+        if (timeline) {
+            timeline.fit({ animation: true });
+        }
+    };
+
     return (
-        <div ref={timelineRef} style={{ height: '80vh' }} className='timelineContainer'></div>
+        <>
+            <div>
+                <div ref={timelineRef} style={{ height: '80vh', width: '100%' }} className='timelineContainer' ></div>
+            </div>
+
+            <div className='d-flex flex-row justify-content-center fixed-bottom mb-5'>
+                <ButtonGroup className='d-flex'>
+                    {/* <Button onClick={handleScrollLeft} >Left</Button> */}
+                    <Button
+                        onClick={zoomIn}
+                        type='button'
+                        variant='outline-secondary'
+                        className='border-0'
+                    >
+                        <i className='bi bi-zoom-in' ></i>
+                    </Button>
+                    <Button
+                        onClick={fit}
+                        type='button'
+                        variant='outline-secondary'
+                        className='border-0'
+                    >
+                        Fit
+                    </Button>
+                    <Button
+                        onClick={zoomOut}
+                        type='button'
+                        variant='outline-secondary'
+                        className='border-0'
+                    >
+                        <i className='bi bi-zoom-out' ></i>
+                    </Button>
+                    {/* <Button onClick={handleScrollRight} >Right</Button> */}
+                </ButtonGroup>
+            </div>
+        </>
     );
 };
 

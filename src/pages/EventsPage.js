@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import EventsBottomNavbar from '../components/EventsBottomNavbar';
 import { useDispatch, useSelector } from 'react-redux';
 import EventsTopNavbar from '../components/EventsTopNavbar';
-import { Button, Container, Nav, NavLink } from 'react-bootstrap';
+import { Button, ButtonGroup, Container, Nav, NavLink } from 'react-bootstrap';
 import VisTimelineGraph from '../components/VisTimelineGraph';
 import { DataSet } from 'vis-data';
 import { openTimeline } from '../actions/timelineActions';
@@ -39,10 +39,14 @@ const EventsPage = () => {
                   {data.timeline.timeline.title}
                 </Nav.Item>
               </Nav>
-              <VisTimelineGraph items={data.timeline.items} options={timelineOptions} />
+              <VisTimelineGraph
+                items={data.timeline.items}
+                options={timelineOptions}
+              />
             </>
           )
       }
+
       <EventsBottomNavbar />
     </div>
   );
