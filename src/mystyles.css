@@ -115,9 +115,12 @@
 } */
 
 
-.homeContainer {
-    background-color: #ffffff7e;
 
+.homeContainer {
+    background-color: #ffffff48;
+    box-shadow: 0 10px 25px #00000049;
+    /* background-color: rgba(199, 199, 199, 0.5); */
+    /* backdrop-filter: blur(2px); */
 }
 
 

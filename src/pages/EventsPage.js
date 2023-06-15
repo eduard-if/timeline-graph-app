@@ -17,7 +17,10 @@ const EventsPage = () => {
   const { loading, error } = data
 
   const timelineOptions = {
-    orientation: 'both',
+    orientation: 'bottom',
+    width: '100%',
+    height: '80vh',
+    showCurrentTime: false,
   };
 
   useEffect(() => {
@@ -34,9 +37,9 @@ const EventsPage = () => {
         </Container>
           : data.timeline.timeline && (
             <>
-              <Nav className='justify-content-between px-1 py-1'>
+              <Nav className='justify-content-start px-1 py-1'>
                 <Nav.Item>
-                  {data.timeline.timeline.title}
+                  <span className='fw-light' > </span>{data.timeline.timeline.title}
                 </Nav.Item>
               </Nav>
               <VisTimelineGraph
@@ -46,6 +49,8 @@ const EventsPage = () => {
             </>
           )
       }
+
+
 
       <EventsBottomNavbar />
     </div>

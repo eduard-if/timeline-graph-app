@@ -21,7 +21,7 @@ const HomePage = () => {
       <BottomNavbar
         handleShowCreateTimelineModal={handleShowCreateTimelineModal} />
       <main className='pb-5 '>
-        <Container className='pt-4 px-4 pb-4 border border-secondary border-opacity-25 rounded shadow-lg homeContainer'>
+        <Container className='pt-4 px-4 pb-4 border border-secondary border-opacity-25 rounded homeContainer'>
           <HomeTimelineContainer />
         </Container>
       </main>

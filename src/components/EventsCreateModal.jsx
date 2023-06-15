@@ -6,12 +6,14 @@ import { useNavigate } from 'react-router-dom';
 import { createEvent } from '../actions/timelineActions';
 
 const EventsCreateModal = ({ showEventsCreateModal, handleCloseEventsCreateModal }) => {
-  const [title, setTitle] = useState('asdasd');
-  const [content, setContent] = useState('sdsd');
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
   const [start, setStart] = useState('2023-06-13');
   const [end, setEnd] = useState('2023-06-13');
   const [type, setType] = useState('box');
-  const [style, setStyle] = useState('');
+  const [bgColor, setBgColor] = useState('');
+  const [textColor, setTextColor] = useState('');
+  const [borderColor, setBorderColor] = useState('');
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -34,7 +36,9 @@ const EventsCreateModal = ({ showEventsCreateModal, handleCloseEventsCreateModal
       show={showEventsCreateModal}
       onHide={handleCloseEventsCreateModal}
       className=''
-      scrollable='true'>
+      scrollable='true'
+      size='lg'
+    >
 
       <Modal.Header closeButton className='bg-success text-light'>
         <Modal.Title>
@@ -44,18 +48,28 @@ const EventsCreateModal = ({ showEventsCreateModal, handleCloseEventsCreateModal
       </Modal.Header>
       <Modal.Body>
         <Form>
-          <Form.Group className='mb-3' controlId='title'>
-            <Form.Label>Content</Form.Label>
+          <Form.Group className='mb-3' controlId='content'>
+            <Form.Label>Text Content</Form.Label>
             <Form.Control
               type='text'
-              placeholder='Your content here'
+              placeholder='What you see on the Timeline'
               value={content}
               onChange={(e) => setContent(e.target.value)}
 
               required
             />
           </Form.Group>
-          <Form.Group className='mb-3' controlId='title'>
+          <Form.Group className='mb-3' controlId='type'>
+            <Form.Label>Type</Form.Label>
+            <Form.Select aria-label='select-event-type' onChange={(e) => setType(e.target.value)} value={type}>
+              <option value='box'>Box</option>
+              <option value='point'>Point</option>
+              <option value='range'>Range</option>
+              <option value='background'>Background</option>
+            </Form.Select>
+
+          </Form.Group>
+          <Form.Group className='mb-3' controlId='start'>
             <Form.Label>Start Date</Form.Label>
             <Form.Control
               type='date'
@@ -64,6 +78,26 @@ const EventsCreateModal = ({ showEventsCreateModal, handleCloseEventsCreateModal
               onChange={(e) => setStart(e.target.value)}
 
               required
+            />
+          </Form.Group>
+          <Form.Group className='mb-3' controlId='end'>
+            <Form.Label>End Date</Form.Label>
+            <Form.Control
+              type='date'
+              placeholder='Your title here'
+              value={end}
+              onChange={(e) => setEnd(e.target.value)}
+
+
+            />
+          </Form.Group>
+          <Form.Group className='mb-3' controlId='title'>
+            <Form.Label>Hover Text</Form.Label>
+            <Form.Control
+              type='text'
+              placeholder='Shows when you hover over an event'
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
             />
           </Form.Group>
         </Form>

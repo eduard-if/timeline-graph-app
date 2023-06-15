@@ -215,3 +215,28 @@ export const createEvent = (
     });
   };
 };
+
+export const deleteEvent = (timelineID, itemID) => async (dispatch) => {
+  try {
+    dispatch({
+      type: EVENT_DELETE_REQUEST
+    })
+
+    const { data } = await axios.delete(
+      `/api/timelines/${timelineID}/items/delete/${itemID}`
+    )
+
+    dispatch({
+      type: EVENT_DELETE_SUCCESS,
+      payload: itemID
+    })
+
+  } catch (error) {
+    dispatch({
+      type: EVENT_DELETE_FAIL,
+      payload: error.response && error.response.data.details
+        ? error.response.data.details
+        : error.message,
+    });
+  }
+}
