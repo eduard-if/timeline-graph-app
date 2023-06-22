@@ -20,71 +20,83 @@ const RegisterPage = () => {
   const location = useLocation();
   const history = useNavigate();
   return (
-    <FormContainer>
-      <h1 className='m-3' align='center'>Register</h1>
-      {/* {message && <Message variant='danger'>{message}</Message>}
+    <>
+      <nav className='d-flex  justify-content-center'>
+        <Link to={'/'} className='navbarBrandText fs-3 text-dark' style={{ textDecoration: 'none' }} >
+          <i className='bi bi-bar-chart-steps'></i> timegraph
+        </Link>
+
+      </nav>
+
+      <FormContainer>
+        {/* {message && <Message variant='danger'>{message}</Message>}
             {error && <Message variant='danger'>{error}</Message>}
             {loading && <Loader />} */}
 
-      <Form
-        //  onSubmit={submitHandler} 
-        className='p-2'>
+        <Form
+          //  onSubmit={submitHandler} 
+          className='p-2 border border-secondary border-opacity-25 rounded'>
 
-        <Form.Group controlId='name' className='m-2'>
-          <Form.Label>Name</Form.Label>
-          <Form.Control
-            required
-            type='name'
-            placeholder='Enter Name'
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          >
-          </Form.Control>
-        </Form.Group>
+          <Form.Group controlId='name' className='my-2'>
+            <Form.Label>Name</Form.Label>
+            <Form.Control
+              required
+              type='name'
+              placeholder='Enter Name'
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            >
+            </Form.Control>
+          </Form.Group>
 
-        <Form.Group controlId='email' className='m-2'>
-          <Form.Label>Email Adress</Form.Label>
-          <Form.Control
-            required
-            type='email'
-            placeholder='Enter Email'
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          >
-          </Form.Control>
-        </Form.Group>
+          <Form.Group controlId='email' className='my-2'>
+            <Form.Label>Email Adress</Form.Label>
+            <Form.Control
+              required
+              type='email'
+              placeholder='Enter Email'
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            >
+            </Form.Control>
+          </Form.Group>
 
-        <Form.Group controlId='password' className='m-2'>
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            required
-            type='password'
-            placeholder='Enter Password'
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          >
-          </Form.Control>
-        </Form.Group>
-        <Form.Group controlId='passwordConfirm' className='m-2'>
-          <Form.Label>Confirm Password</Form.Label>
-          <Form.Control
-            required
-            type='password'
-            placeholder='Confirm Password'
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          >
-          </Form.Control>
-        </Form.Group>
+          <Form.Group controlId='password' className='my-2'>
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              required
+              type='password'
+              placeholder='Enter Password'
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            >
+            </Form.Control>
+          </Form.Group>
+          <Form.Group controlId='passwordConfirm' className='my-2'>
+            <Form.Label>Confirm Password</Form.Label>
+            <Form.Control
+              required
+              type='password'
+              placeholder='Confirm Password'
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            >
+            </Form.Control>
+          </Form.Group>
 
-        <Button className='m-2' type='submit' variant='primary'>Create Account</Button>
-      </Form>
-      <Row className='py-3'>
-        <Col className='ms-3'>
-          {/* Already have an account? <Link to={redirect ? `/login?redirect=${redirect}` : '/login'}>Sign In</Link> */}
-        </Col>
-      </Row>
-    </FormContainer>
+          <div className='d-flex justify-content-center'  >
+
+            <Button className='my-2 rounded shadow' type='submit' variant='success'>Create Account</Button>
+
+          </div>
+        </Form>
+        <Row className='py-3'>
+          <Col className='ms-3'>
+            {/* Already have an account? <Link to={redirect ? `/login?redirect=${redirect}` : '/login'}>Sign In</Link> */}
+          </Col>
+        </Row>
+      </FormContainer>
+    </>
   );
 };
 

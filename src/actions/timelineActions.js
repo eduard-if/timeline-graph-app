@@ -182,7 +182,7 @@ export const updateTimeline = ({
 };
 
 export const createEvent = (
-  title, content, start, end, type, id
+  title, content, start, end, type, bgColor, textColor, borderColor, notesDetails, id
 ) => async (dispatch) => {
   try {
     dispatch({ type: EVENT_CREATE_REQUEST });
@@ -196,7 +196,13 @@ export const createEvent = (
     const { data } = await axios.post(
       `/api/timelines/${id}/items/create/`,
       {
-        'title': title, 'content': content, 'start': start, 'end': end, 'type': type,
+        'title': title,
+        'content': content,
+        'start': start,
+        'end': end,
+        'type': type,
+        'style': `background-color: ${bgColor}; color: ${textColor}; border-color: ${borderColor}; border-radius: 7px;`,
+        'notesDetails': notesDetails
       }
     );
     console.log(data.item)

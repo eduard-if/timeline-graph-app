@@ -8,12 +8,16 @@
 
 
 .homeNavbar {
-    background-color: #ffffff00;
+    /* background-color: #343a401a; */
+    /* background-color: rgba(82, 82, 184, 0.63); */
+    /* background-color: #343a401a; */
 
+    /* background-color: transparent; */
+    backdrop-filter: blur(10px);
 }
 
 .searchNavbar {
-    opacity: 45%;
+    opacity: 100%;
 }
 
 .searchNavbar:focus {
@@ -34,15 +38,19 @@
 
 .homeCardHover:hover {
     transition: 0.2s all ease-in-out;
-    box-shadow: 1px 1px 5px 5px rgba(139, 139, 139, 0.151);
+    box-shadow: 0px 5px 15px rgba(32, 32, 32, 0.185);
+    /* box-shadow: 0 8px 8px -4px rgba(27, 27, 27, 0.288); */
     scale: 1.009;
+    filter: contrast(115%);
 
 }
 
 .homeListCardHover:hover {
     transition: 0.2s all ease-in-out;
-    box-shadow: 1px 1px 5px 5px rgba(139, 139, 139, 0.151);
+    box-shadow: 0 5px 5px -4px rgba(32, 32, 32, 0.288);
+    /* box-shadow: 1px 1px 5px 5px rgba(139, 139, 139, 0.151); */
     scale: 1.009;
+    filter: contrast(115%);
 }
 
 
@@ -114,26 +122,159 @@
     opacity: 100% !important;
 } */
 
+.homeBottomNavbar {
+    background-color: #ffffffc4;
+    backdrop-filter: blur(2px);
+}
+
 
 
 .homeContainer {
-    background-color: #ffffff48;
-    box-shadow: 0 10px 25px #00000049;
-    /* background-color: rgba(199, 199, 199, 0.5); */
+    /* background-color: #343a40; */
+    /* background-color: white;
+    box-shadow: 0px 40px 50px #30303086; */
+    border: black;
     /* backdrop-filter: blur(2px); */
+    /* background-color: rgba(199, 199, 199, 0.5);
+    backdrop-filter: blur(2px); */
+    /* box-shadow: 0 8px 8px -4px rgba(27, 27, 27, 0.288); */
 }
 
+
+/* 
+.eventsListContainer {
+    background-color: #343a401a;
+    box-shadow: 0 5px 10px #00000060;
+    /* backdrop-filter: blur(2px); */
+/* border: solid;
+    border-color: rgba(139, 139, 139, 0.466);
+    border-width: 1px; */
+/*} */
+
+.eventsListCard {
+    background-color: #ffffffd7;
+    box-shadow: 0 5px 10px #3030301e;
+    border: solid;
+    border-width: 1.5px;
+    border-color: rgba(139, 139, 139, 0.205);
+    border-radius: 7px;
+}
+
+.eventsListCard:hover {
+    transition: 0.1s border-color ease-in-out;
+    /* background-color: #ffffff; */
+    border-color: rgba(139, 139, 139, 0.466);
+}
+
+.eventsListCardCol {
+    /* box-shadow: 0px 4px 10px #30303060; */
+    /* box-shadow: 0px 8px 8px -4px #30303060; */
+    border-radius: 5px;
+}
+
+.eventsListCardCol:hover {
+    transition: 0.1s filter ease-in-out;
+    filter: contrast(110%);
+}
+
+.modal-content {
+    background-color: #ffffffd8;
+    backdrop-filter: blur(10px);
+}
+
+.eventsCreateModalInputs {
+    background-color: #ffffffd7;
+    /* backdrop-filter: blur(10px); */
+    box-shadow: 0 5px 10px #3030301e;
+    border: solid;
+    border-width: 1.5px;
+    border-color: rgba(139, 139, 139, 0.205);
+    border-radius: 7px;
+}
+
+/* 
+.eventsCreateModalHeader {
+    background-color: rgba(0, 2, 95, 0.795);
+    color: #135300;
+
+
+} */
+
+
+/* .eventsCreateModalInputs:focus-within {
+    border-color: rgba(51, 51, 51, 0.425) !important;
+} */
+
+/* .eventsBottomNavbar {
+    backdrop-filter: blur(5px);
+    background-color: rgba(0, 0, 0, 0.267);
+    /* box-shadow: 0 -10px 25px #30303034; */
+
+/* } */
+
+.eventsCreateModalInputs:hover {
+    transition: 0.1s border-color ease-in-out;
+    background-color: #ffffff;
+
+    border-color: rgba(139, 139, 139, 0.466);
+}
+
+.eventsPageOffcanvas {
+    background-color: #ffffffcc;
+    backdrop-filter: blur(10px);
+}
+
+.cardTimelineOptions {
+    background-color: #ffffff13;
+    backdrop-filter: blur(2px);
+    box-shadow: 0 2px 10px #3030301e;
+}
+
+.eventDetailsCard {
+    background-color: #ffffffd7;
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 0 6px 6px -4px rgba(27, 27, 27, 0.459);
+    /* box-shadow: 0 5px 15px #00000049; */
+    border: none;
+}
+
+.eventCardDetailsFooter {
+    background-color: transparent;
+
+}
 
 .timelineContainer {
     /* position: sticky; */
     /* top: 50vh; */
     overflow: auto;
 
+    /* background-color: rgba(189, 189, 189, 0.096); */
 }
+
+/* .vis-panel.vis-center {
+    /* background-color: #bfbfbf17; */
+/* backdrop-filter: blur(1px); */
+/* backdrop-filter: brightness(102%) blur(1px); */
+
+/*} */
+
+
 
 .vis-timeline .vis-panel.vis-bottom .vis-axis {
     border: none;
 }
+
+.vis-item {
+    transition: 0.1s box-shadow ease-in-out;
+
+}
+
+.vis-item:hover {
+    box-shadow: 0 1px 5px #00000049;
+
+}
+
 
 /* .vis-panel.vis-top .vis-axis {
     border: none;

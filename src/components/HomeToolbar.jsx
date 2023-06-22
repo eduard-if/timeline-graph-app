@@ -26,7 +26,7 @@ const HomeToolbar = ({ handleShowCreateTimelineModal }) => {
 
   return (
     <>
-      <Nav className='justify-content-center mt-3' >
+      <Nav className='justify-content-center bg-dark py-1 shadow sticky-top' >
 
         <Nav.Item >
           <Button
@@ -79,7 +79,7 @@ const HomeToolbar = ({ handleShowCreateTimelineModal }) => {
         <Nav.Item className='d-none d-sm-none d-md-block mx-1'>
           <Button
             onClick={handleShowCreateTimelineModal}
-            variant='outline-dark'
+            variant='outline-secondary'
             className='rounded-pill border-0 customButtonPadding '
           >
             <span

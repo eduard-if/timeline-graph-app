@@ -1,13 +1,17 @@
 import React from 'react';
 import { Button, Col, Container, Form, InputGroup, Nav, NavItem, NavLink, Navbar, Row } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 const BottomNavbar = ({ handleShowCreateTimelineModal }) => {
   return (
-    <Navbar variant='light' bg='light' className='shadow px-1 fixed-bottom  d-md-none d-lg-none'>
+    <Navbar variant='light' className='shadow px-1 fixed-bottom  d-md-none d-lg-none homeBottomNavbar'>
       <Container className='justify-content-between' fluid>
-        <Navbar.Brand href='/' className='navbarBrandText'>
-          <i className='bi bi-bar-chart-steps'></i>
-        </Navbar.Brand>
+        <Link to={'/'} >
+          <Navbar.Brand className='navbarBrandText'>
+            <i className='bi bi-bar-chart-steps'></i>
+          </Navbar.Brand>
+        </Link>
+
 
         <Button
           onClick={handleShowCreateTimelineModal}

@@ -46,17 +46,12 @@ const TimelineTableView = () => {
               <th >Description</th>
               <th>Last Updated</th>
               <th>Created</th>
-              <th>Background Color</th>
-              <th>Text Color</th>
-              <th>Title Color</th>
-              <th>Border Color</th>
-              <th>Image URL</th>
             </tr>
           </thead>
           <tbody className='table-group-divider table-light'>
             {timelines.map((timeline, index) => (
               <tr key={index} className=''>
-                <td className='align-middle'>
+                <td className='align-middle text-center'>
                   <ButtonGroup aria-label='edit' className='' size=''>
                     <Button
                       // onClick={handleShowDelete}
@@ -97,17 +92,10 @@ const TimelineTableView = () => {
                   </Link>
                 </td>
                 <td>{
-                  timeline.description && timeline.description.length > 40 ? timeline.description.slice(0, 30) + '...' : timeline.description
+                  timeline.description && timeline.description.length > 50 ? timeline.description.slice(0, 50) + '...' : timeline.description
                 }</td>
                 <td>{new Date(timeline.lastUpdated).toLocaleString('en-GB', { hour12: false })}</td>
                 <td>{new Date(timeline.createdAt).toLocaleString('en-GB', { hour12: false })}</td>
-                <td>{timeline.bgColor}<span style={{ color: timeline.bgColor }}> &#x25A0;</span></td>
-                <td>{timeline.textColor}<span style={{ color: timeline.textColor }}> &#x25A0;</span></td>
-                <td>{timeline.titleColor}<span style={{ color: timeline.titleColor }}> &#x25A0;</span></td>
-                <td>{timeline.borderColor}<span style={{ color: timeline.borderColor }}> &#x25A0;</span></td>
-                <td>{
-                  timeline.imageUrl && timeline.imageUrl.length > 30 ? timeline.imageUrl.slice(0, 30) + '...' : timeline.imageUrl
-                }</td>
               </tr>
             ))}
           </tbody>
