@@ -35,7 +35,7 @@ const CreateTimelineModal = ({ showCreateTimelineModal, handleCloseCreateTimelin
       className=''
       scrollable='true'>
 
-      <Modal.Header closeButton className='bg-success text-light'>
+      <Modal.Header closeButton className='bg-transparent text-dark'>
         <Modal.Title>
           <i className='bi bi-calendar-range-fill pe-2' ></i>
           New Timeline
@@ -159,12 +159,12 @@ const CreateTimelineModal = ({ showCreateTimelineModal, handleCloseCreateTimelin
 
       </Modal.Body>
 
-      <Modal.Footer>
-        <Button variant="danger" type='submit' onClick={handleCloseCreateTimelineModal}>
-          Cancel
+      <Modal.Footer className='justify-content-center' >
+        <Button variant='danger' className='rounded shadow-sm' type='submit' onClick={handleCloseCreateTimelineModal}>
+          Cancel <i className='bi bi-x-lg' ></i>
         </Button>
-        <Button variant="success" onClick={handleSubmit} >
-          Create <i className='ps-1  bi bi-plus-lg'></i>
+        <Button variant='success' className='rounded shadow-sm' onClick={handleSubmit} >
+          Create <i className='ps-1  bi bi-plus-lg '></i>
         </Button>
       </Modal.Footer>
     </Modal>

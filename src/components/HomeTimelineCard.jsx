@@ -25,7 +25,7 @@ const HomeTimelineCard = ({ data }) => {
   return (
     <>
       <Card
-        className='homeCardHover overflow-hidden'
+        className='homeCardHover overflow-hidden shadow border-0'
         as='div'
         style={{
           backgroundColor: bgColor,
@@ -38,7 +38,7 @@ const HomeTimelineCard = ({ data }) => {
             <CardImg src={data.imageUrl}
               className='overflow-hidden homeCardImg shadow-sm'
               style={{
-                height: md ? '100%' : '15vw'
+                maxHeight: md ? '50vh' : '30vh'
               }}
             />
           </Link>
@@ -62,7 +62,7 @@ const HomeTimelineCard = ({ data }) => {
           <Row className='justify-content-between fst-italic fw-light opacity-50 homeCardFooter'>
             <Col xs={8}
               className='pt-1'>
-              Last Updated: {new Date(lastUpdated).toLocaleString('en-GB', { hour12: false })}
+              Last Updated: {new Date(lastUpdated).toLocaleString('en-GB', { hour12: false }).split(',')[0]}
             </Col>
             <Col xs={3} className='d-flex  ps-3 pe-1 justify-content-end'>
               <Button

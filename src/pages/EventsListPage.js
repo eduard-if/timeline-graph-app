@@ -35,10 +35,9 @@ const EventsListPage = () => {
 
       <>
         <Nav
-          style={{ backdropFilter: 'blur(20px)' }}
-          className='sticky-top justify-content-center'>
+          className='bg-light sticky-top justify-content-center'>
           <div className='d-flex text-dark fs-3 px-3 pt-2 pb-1 fw-bold justify-content-between w-100' >
-            <Link to={`/timeline/${id}`} style={{ textDecoration: 'none' }} className='text-dark fs-4' >
+            <Link to={`/timeline/${id}`} style={{ textDecoration: 'none' }} className='text-dark fs-4 fw-light' >
               <NavItem  >
                 <i className='bi bi-card-list' ></i> Events List
               </NavItem>
@@ -98,7 +97,7 @@ const EventsListPage = () => {
         <Container className='mt-4' >
           {loading ? <Loader /> :
             data.timeline && data.timeline.items && data.timeline.items.length === 0 ? <Message variant='secondary' >
-              <h1 className='text-center' >Timeline Empty</h1>
+              <h1 className='text-center fw-light' >Timeline Empty...</h1>
             </Message> :
               error ? <Container className='pt-5'>
                 <Message variant='danger' ><h1 align='center'>{error}</h1></Message>
@@ -112,45 +111,45 @@ const EventsListPage = () => {
                           <Card.Body>
                             <Row >
                               <Col md className='text-center my-2 ' >
-                                <ButtonGroup aria-label='edit' className='shadow-sm' size=''>
+                                <ButtonGroup aria-label='edit' className='' size=''>
                                   <Button
                                     // onClick={handleShowDelete}
-                                    variant='dark'
-                                    className=''
+                                    variant='outline-dark'
+                                    className='rounded border-0 mx-1'
+
                                   >
-                                    <i className='bi bi-trash3-fill pe-2' ></i>
+                                    <i className='bi bi-trash3-fill' ></i>
                                   </Button>
                                   <Button
-                                    variant='dark'
-                                    // onClick={handleShowEdit()}
-                                    className=''
+                                    variant='outline-dark'
+                                    className='rounded border-0 mx-1'
                                   >
-                                    <i className='bi-pencil-square pe-2' ></i>
+                                    <i className='bi-pencil-square' ></i>
                                   </Button>
                                 </ButtonGroup>
                               </Col>
                               <Col md className='d-flex  justify-content-center my-2' >
                                 <strong>{item.content}</strong>
                               </Col>
-                              <Col md className='text-center my-2 bg-light fw-light eventsListCardCol' style={colMargin} >
+                              <Col md className='text-center my-2 fw-light eventsListCardCol shadow-sm' style={colMargin} >
                                 Type
                                 <br></br>
                                 <hr className='my-1' ></hr>
                                 {item.type}
                               </Col>
-                              <Col md className='text-center my-2 bg-success text-light eventsListCardCol' style={colMargin} >
+                              <Col md className='text-center my-2  eventsListCardCol shadow-sm' style={colMargin} >
                                 Start Date
                                 <br></br>
                                 <hr className='my-2 eventsListCardCol' ></hr>
                                 {new Date(item.start).toLocaleString('en-GB', { hour12: false })}
                               </Col>
-                              <Col md className='text-center my-2 bg-warning text-light eventsListCardCol' style={colMargin} >
+                              <Col md className='text-center my-2 eventsListCardCol shadow-sm' style={colMargin} >
                                 End Date
                                 <br></br>
                                 <hr className='my-2' ></hr>
                                 {new Date(item.end).toLocaleString('en-GB', { hour12: false })}
                               </Col>
-                              <Col md className='text-center my-2 bg-secondary text-light eventsListCardCol' style={colMargin} >
+                              <Col md className='text-center my-2 eventsListCardCol shadow-sm' style={colMargin} >
                                 Group
                                 <br></br>
                                 <hr className='my-1' ></hr>
@@ -170,26 +169,29 @@ const EventsListPage = () => {
         <Link to={`/timeline/${id}`} >
           <Button
             variant='dark'
-            className='rounded-circle px-2 py-1 mb-2 ms-3 mb-2 fs-6 opacity-75 shadow'
+            className='rounded-circle px-2 py-1  ms-4  fs-6 opacity-75 shadow'
             style={{
               position: 'fixed',
-              bottom: '3rem',
+              bottom: 0,
               left: 0,
+              marginBottom: '6rem',
+              scale: '1.2'
             }}
           >
             <i className='bi bi-arrow-90deg-left' ></i>
           </Button>
         </Link>
 
-
         <Link to={'/'} >
           <Button
             variant='dark'
-            className='rounded-circle px-2 py-1 mb-2 ms-3 mb-2 fs-6 opacity-75 shadow'
+            className='rounded-circle px-2 py-1  ms-4  fs-6 opacity-75 shadow'
             style={{
               position: 'fixed',
               bottom: 0,
               left: 0,
+              marginBottom: '2rem',
+              scale: '1.2'
             }}
           >
             <i className='bi bi-house' ></i>
@@ -198,12 +200,14 @@ const EventsListPage = () => {
 
         <Button
           variant='dark'
-          className='rounded-circle px-2 py-1 mb-2 me-3 mb-2 fs-6 opacity-75 shadow'
+          className='rounded-circle px-2 py-1 me-4 fs-6 opacity-75 shadow-sm'
           onClick={handleScrollToTop}
           style={{
             position: 'fixed',
             bottom: 0,
             right: 0,
+            marginBottom: '2rem',
+            scale: '1.2'
           }}
         >
           <i className='bi bi-chevron-up' ></i>

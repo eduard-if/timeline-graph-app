@@ -51,7 +51,7 @@ const HomeTimelineContainer = () => {
                 <Row className=''>
                   {timelines.map((timeline, index) => (
 
-                    <Col xs={12} sm={12} md={4} lg={3} className='mb-4' key={index} >
+                    <Col xs={12} sm={12} md={6} lg={4} xl={3} className='mb-4' key={index} >
                       <HomeTimelineCard data={timeline} />
                     </Col>
 

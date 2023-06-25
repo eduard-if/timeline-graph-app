@@ -2,8 +2,12 @@ import React, { useState } from 'react'
 import { Button, Card, Col, Container, Form, InputGroup, Nav, NavItem, NavLink, Navbar, Offcanvas, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { gridView, listView, tableView } from '../actions/uiActions';
+import { Link } from 'react-router-dom';
+import { useMediaQuery } from 'react-responsive';
 
 const HomeNavbar = ({ handleShowCreateTimelineModal }) => {
+  const md = useMediaQuery({ maxWidth: 992 })
+
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -33,44 +37,45 @@ const HomeNavbar = ({ handleShowCreateTimelineModal }) => {
   return (
     <>
       <Nav
-        style={{ backdropFilter: 'blur(20px)' }}
-        className='sticky-top justify-content-center'
+        style={{ backdropFilter: 'blur(2px) grayscale(100%)' }}
+        className='sticky-top justify-content-center mb-4 shadow-sm'
       >
-        <div className='d-flex text-dark fs-3 px-3 pt-2 pb-1 fw-bold justify-content-between w-100'>
-          <Navbar.Brand href='/' className='navbarBrandText '>
-            <i className='bi bi-bar-chart-steps'></i> timegraph
-          </Navbar.Brand>
+        <div className='d-flex text-dark  px-3 pt-2 pb-2 fw-bold justify-content-between w-100 ' >
+          <Link to={'/'} className='navbarBrandText fs-5 text-dark align-middle text-nowrap' style={{ textDecoration: 'none' }}>
+            <i className='bi bi-bar-chart-steps'></i> {!md && (<span>timegraph</span>)}
+          </Link>
 
-          <InputGroup className='w-75'>
+          <Form className='w-50' >
             <Form.Control
+
+              size='sm'
               type='search'
-              placeholder='Search'
-              className='bg-light searchNavbar'
+              placeholder='Search...'
+              className='bg-light rounded'
               aria-label='Search'
             />
-            <InputGroup.Text className='bg-light'>
-              <i className='bi bi-search' ></i>
-            </InputGroup.Text>
-          </InputGroup>
+          </Form>
+
+
 
           <Button
             variant='dark'
-            className='fs-4 ms-5 bg-transparent text-dark border-0'
+            className=' bg-transparent text-dark border-0 p-0 px-2 fs-5'
             onClick={handleShow}>
-            <i className='bi bi-person-circle '></i>
+            <i className='bi bi-person-circle ' ></i>
           </Button>
 
         </div>
 
-        <div
+        {/* <div
 
-          className='d-flex justify-content-center shadow px-3 py-2 bg-dark w-100'>
+          className='d-flex justify-content-center px-3 py-2 bg-transparent w-100'>
 
-          <Nav.Item >
+          <span className='rounded p-1 bg-light ' >
             <Button
-              variant='outline-secondary'
+              variant='outline-dark'
               onClick={handleListGridView}
-              className='rounded-pill border-0 customButtonPadding mt-2 px-3'
+              className='rounded border-0  px-2 py-0 opacity-75'
             >
 
               {viewModeHome === 'grid' ? (
@@ -112,26 +117,28 @@ const HomeNavbar = ({ handleShowCreateTimelineModal }) => {
                   )
               }
             </Button>
-          </Nav.Item>
 
-          <Nav.Item className='d-none d-sm-none d-md-block mx-1'>
+
+
             <Button
               onClick={handleShowCreateTimelineModal}
-              variant='outline-secondary'
-              className='rounded-pill border-0 customButtonPadding '
+              variant='outline-success'
+              className='rounded border-0 py-0 mx-3 px-2'
             >
               <span
-                className='fs-6 align-middle pe-2'
+                className=' align-middle pe-2'
               >New</span>
-              <i className='bi bi-plus-circle-fill fs-4 align-middle'></i>
+              <i
+                style={{ fontSize: 'larger' }}
+                className='bi bi-plus-circle-fill  align-middle'></i>
             </Button>
-          </Nav.Item>
 
-          <Nav.Item>
+
+
             <Button
-              variant='outline-secondary'
+              variant='outline-dark'
               onClick={handleTableView}
-              className='rounded-pill border-0 customButtonPadding mt-2 px-3 '
+              className='rounded border-0 opacity-75  py-0 px-2'
             >
               <i
                 className='bi bi-table '
@@ -142,8 +149,8 @@ const HomeNavbar = ({ handleShowCreateTimelineModal }) => {
                 }}></i>
               <span className=''>Table</span>
             </Button>
-          </Nav.Item>
-        </div >
+          </span>
+        </div > */}
 
       </Nav>
 

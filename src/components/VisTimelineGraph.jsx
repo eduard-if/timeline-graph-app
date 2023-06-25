@@ -49,16 +49,6 @@ const VisTimelineGraph = ({ items, options, timelineID }) => {
   }, [options, items]);
 
 
-  // const handleItemClick = useCallback(
-  //     (itemId) => {
-  //         if (timeline) {
-  //             timeline.focus(itemId, { animation: true });
-
-  //         }
-  //     },
-  //     [timeline]
-  // );
-
   const zoomIn = () => {
     if (timeline) {
       timeline.zoomIn(1, { animation: true });
@@ -89,6 +79,16 @@ const VisTimelineGraph = ({ items, options, timelineID }) => {
     timeline.moveTo(newStart, { animation: true });
   };
 
+  const leftBorderStyle = {
+    borderTopLeftRadius: '6px',
+    borderBottomLeftRadius: '6px',
+  }
+
+  const rightBorderStyle = {
+    borderTopRightRadius: '6px',
+    borderBottomRightRadius: '6px',
+  }
+
   return (
     <>
       <Row className='d-flex justify-content-center mt-1 mx-2 fixed-top' >
@@ -96,14 +96,21 @@ const VisTimelineGraph = ({ items, options, timelineID }) => {
           <div  >
             <Col className='d-flex justify-content-center'>
               <ButtonGroup className='shadow-sm' >
-                <Button className='btn-sm  ' variant='dark'>
+
+                <Button
+                  style={leftBorderStyle}
+                  className='btn-sm  ' variant='dark'>
                   <i className='bi bi-trash3-fill fs-6' ></i>
                 </Button>
+
                 <Button variant='dark border-0 ' as='div' onClick={() => setOpenEventDetails(!openEventDetails)}>
                   <span className='' >{new Date(itemToEdit.start).toLocaleString('en-GB', { hour12: false })} - {new Date(itemToEdit.end).toLocaleString('en-GB', { hour12: false })}</span>
                   <span className='fw-bold'> {itemToEdit.content}</span>
                 </Button>
-                <Button className='btn-sm  ' variant='dark '>
+
+                <Button
+                  style={rightBorderStyle}
+                  className='btn-sm  ' variant='dark '>
                   <i className='bi-pencil-square fs-6' ></i>
                 </Button>
               </ButtonGroup>
@@ -130,10 +137,16 @@ const VisTimelineGraph = ({ items, options, timelineID }) => {
                             <span>To: {new Date(itemToEdit.end).toLocaleString('en-GB', { hour12: false }).split(',')[0]}</span>
                           </span></i>
                         </Card.Text>
+
                       </Card.Body>
+
                       <Card.Footer className='border-0 p-0 pb-1 eventCardDetailsFooter'>
                         <div className='d-flex justify-content-center'>
-                          <Button onClick={() => setOpenEventDetails(false)} className='px-2 py-1 border-0' variant='light' style={{ backgroundColor: 'transparent' }} >
+
+                          <Button
+                            onClick={() => setOpenEventDetails(false)}
+                            className='px-2 py-1 border-0' variant='light'
+                            style={{ backgroundColor: 'transparent' }} >
                             <i className='bi bi-x-lg' ></i>
                           </Button>
                         </div>

@@ -79,7 +79,7 @@ const EventsBottomNavbar = () => {
                     </Form.Select>
                   </InputGroup>
 
-                  <InputGroup className='mb-3 border border-secondary border-opacity-50 rounded'>
+                  <InputGroup className='mb-3 border border-dark border-opacity-10 rounded'>
                     <InputGroup.Text className='fw-lighter border-0 border-end' style={{ backgroundColor: 'transparent' }} >Vertical Scrollbar</InputGroup.Text>
                     <div className='d-flex flex-row align-center justify-content-center m-auto' >
                       <Form.Check
