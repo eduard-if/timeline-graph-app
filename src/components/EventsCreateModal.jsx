@@ -79,7 +79,9 @@ const EventsCreateModal = ({ showEventsCreateModal, handleCloseEventsCreateModal
                 <Row>
                   <Col>
                     <Form.Label style={stylePreview} >Font Size</Form.Label>
-                    <Form.Select size='sm' aria-label='select-font-style' onChange={(e) => setFontsize(e.target.value)} value={fontSize}>
+                    <Form.Select
+                      className='rounded'
+                      size='sm' aria-label='select-font-style' onChange={(e) => setFontsize(e.target.value)} value={fontSize}>
                       <option value='medium' style={{ fontSize: 'medium' }} >Medium</option>
                       <option value='large' style={{ fontSize: 'large' }} >Large</option>
                       <option value='small' style={{ fontSize: 'small' }} >Small</option>
@@ -93,7 +95,9 @@ const EventsCreateModal = ({ showEventsCreateModal, handleCloseEventsCreateModal
                   <Col>
                     <Form.Label
                       style={stylePreview}>Style</Form.Label>
-                    <Form.Select size='sm' aria-label='select-font-style' onChange={(e) => setFontStyle(e.target.value)} value={fontStyle}>
+                    <Form.Select
+                      className='rounded'
+                      size='sm' aria-label='select-font-style' onChange={(e) => setFontStyle(e.target.value)} value={fontStyle}>
                       <option value='normal' style={{ fontStyle: 'normal' }} >Normal</option>
                       <option value='italic' style={{ fontStyle: 'italic' }} >Italic</option>
                     </Form.Select>
@@ -103,7 +107,9 @@ const EventsCreateModal = ({ showEventsCreateModal, handleCloseEventsCreateModal
                   <Col>
                     <Form.Label
                       style={stylePreview}>Weight</Form.Label>
-                    <Form.Select size='sm' aria-label='select-font-weight' onChange={(e) => setFontWeight(e.target.value)} value={fontWeight}>
+                    <Form.Select
+                      className='rounded'
+                      size='sm' aria-label='select-font-weight' onChange={(e) => setFontWeight(e.target.value)} value={fontWeight}>
                       <option value='normal' style={{ fontWeight: 'normal' }} >Normal</option>
                       <option value='bold' style={{ fontWeight: 'bold' }} >Bold</option>
                       <option value='lighter' style={{ fontWeight: 'lighter' }} >Lighter</option>
@@ -112,7 +118,9 @@ const EventsCreateModal = ({ showEventsCreateModal, handleCloseEventsCreateModal
                   <Col>
                     <Form.Label
                       style={stylePreview}>Line Decoration</Form.Label>
-                    <Form.Select size='sm' aria-label='select-font-line' onChange={(e) => setLineDecoration(e.target.value)} value={lineDecoration}>
+                    <Form.Select
+                      className='rounded'
+                      size='sm' aria-label='select-font-line' onChange={(e) => setLineDecoration(e.target.value)} value={lineDecoration}>
                       <option value='none' style={{ textDecorationLine: 'none' }} >None</option>
                       <option value='underline' style={{ textDecorationLine: 'underline' }} >Underline</option>
                       <option value='overline' style={{ textDecorationLine: 'overline' }} >Overline</option>
@@ -127,7 +135,9 @@ const EventsCreateModal = ({ showEventsCreateModal, handleCloseEventsCreateModal
                 className='mb-3   p-2 eventsCreateModalInputs'
                 controlId='type'>
                 <Form.Label>Type</Form.Label>
-                <Form.Select size='sm' aria-label='select-event-type' onChange={(e) => setType(e.target.value)} value={type}>
+                <Form.Select
+                  className='rounded'
+                  size='sm' aria-label='select-event-type' onChange={(e) => setType(e.target.value)} value={type}>
                   <option value='box'>Box</option>
                   <option value='point'>Point</option>
                   <option value='range'>Range</option>
@@ -149,6 +159,7 @@ const EventsCreateModal = ({ showEventsCreateModal, handleCloseEventsCreateModal
                 <Form.Group className='mb-3' controlId='start'>
                   <Form.Label>Start Date</Form.Label>
                   <Form.Control
+
                     size='sm'
                     type='date'
                     placeholder='Your title here'

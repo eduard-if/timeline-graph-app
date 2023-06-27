@@ -39,26 +39,28 @@
 .homeCardHover:hover {
     transition: 0.2s all ease-in-out;
     scale: 1.009;
-    filter: contrast(105%);
+
 
 }
 
 .homeListCardHover:hover {
     transition: 0.2s all ease-in-out;
     scale: 1.009;
-    filter: contrast(105%);
+
 }
 
 
 .homeCardImg {
     width: 100%;
     object-fit: cover;
-    transition: 0.2s scale ease-out;
+    transition: 0.2s all ease-out;
+    filter: contrast(95%);
 }
 
 .homeCardHover:hover .homeCardImg {
-    transition: 0.2s scale ease-in;
+    transition: 0.2s all ease-in;
     scale: 1.05;
+    filter: contrast(110%);
 }
 
 
@@ -148,30 +150,33 @@
 /*} */
 
 .eventsListCard {
-    background-color: #ffffffd7;
-    box-shadow: 0 5px 10px #3030301e;
+    background-color: #8a8a8a0c;
+    /* box-shadow: 0 5px 10px #3030301e; */
     border: solid;
     border-width: 1.5px;
-    border-color: rgba(139, 139, 139, 0.205);
+    border-color: rgba(168, 168, 168, 0.205);
     border-radius: 7px;
+
 }
 
 .eventsListCard:hover {
-    transition: 0.1s border-color ease-in-out;
+    transition: 0.1s all ease-in-out;
+    background-color: #ffffff75;
     /* background-color: #ffffff; */
-    border-color: rgba(139, 139, 139, 0.466);
+    border-color: rgba(0, 0, 0, 0.466);
 }
 
 .eventsListCardCol {
+    background-color: #ffffff75;
     /* box-shadow: 0px 4px 10px #30303060; */
     /* box-shadow: 0px 8px 8px -4px #30303060; */
     border-radius: 5px;
 }
 
-/* .eventsListCardCol:hover {
-    transition: 0.1s filter ease-in-out;
-    filter: invert(100%);
-} */
+.eventsListCardCol:hover {
+    transition: 0.1s all ease-in-out;
+    background-color: #8a8a8a0c;
+}
 
 .modal-content {
     background-color: #ffffffd8;

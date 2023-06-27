@@ -19,7 +19,7 @@ const HomeTimelineList = ({ data }) => {
   return (
     <>
       <Card
-        className='homeListCardHover overflow-hidden shadow border-0'
+        className='homeListCardHover overflow-hidden'
         as='div'
         style={{
           backgroundColor: bgColor,
