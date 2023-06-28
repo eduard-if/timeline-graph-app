@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { Button, ButtonGroup, Card, Col, Container, Form, InputGroup, Nav, NavItem, NavLink, Navbar, Offcanvas, Row } from 'react-bootstrap';
+import { Button, Card, Container, Form, InputGroup, Navbar, Offcanvas, } from 'react-bootstrap';
 import EventsCreateModal from './EventsCreateModal';
 import { Link } from 'react-router-dom';
 
-const EventsBottomNavbar = () => {
+const TimelinePageBottomNavbar = () => {
 
   const [show, setShow] = useState(false);
 
@@ -103,4 +103,4 @@ const EventsBottomNavbar = () => {
   );
 };
 
-export default EventsBottomNavbar;
+export default TimelinePageBottomNavbar;

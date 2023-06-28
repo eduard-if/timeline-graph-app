@@ -8,8 +8,8 @@ import { useLocation } from 'react-router-dom';
 import { listTimelines } from '../actions/timelineActions';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
-import HomeTimelineCard from '../components/HomeTimelineCard';
-import HomeTimelineList from '../components/HomeTimelineList';
+import HomeTimelineCard from '../components/HomeTimelineGridCard';
+import HomeTimelineListCard from '../components/HomeTimelineListCard';
 
 const HomePage = () => {
   const [showCreateTimelineModal, setShowCreateTimelineModal] = useState(false);
@@ -44,7 +44,6 @@ const HomePage = () => {
       <main className='pb-5 '>
         <Container
           className=' px-4 pb-4'>
-          {/* <HomeTimelinesContainer /> */}
 
           {loading ? <Loader /> :
 
@@ -89,7 +88,7 @@ const HomePage = () => {
                             <ListGroup variant='flush' className={!md ? 'w-50' : 'w-100'} >
                               {timelines.map((timeline, index) => (
                                 <ListGroup.Item key={index} className='py-3 bg-transparent'>
-                                  <HomeTimelineList data={timeline} />
+                                  <HomeTimelineListCard data={timeline} />
                                 </ListGroup.Item>
                               ))}
                             </ListGroup>
@@ -106,7 +105,7 @@ const HomePage = () => {
       </main>
       <Button
         variant='primary'
-        className=' rounded-circle px-2 py-1 me-4 fs-6 opacity-75 shadow-sm'
+        className=' rounded-circle px-2 py-1 me-4 fs-6 opacity-75  shadow-sm'
         onClick={handleScrollToTop}
         style={{
           position: 'fixed',

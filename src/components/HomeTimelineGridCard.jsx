@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import { Button, Card, CardImg, Col, Row } from 'react-bootstrap';
 import { Link } from "react-router-dom";
-import DeleteEditModals from './DeleteEditModals';
+import TimelineDeleteEditModals from './TimelineDeleteEditModals';
+import { useMediaQuery } from 'react-responsive';
 
-const HomeTimelineList = ({ data }) => {
+
+const HomeTimelineGridCard = ({ data }) => {
+  const md = useMediaQuery({ maxWidth: 992 })
+
   const [showEdit, setShowEdit] = useState(false);
 
   const handleCloseEdit = () => setShowEdit(false);
@@ -19,7 +23,7 @@ const HomeTimelineList = ({ data }) => {
   return (
     <>
       <Card
-        className='homeListCardHover overflow-hidden'
+        className='homeCardHover overflow-hidden '
         as='div'
         style={{
           backgroundColor: bgColor,
@@ -27,6 +31,16 @@ const HomeTimelineList = ({ data }) => {
           borderColor: borderColor
         }}
       >
+        {data.imageUrl && (
+          <Link to={`timeline/${id}`}>
+            <CardImg src={data.imageUrl}
+              className='overflow-hidden homeCardImg shadow-sm'
+              style={{
+                maxHeight: md ? '50vh' : '30vh'
+              }}
+            />
+          </Link>
+        )}
         <Card.Body>
           <Link to={`timeline/${id}`}
             className='titleRouterLink '
@@ -37,16 +51,16 @@ const HomeTimelineList = ({ data }) => {
             </Card.Title>
           </Link>
 
+
           <Card.Text>
-            {description && description.length > 200 ? description.slice(0, 200) + '...' : description}
+            {description && description.length > 100 ? description.slice(0, 100) + '...' : description}
           </Card.Text>
         </Card.Body>
-
         <Card.Footer className='py-1'>
           <Row className='justify-content-between fst-italic fw-light opacity-50 homeCardFooter'>
             <Col xs={8}
               className='pt-1'>
-              Last Updated: {new Date(lastUpdated).toLocaleString('en-US', { hour12: false })}
+              Last Updated: {new Date(lastUpdated).toLocaleString('en-GB', { hour12: false }).split(',')[0]}
             </Col>
             <Col xs={3} className='d-flex  ps-3 pe-1 justify-content-end'>
               <Button
@@ -84,10 +98,11 @@ const HomeTimelineList = ({ data }) => {
               </Button>
             </Col>
           </Row>
+
         </Card.Footer>
       </Card>
 
-      <DeleteEditModals
+      <TimelineDeleteEditModals
         showEdit={showEdit}
         handleCloseEdit={handleCloseEdit}
         itemId={id}
@@ -98,4 +113,4 @@ const HomeTimelineList = ({ data }) => {
   );
 };
 
-export default HomeTimelineList;
+export default HomeTimelineGridCard;

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { deleteTimeline, updateTimeline } from '../actions/timelineActions';
 
 
-const DeleteEditModals = ({ itemId, showEdit, handleCloseEdit, showDelete, handleCloseDelete }) => {
+const TimelineDeleteEditModals = ({ itemId, showEdit, handleCloseEdit, showDelete, handleCloseDelete }) => {
   const dispatch = useDispatch();
 
   const timelineList = useSelector(state => state.timelineList);
@@ -220,4 +220,4 @@ const DeleteEditModals = ({ itemId, showEdit, handleCloseEdit, showDelete, handl
   );
 };
 
-export default DeleteEditModals;
+export default TimelineDeleteEditModals;

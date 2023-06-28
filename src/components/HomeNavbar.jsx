@@ -5,7 +5,7 @@ import { gridView, listView, tableView } from '../actions/uiActions';
 import { Link } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 
-const HomeNavbar = ({ handleShowCreateTimelineModal }) => {
+const HomeNavbar = () => {
   const md = useMediaQuery({ maxWidth: 992 })
 
   const [show, setShow] = useState(false);
@@ -14,25 +14,6 @@ const HomeNavbar = ({ handleShowCreateTimelineModal }) => {
   const handleShow = () => setShow(true);
 
   const dispatch = useDispatch();
-
-  let { viewModeHome } = useSelector(state => state.viewModeHome);
-
-  const handleListGridView = () => {
-    if (viewModeHome === 'grid') {
-      dispatch(listView())
-    } else if (viewModeHome === 'list') {
-      dispatch(gridView())
-    } else if (viewModeHome === 'table') {
-      dispatch(gridView())
-    };
-  };
-
-  const handleTableView = () => {
-    if (viewModeHome !== 'table') {
-      dispatch(tableView());
-    };
-  };
-
 
   return (
     <>
@@ -67,96 +48,7 @@ const HomeNavbar = ({ handleShowCreateTimelineModal }) => {
 
         </div>
 
-        {/* <div
-
-          className='d-flex justify-content-center px-3 py-2 bg-transparent w-100'>
-
-          <span className='rounded p-1 bg-light ' >
-            <Button
-              variant='outline-dark'
-              onClick={handleListGridView}
-              className='rounded border-0  px-2 py-0 opacity-75'
-            >
-
-              {viewModeHome === 'grid' ? (
-                <>
-                  <i
-                    className='bi bi-list-task align-middle'
-                    style={{
-                      fontSize: 'larger',
-                      paddingRight: '0.1rem'
-                    }}></i>
-                  <span className='align-middle'>
-                    List
-                  </span>
-                </>
-              )
-                : viewModeHome === 'list' ?
-                  (<>
-                    <i
-                      className='bi bi-grid-fill align-middle '
-                      style={{
-                        fontSize: 'larger',
-                        paddingRight: '0.1rem'
-                      }}></i>
-                    <span className='align-middle'>
-                      Grid
-                    </span>
-                  </>
-                  ) : (<>
-                    <i
-                      className='bi bi-grid-fill align-middle '
-                      style={{
-                        fontSize: 'larger',
-                        paddingRight: '0.1rem'
-                      }}></i>
-                    <span className='align-middle'>
-                      Grid
-                    </span>
-                  </>
-                  )
-              }
-            </Button>
-
-
-
-            <Button
-              onClick={handleShowCreateTimelineModal}
-              variant='outline-success'
-              className='rounded border-0 py-0 mx-3 px-2'
-            >
-              <span
-                className=' align-middle pe-2'
-              >New</span>
-              <i
-                style={{ fontSize: 'larger' }}
-                className='bi bi-plus-circle-fill  align-middle'></i>
-            </Button>
-
-
-
-            <Button
-              variant='outline-dark'
-              onClick={handleTableView}
-              className='rounded border-0 opacity-75  py-0 px-2'
-            >
-              <i
-                className='bi bi-table '
-                style={{
-                  fontSize: 'larger',
-                  paddingRight: '0.2rem',
-
-                }}></i>
-              <span className=''>Table</span>
-            </Button>
-          </span>
-        </div > */}
-
       </Nav>
-
-
-
-
       <Offcanvas show={show} onHide={handleClose} placement='end' className='eventsPageOffcanvas'>
         <Offcanvas.Header closeButton>
           <Offcanvas.Title className='navbarBrandText' >
@@ -171,9 +63,7 @@ const HomeNavbar = ({ handleShowCreateTimelineModal }) => {
               style={{ backgroundColor: 'transparent' }}
             >Timeline Options</Card.Header>
             <Card.Body>
-
             </Card.Body>
-
           </Card>
         </Offcanvas.Body>
       </Offcanvas>

@@ -1,11 +1,9 @@
 import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import EventsBottomNavbar from '../components/EventsBottomNavbar';
+import TimelinePageBottomNavbar from '../components/TimelinePageBottomNavbar';
 import { useDispatch, useSelector } from 'react-redux';
-import EventsTopNavbar from '../components/EventsTopNavbar';
-import { Button, ButtonGroup, Container, Nav, NavLink } from 'react-bootstrap';
+import { Container, Nav } from 'react-bootstrap';
 import VisTimelineGraph from '../components/VisTimelineGraph';
-import { DataSet } from 'vis-data';
 import { openTimeline } from '../actions/timelineActions';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
@@ -40,14 +38,17 @@ const EventsPage = () => {
           : data.timeline.timeline && (
             <>
 
+              {/* small timeline title + link to homepage */}
               <Nav className='justify-content-start px-1 py-1'>
-                <Link to={'/'} className='text-dark me-1' style={{ textDecoration: 'none' }} >
+                <Link to={'/'} className='text-dark me-1 pe-1' style={{ textDecoration: 'none' }} >
                   <i className='bi bi-bar-chart-steps'></i>
                 </Link>
                 <Nav.Item>
                   <span className='fw-light' > </span>{data.timeline.timeline.title}
                 </Nav.Item>
               </Nav>
+
+              {/* actual timeline plus related controls */}
               <VisTimelineGraph
                 items={data.timeline.items}
                 options={timelineOptions}
@@ -58,8 +59,8 @@ const EventsPage = () => {
       }
 
 
-
-      <EventsBottomNavbar />
+      {/* home & timeline options sidebar + create event button */}
+      <TimelinePageBottomNavbar />
     </div>
   );
 };
