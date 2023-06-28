@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
-import { Button, Card, Col, Container, Form, InputGroup, Nav, NavItem, NavLink, Navbar, Offcanvas, Row } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
-import { gridView, listView, tableView } from '../actions/uiActions';
+import { Button, Card, Form, Nav, Offcanvas, } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 

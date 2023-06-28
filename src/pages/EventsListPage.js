@@ -14,7 +14,7 @@ const EventsListPage = () => {
   const { loading, error } = data
   // const items = data.timeline.items
 
-  const sm = useMediaQuery({ maxWidth: 576 })
+  const bootstrapMediumBreakpoint = useMediaQuery({ maxWidth: 768 })
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -27,17 +27,20 @@ const EventsListPage = () => {
   }
 
   const colMargin = {
-    margin: !sm ? '2px' : ''
+    margin: !bootstrapMediumBreakpoint ? '2px' : ''
   }
 
   return (
     <div>
 
       <>
+        {/* navbar split into 2 pieces for navigation(top) and filtering(bottom) */}
         <Nav
           style={{ backdropFilter: 'blur(2px) grayscale(100%)' }}
           className='sticky-top justify-content-center shadow-sm'>
+
           <div className='d-flex text-dark fs-3 px-3 pt-2 pb-1 fw-bold justify-content-between w-100' >
+
             <Link to={`/timeline/${id}`} style={{ textDecoration: 'none' }} className='text-dark fs-4 fw-light' >
               <NavItem  >
                 <i className='bi bi-card-list' ></i> Events List
@@ -48,19 +51,20 @@ const EventsListPage = () => {
                 style={{ textDecoration: 'none' }}
               >
                 <Button
-                  className=' border-0 fw-light bg-transparent rounded py-1 mt-1 fs-6 d-flex flex-row'
+                  className=' border-0 fw-light rounded py-1 mt-1 fs-6 d-flex flex-row'
                   variant='light'
                 >
                   <i className="bi bi-arrow-bar-left"></i>
                   <div
-                    style={{ display: !sm ? 'block' : 'none' }}
+                    style={{ display: !bootstrapMediumBreakpoint ? 'block' : 'none' }}
                   >Back to Timeline</div>
                 </Button>
               </Link>
             </NavItem>
           </div>
-          <div
 
+          {/* events filtering */}
+          <div
             className='d-flex justify-content-center  px-3 py-2 bg-transparent w-100'>
             <NavItem>
               <Form className='d-flex ' >
@@ -95,6 +99,8 @@ const EventsListPage = () => {
             </NavItem>
           </div>
         </Nav>
+
+        {/* container that renders the events list + details */}
         <Container className='mt-4' >
           {loading ? <Loader /> :
             data.timeline && data.timeline.items && data.timeline.items.length === 0 ? <Message variant='secondary' >
@@ -106,6 +112,7 @@ const EventsListPage = () => {
                 : data.timeline.timeline && (
                   <ListGroup variant='' className='eventsListContainer my-4 '
                   >
+                    <span className='fw-lighter ms-3 opacity-50' style={{ fontSize: 'smaller' }} >Total items: {data.timeline.items.length}</span>
                     {data.timeline.items.map((item, index) => (
                       <ListGroup.Item key={index} className='py-3 bg-transparent'>
                         <Card className='eventsListCard' >
@@ -141,7 +148,7 @@ const EventsListPage = () => {
                               <Col md className='text-center  my-2  eventsListCardCol shadow-sm' style={colMargin} >
                                 Start Date
                                 <br></br>
-                                <hr className='my-2 eventsListCardCol' ></hr>
+                                <hr className='my-2 ' ></hr>
                                 {new Date(item.start).toLocaleString('en-GB', { hour12: false })}
                               </Col>
                               <Col md className='text-center  my-2 eventsListCardCol shadow-sm' style={colMargin} >
@@ -163,10 +170,10 @@ const EventsListPage = () => {
                     ))}
                   </ListGroup>
                 )
-
           }
         </Container>
 
+        {/* fixed floating navigation buttons */}
         <Link to={`/timeline/${id}`} >
           <Button
             variant='secondary'
