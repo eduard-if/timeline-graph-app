@@ -104,6 +104,8 @@
     transition: width .3s;
 }
 
+
+
 .titleRouterLinkIcon {
     font-size: 1rem;
 }
@@ -161,7 +163,7 @@
     backdrop-filter: blur(10px);
 }
 
-.eventsCreateModalInputs {
+.modalInputs {
     background-color: #ffffffd7;
     box-shadow: 0 5px 10px #3030301e;
     border: solid;
@@ -169,6 +171,8 @@
     border-color: rgba(139, 139, 139, 0.205);
     border-radius: 7px;
 }
+
+
 
 .eventsCreateModalInputs:hover {
     transition: 0.1s border-color ease-in-out;
@@ -183,9 +187,12 @@
 }
 
 .cardTimelineOptions {
-    background-color: #ffffff13;
-    backdrop-filter: blur(2px);
-    box-shadow: 0 2px 10px #3030301e;
+    background-color: #ffffffd7;
+    box-shadow: 0 5px 10px #3030301e;
+    border: solid;
+    border-width: 1.5px;
+    border-color: rgba(139, 139, 139, 0.205);
+    border-radius: 7px;
 }
 
 .eventDetailsCard {
@@ -204,6 +211,33 @@
 
 .timelineContainer {
     overflow: auto;
+}
+
+.warningToast {
+    border: none;
+    background-color: rgba(255, 255, 255, 0.836);
+    backdrop-filter: blur(10px);
+    border-left-style: solid !important;
+    border-left-color: #efa31d !important;
+    border-left-width: 10px !important;
+}
+
+.successToast {
+    border: none;
+    background-color: rgba(255, 255, 255, 0.836);
+    backdrop-filter: blur(10px);
+    border-left-style: solid !important;
+    border-left-color: #13b955 !important;
+    border-left-width: 10px !important;
+}
+
+.errorToast {
+    border: none;
+    background-color: rgba(255, 255, 255, 0.836);
+    backdrop-filter: blur(10px);
+    border-left-style: solid !important;
+    border-left-color: #fc3939 !important;
+    border-left-width: 10px !important;
 }
 
 .vis-timeline .vis-panel.vis-bottom .vis-axis {
