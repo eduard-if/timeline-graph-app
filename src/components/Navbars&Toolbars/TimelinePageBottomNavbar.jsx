@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Card, Container, Form, InputGroup, Navbar, Offcanvas, } from 'react-bootstrap';
-import EventsCreateModal from './EventsCreateModal';
+import EventsCreateModal from '../Modals/EventsCreateModal';
 import { Link } from 'react-router-dom';
 
 const TimelinePageBottomNavbar = () => {

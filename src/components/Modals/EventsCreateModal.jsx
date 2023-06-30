@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 import { Button, Card, Col, Container, Form, Modal, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { createEvent } from '../actions/timelineActions';
 import { CirclePicker, CompactPicker, GithubPicker, SketchPicker, SliderPicker } from 'react-color';
+import { createEvent } from '../../actions/timelineActions';
 
 const EventsCreateModal = ({ showEventsCreateModal, handleCloseEventsCreateModal }) => {
   const [title, setTitle] = useState('');
@@ -49,7 +49,7 @@ const EventsCreateModal = ({ showEventsCreateModal, handleCloseEventsCreateModal
       size='lg'
 
     >
-      <Modal.Header closeButton className='eventsCreateModalHeader bg-dark text-light shadow-sm '>
+      <Modal.Header closeVariant='white' closeButton className='eventsCreateModalHeader bg-dark text-light shadow-sm '>
         <Modal.Title>
           <i className='bi bi-calendar-event pe-2' ></i>
           New Event
@@ -61,7 +61,7 @@ const EventsCreateModal = ({ showEventsCreateModal, handleCloseEventsCreateModal
 
             <Col lg='6'>
               <Form.Group
-                className='mb-3   p-2 eventsCreateModalInputs'
+                className='mb-3   p-2 modalInputs'
                 controlId='content'>
                 <Form.Label>Text Content</Form.Label>
                 <Form.Control
@@ -75,7 +75,7 @@ const EventsCreateModal = ({ showEventsCreateModal, handleCloseEventsCreateModal
                 />
               </Form.Group>
               <Form.Group
-                className='mb-3   p-2 eventsCreateModalInputs' >
+                className='mb-3   p-2 modalInputs' >
                 <Row>
                   <Col>
                     <Form.Label style={stylePreview} >Font Size</Form.Label>
@@ -132,7 +132,7 @@ const EventsCreateModal = ({ showEventsCreateModal, handleCloseEventsCreateModal
               </Form.Group>
 
               <Form.Group
-                className='mb-3   p-2 eventsCreateModalInputs'
+                className='mb-3   p-2 modalInputs'
                 controlId='type'>
                 <Form.Label>Type</Form.Label>
                 <Form.Select
@@ -155,7 +155,7 @@ const EventsCreateModal = ({ showEventsCreateModal, handleCloseEventsCreateModal
 
               </Form.Group>
               <div
-                className='  p-2 mb-3 eventsCreateModalInputs'>
+                className='  p-2 mb-3 modalInputs'>
                 <Form.Group className='mb-3' controlId='start'>
                   <Form.Label>Start Date</Form.Label>
                   <Form.Control
@@ -181,7 +181,7 @@ const EventsCreateModal = ({ showEventsCreateModal, handleCloseEventsCreateModal
                 </Form.Group>
               </div>
               <Form.Group
-                className='mb-3   p-2 eventsCreateModalInputs'
+                className='mb-3   p-2 modalInputs'
                 controlId='hover'>
                 <Form.Label>Hover Text</Form.Label>
                 <Form.Control
@@ -197,7 +197,7 @@ const EventsCreateModal = ({ showEventsCreateModal, handleCloseEventsCreateModal
 
             <Col>
               <div
-                className='  p-2 mb-3 eventsCreateModalInputs' >
+                className='  p-2 mb-3 modalInputs' >
                 {type !== 'point' &&
                   (
                     <Form.Group

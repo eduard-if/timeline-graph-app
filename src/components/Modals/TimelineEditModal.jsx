@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Col, Container, Form, Modal, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteTimeline, updateTimeline } from '../actions/timelineActions';
 
 import { FaFloppyDisk } from 'react-icons/fa6'
+import { updateTimeline } from '../../actions/timelineActions';
 
 const TimelineEditModal = ({ itemId, showEdit, handleCloseEdit }) => {
   const dispatch = useDispatch();

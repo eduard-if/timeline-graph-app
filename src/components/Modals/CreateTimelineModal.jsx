@@ -2,8 +2,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Button, Col, Container, Form, Modal, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { createTimeline, listTimelines } from '../actions/timelineActions';
-import { PuffLoader } from 'react-spinners'
+import { PuffLoader } from 'react-spinners';
+import { createTimeline } from '../../actions/timelineActions';
 
 const CreateTimelineModal = ({ showCreateTimelineModal, handleCloseCreateTimelineModal, setShowToast }) => {
   const [title, setTitle] = useState('');
@@ -37,7 +37,7 @@ const CreateTimelineModal = ({ showCreateTimelineModal, handleCloseCreateTimelin
       handleCloseCreateTimelineModal();
       setShowToast(true);
     }
-  }, [timelineCreate.loading])
+  }, [timelineCreate.loading]);
 
   return (
     <Modal
