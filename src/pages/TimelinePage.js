@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import TimelinePageBottomNavbar from '../components/TimelinePageBottomNavbar';
+import TimelinePageBottomNavbar from '../components/Navbars&Toolbars/TimelinePageBottomNavbar';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container, Nav } from 'react-bootstrap';
 import VisTimelineGraph from '../components/VisTimelineGraph';

@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import HomeNavbar from '../components/HomeNavbar';
+import HomeNavbar from '../components/Navbars&Toolbars/HomeNavbar';
 import { Button, Col, Container, ListGroup, Nav, Row, Tab, Tabs, ToastContainer } from 'react-bootstrap';
-import CreateTimelineModal from '../components/CreateTimelineModal';
+import CreateTimelineModal from '../components/Modals/CreateTimelineModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
 import { useLocation } from 'react-router-dom';
 import { listTimelines } from '../actions/timelineActions';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
-import HomeTimelineCard from '../components/HomeTimelineGridCard';
-import HomeTimelineListCard from '../components/HomeTimelineListCard';
-import CreateTimelineToast from '../components/CreateTimelineToast';
+import HomeTimelineGridCard from '../components/TimelineCards/HomeTimelineGridCard';
+import HomeTimelineListCard from '../components/TimelineCards/HomeTimelineListCard';
+import CreateTimelineToast from '../components/Toasts/CreateTimelineToast';
 import { HiExclamationCircle } from 'react-icons/hi2';
 import { PuffLoader } from 'react-spinners';
-import TimelineEditModal from '../components/TimelineEditModal';
-import TimelineDeleteModal from '../components/TimelineDeleteModal';
+import TimelineEditModal from '../components/Modals/TimelineEditModal';
+import TimelineDeleteModal from '../components/Modals/TimelineDeleteModal';
+import DeleteTimelineToast from '../components/Toasts/DeleteTimelineToast';
 
 const HomePage = () => {
   const [showCreateTimelineModal, setShowCreateTimelineModal] = useState(false);
@@ -23,7 +24,9 @@ const HomePage = () => {
 
   const handleCloseCreateTimelineModal = () => setShowCreateTimelineModal(false);
   const handleShowCreateTimelineModal = () => {
-    setShowToast(false)
+    setShowToast(false);
+    setShowDeleteToast(false);
+    setShowToast(false);
     setShowCreateTimelineModal(true);
   }
 
@@ -33,27 +36,32 @@ const HomePage = () => {
 
   const handleCloseEdit = () => {
     setShowEdit(false);
-    setItemIdtoEdit('')
+    setItemIdtoEdit('');
   }
 
   const handleShowEdit = (id) => {
     setItemIdtoEdit(id)
     setShowEdit(true);
+    setShowDeleteToast(false);
+    setShowToast(false);
   }
 
   const [showDelete, setShowDelete] = useState(false);
 
   const handleCloseDelete = () => {
     setShowDelete(false);
-    setItemIdtoEdit('')
+    setItemIdtoEdit('');
   }
   const handleShowDelete = (id) => {
     setItemIdtoEdit(id)
-    console.log('timelinetoedit:', id)
     setShowDelete(true);
+    setShowDeleteToast(false);
+    setShowToast(false);
   }
 
   const [showToast, setShowToast] = useState(false);
+
+  const [showDeleteToast, setShowDeleteToast] = useState(false);
 
   const handleScrollToTop = () => {
     window.scrollTo(0, 0);
@@ -113,7 +121,7 @@ const HomePage = () => {
                               {timelines.map((timeline, index) => (
 
                                 <Col xs={12} sm={12} md={6} lg={4} xl={3} className='mb-4' key={index} >
-                                  <HomeTimelineCard
+                                  <HomeTimelineGridCard
                                     data={timeline}
                                     handleShowDelete={handleShowDelete}
                                     handleShowEdit={handleShowEdit}
@@ -181,6 +189,7 @@ const HomePage = () => {
       </Button>
 
       <CreateTimelineToast showToast={showToast} setShowToast={setShowToast} />
+      <DeleteTimelineToast showDeleteToast={showDeleteToast} setShowDeleteToast={setShowDeleteToast} />
 
       <CreateTimelineModal
         showCreateTimelineModal={showCreateTimelineModal}
@@ -194,11 +203,15 @@ const HomePage = () => {
           <TimelineEditModal
             showEdit={showEdit}
             handleCloseEdit={handleCloseEdit}
-            itemId={itemIdtoEdit} />
-          <TimelineDeleteModal
             itemId={itemIdtoEdit}
+
+          />
+          <TimelineDeleteModal
+            setShowDeleteToast={setShowDeleteToast}
             showDelete={showDelete}
-            handleCloseDelete={handleCloseDelete} />
+            handleCloseDelete={handleCloseDelete}
+            itemId={itemIdtoEdit}
+          />
         </>
       )}
 
