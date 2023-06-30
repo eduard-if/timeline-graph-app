@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import HomeNavbar from '../components/HomeNavbar';
-import { Button, Col, Container, ListGroup, Nav, Row, Tab, Tabs } from 'react-bootstrap';
+import { Button, Col, Container, ListGroup, Nav, Row, Tab, Tabs, ToastContainer } from 'react-bootstrap';
 import CreateTimelineModal from '../components/CreateTimelineModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
@@ -10,6 +10,11 @@ import Loader from '../components/Loader';
 import Message from '../components/Message';
 import HomeTimelineCard from '../components/HomeTimelineGridCard';
 import HomeTimelineListCard from '../components/HomeTimelineListCard';
+import CreateTimelineToast from '../components/CreateTimelineToast';
+import { HiExclamationCircle } from 'react-icons/hi2';
+import { PuffLoader } from 'react-spinners';
+import TimelineEditModal from '../components/TimelineEditModal';
+import TimelineDeleteModal from '../components/TimelineDeleteModal';
 
 const HomePage = () => {
   const [showCreateTimelineModal, setShowCreateTimelineModal] = useState(false);
@@ -17,7 +22,38 @@ const HomePage = () => {
   const lg = useMediaQuery({ minWidth: 1200 })
 
   const handleCloseCreateTimelineModal = () => setShowCreateTimelineModal(false);
-  const handleShowCreateTimelineModal = () => setShowCreateTimelineModal(true);
+  const handleShowCreateTimelineModal = () => {
+    setShowToast(false)
+    setShowCreateTimelineModal(true);
+  }
+
+  const [itemIdtoEdit, setItemIdtoEdit] = useState('')
+
+  const [showEdit, setShowEdit] = useState(false);
+
+  const handleCloseEdit = () => {
+    setShowEdit(false);
+    setItemIdtoEdit('')
+  }
+
+  const handleShowEdit = (id) => {
+    setItemIdtoEdit(id)
+    setShowEdit(true);
+  }
+
+  const [showDelete, setShowDelete] = useState(false);
+
+  const handleCloseDelete = () => {
+    setShowDelete(false);
+    setItemIdtoEdit('')
+  }
+  const handleShowDelete = (id) => {
+    setItemIdtoEdit(id)
+    console.log('timelinetoedit:', id)
+    setShowDelete(true);
+  }
+
+  const [showToast, setShowToast] = useState(false);
 
   const handleScrollToTop = () => {
     window.scrollTo(0, 0);
@@ -35,23 +71,23 @@ const HomePage = () => {
   }, [dispatch, location]);
 
 
+
   return (
-    <div >
+    < >
       <HomeNavbar handleShowCreateTimelineModal={handleShowCreateTimelineModal} />
       <main className='pb-5 '>
         <Container
           className=' px-4 pb-4'>
 
-          {loading ? <Loader /> :
+          {loading ? <PuffLoader color='#17141f' role='status' className='mx-auto' speedMultiplier={2} size={100} /> :
 
-            timelines.length === 0 ? <Message variant='secondary' >
+            timelines && timelines.length === 0 ? <Message variant='secondary' >
               <h1 className='text-center' >No Timelines</h1>
             </Message> :
-              error ? <Message variant='danger'>{error}</Message> :
-
-
+              error ? <Message variant='danger' >
+                <h1 className='text-center fw-bold' ><HiExclamationCircle className='mb-2' /> {error}</h1>
+              </Message> :
                 (
-
                   <Tab.Container defaultActiveKey='grid'>
                     {/*timelines grid card and list card tabs*/}
                     <Row>
@@ -77,7 +113,11 @@ const HomePage = () => {
                               {timelines.map((timeline, index) => (
 
                                 <Col xs={12} sm={12} md={6} lg={4} xl={3} className='mb-4' key={index} >
-                                  <HomeTimelineCard data={timeline} />
+                                  <HomeTimelineCard
+                                    data={timeline}
+                                    handleShowDelete={handleShowDelete}
+                                    handleShowEdit={handleShowEdit}
+                                  />
                                 </Col>
 
                               ))}
@@ -90,7 +130,11 @@ const HomePage = () => {
                               <ListGroup variant='flush' className={!md ? 'w-50' : 'w-100'} >
                                 {timelines.map((timeline, index) => (
                                   <ListGroup.Item key={index} className='py-3 bg-transparent'>
-                                    <HomeTimelineListCard data={timeline} />
+                                    <HomeTimelineListCard
+                                      data={timeline}
+                                      handleShowDelete={handleShowDelete}
+                                      handleShowEdit={handleShowEdit}
+                                    />
                                   </ListGroup.Item>
                                 ))}
                               </ListGroup>
@@ -102,14 +146,13 @@ const HomePage = () => {
                   </Tab.Container>
                 )}
 
-
         </Container>
       </main>
 
       {/*create timeline and scroll to top buttons */}
       <Button
-        variant='primary'
-        className=' rounded-circle px-2 py-1 me-4 fs-6 opacity-75  shadow-sm'
+        variant='secondary'
+        className=' rounded-circle px-2 py-1 me-4 fs-6 shadow-sm'
         onClick={handleScrollToTop}
         style={{
           position: 'fixed',
@@ -137,11 +180,29 @@ const HomePage = () => {
         <i className='bi bi-plus-lg' ></i>
       </Button>
 
+      <CreateTimelineToast showToast={showToast} setShowToast={setShowToast} />
+
       <CreateTimelineModal
         showCreateTimelineModal={showCreateTimelineModal}
         handleShowCreateTimelineModal={handleShowCreateTimelineModal}
-        handleCloseCreateTimelineModal={handleCloseCreateTimelineModal} />
-    </div >
+        handleCloseCreateTimelineModal={handleCloseCreateTimelineModal}
+        setShowToast={setShowToast}
+      />
+
+      {itemIdtoEdit !== '' && (
+        <>
+          <TimelineEditModal
+            showEdit={showEdit}
+            handleCloseEdit={handleCloseEdit}
+            itemId={itemIdtoEdit} />
+          <TimelineDeleteModal
+            itemId={itemIdtoEdit}
+            showDelete={showDelete}
+            handleCloseDelete={handleCloseDelete} />
+        </>
+      )}
+
+    </ >
   );
 };
 
