@@ -6,6 +6,7 @@ import { openTimeline } from '../actions/timelineActions';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 import { useMediaQuery } from 'react-responsive';
+import { PuffLoader } from 'react-spinners';
 
 const EventsListPage = () => {
   const dispatch = useDispatch();
@@ -102,7 +103,7 @@ const EventsListPage = () => {
 
         {/* container that renders the events list + details */}
         <Container className='mt-4' >
-          {loading ? <Loader /> :
+          {loading ? <PuffLoader color='#17141f' role='status' className='mx-auto mt-2' speedMultiplier={2} size={100} /> :
             data.timeline && data.timeline.items && data.timeline.items.length === 0 ? <Message variant='secondary' >
               <h1 className='text-center fw-light' >Timeline Empty...</h1>
             </Message> :

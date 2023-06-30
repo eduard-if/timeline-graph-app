@@ -7,6 +7,7 @@ import VisTimelineGraph from '../components/VisTimelineGraph';
 import { openTimeline } from '../actions/timelineActions';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
+import { PuffLoader } from 'react-spinners';
 
 const EventsPage = () => {
   const dispatch = useDispatch();
@@ -31,7 +32,9 @@ const EventsPage = () => {
 
   return (
     <div className='eventPage'>
-      {loading ? <Loader /> :
+      {loading ?
+        <PuffLoader
+          color='#17141f' role='status' className='mx-auto mt-5' speedMultiplier={2} size={200} /> :
         error ? <Container className='pt-5'>
           <Message variant='danger'><h1 align='center'>{error}</h1></Message>
         </Container>
