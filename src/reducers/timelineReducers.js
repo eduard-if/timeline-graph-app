@@ -37,12 +37,12 @@ import {
 } from '../constants/eventConstants';
 
 
-export const timelineCreateReducer = (state = {}, action) => {
+export const timelineCreateReducer = (state = { timeline: {} }, action) => {
   switch (action.type) {
     case TIMELINE_CREATE_REQUEST:
       return { loading: true, };
     case TIMELINE_CREATE_SUCCESS:
-      return { loading: false, };
+      return { loading: false, timeline: action.payload };
     case TIMELINE_CREATE_FAIL:
       return { loading: false, error: action.payload };
     default:
@@ -50,6 +50,7 @@ export const timelineCreateReducer = (state = {}, action) => {
   };
 };
 
+// the timeline that gets clicked on and all the items that are fetched, are stored separately in the state
 export const timelineOpenReducer = (state = { timeline: { items: [] } }, action) => {
   switch (action.type) {
     case TIMELINE_OPEN_REQUEST:
@@ -77,6 +78,8 @@ export const timelineOpenReducer = (state = { timeline: { items: [] } }, action)
         ...state,
         items: state.items.filter(item => item.id !== action.payload)
       }
+
+    // clearing the timeline to make sure it doesn't display when opening another one
     case TIMELINE_OPEN_CLEAR:
       return {
         ...state, timeline: {}
@@ -86,6 +89,7 @@ export const timelineOpenReducer = (state = { timeline: { items: [] } }, action)
   };
 };
 
+// handles the loading of all the timelines and updating the state for deletes & updates
 export const timelineListReducer = (state = { timelines: [] }, action) => {
   switch (action.type) {
     case TIMELINE_LIST_REQUEST:
