@@ -1,18 +1,10 @@
 import React, { useState } from 'react';
 import { Button, Card, Col, Row } from 'react-bootstrap';
 import { Link } from "react-router-dom";
-import TimelineDeleteEditModals from './TimelineDeleteEditModals';
 
-const HomeTimelineListCard = ({ data }) => {
-  const [showEdit, setShowEdit] = useState(false);
 
-  const handleCloseEdit = () => setShowEdit(false);
-  const handleShowEdit = () => setShowEdit(true);
+const HomeTimelineListCard = ({ data, handleShowDelete, handleShowEdit }) => {
 
-  const [showDelete, setShowDelete] = useState(false);
-
-  const handleCloseDelete = () => setShowDelete(false);
-  const handleShowDelete = () => setShowDelete(true);
 
   const { title, description, bgColor, textColor, titleColor, borderColor, lastUpdated, id } = data;
 
@@ -50,7 +42,8 @@ const HomeTimelineListCard = ({ data }) => {
             </Col>
             <Col xs={3} className='d-flex  ps-3 pe-1 justify-content-end'>
               <Button
-                onClick={handleShowDelete}
+                onClick={() => handleShowDelete(id)}
+                variant='dark'
                 className='rounded'
                 style={{
                   paddingTop: 0,
@@ -67,8 +60,9 @@ const HomeTimelineListCard = ({ data }) => {
                 <i className='bi bi-x-lg' ></i>
               </Button>
               <Button
-                onClick={handleShowEdit}
+                onClick={() => handleShowEdit(id)}
                 className='rounded'
+                variant='dark'
                 style={{
                   paddingTop: 0,
                   paddingBottom: 0,
@@ -87,13 +81,7 @@ const HomeTimelineListCard = ({ data }) => {
         </Card.Footer>
       </Card>
 
-      <TimelineDeleteEditModals
-        showEdit={showEdit}
-        handleCloseEdit={handleCloseEdit}
-        itemId={id}
-        showDelete={showDelete}
-        handleCloseDelete={handleCloseDelete}
-      />
+
     </>
   );
 };

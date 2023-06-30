@@ -1,22 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Button, Card, CardImg, Col, Row } from 'react-bootstrap';
 import { Link } from "react-router-dom";
-import TimelineDeleteEditModals from './TimelineDeleteEditModals';
 import { useMediaQuery } from 'react-responsive';
 
-
-const HomeTimelineGridCard = ({ data }) => {
+const HomeTimelineGridCard = ({ data, handleShowDelete, handleShowEdit }) => {
   const md = useMediaQuery({ maxWidth: 992 })
 
-  const [showEdit, setShowEdit] = useState(false);
-
-  const handleCloseEdit = () => setShowEdit(false);
-  const handleShowEdit = () => setShowEdit(true);
-
-  const [showDelete, setShowDelete] = useState(false);
-
-  const handleCloseDelete = () => setShowDelete(false);
-  const handleShowDelete = () => setShowDelete(true);
 
   const { title, description, bgColor, textColor, titleColor, borderColor, lastUpdated, id } = data;
 
@@ -28,7 +17,7 @@ const HomeTimelineGridCard = ({ data }) => {
         style={{
           backgroundColor: bgColor,
           color: textColor,
-          borderColor: borderColor
+          borderColor: borderColor,
         }}
       >
         {data.imageUrl && (
@@ -56,7 +45,7 @@ const HomeTimelineGridCard = ({ data }) => {
             {description && description.length > 100 ? description.slice(0, 100) + '...' : description}
           </Card.Text>
         </Card.Body>
-        <Card.Footer className='py-1'>
+        <Card.Footer className='py-1'  >
           <Row className='justify-content-between fst-italic fw-light opacity-50 homeCardFooter'>
             <Col xs={8}
               className='pt-1'>
@@ -64,7 +53,8 @@ const HomeTimelineGridCard = ({ data }) => {
             </Col>
             <Col xs={3} className='d-flex  ps-3 pe-1 justify-content-end'>
               <Button
-                onClick={handleShowDelete}
+                onClick={() => handleShowDelete(id)}
+                variant='dark'
                 className='rounded'
                 style={{
                   paddingTop: 0,
@@ -81,7 +71,8 @@ const HomeTimelineGridCard = ({ data }) => {
                 <i className='bi bi-x-lg' ></i>
               </Button>
               <Button
-                onClick={handleShowEdit}
+                onClick={() => handleShowEdit(id)}
+                variant='dark'
                 className='rounded'
                 style={{
                   paddingTop: 0,
@@ -102,13 +93,6 @@ const HomeTimelineGridCard = ({ data }) => {
         </Card.Footer>
       </Card>
 
-      <TimelineDeleteEditModals
-        showEdit={showEdit}
-        handleCloseEdit={handleCloseEdit}
-        itemId={id}
-        showDelete={showDelete}
-        handleCloseDelete={handleCloseDelete}
-      />
     </>
   );
 };
