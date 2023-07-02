@@ -34,14 +34,16 @@
 .homeCardHover:hover {
     transition: 0.2s all ease-in-out;
     scale: 1.009;
-
+    border-radius: 7px;
 
 }
+
+
 
 .homeListCardHover:hover {
     transition: 0.2s all ease-in-out;
     scale: 1.009;
-
+    border-radius: 7px;
 }
 
 
@@ -159,8 +161,8 @@
 }
 
 .modal-content {
-    background-color: #ffffffd8;
-    backdrop-filter: blur(10px);
+    background-color: rgb(233, 233, 233);
+    /* backdrop-filter: blur(10px); */
 }
 
 .modalInputs {
@@ -182,8 +184,8 @@
 }
 
 .eventsPageOffcanvas {
-    background-color: #ffffffcc;
-    backdrop-filter: blur(10px);
+    background-color: rgb(233, 233, 233);
+    /* backdrop-filter: blur(10px); */
 }
 
 .cardTimelineOptions {
@@ -196,12 +198,13 @@
 }
 
 .eventDetailsCard {
-    background-color: #ffffffd7;
-    backdrop-filter: blur(10px);
+    background-color: rgb(255, 255, 255);
     border-radius: 20px;
     box-shadow: 0 6px 6px -4px rgba(27, 27, 27, 0.459);
-
-    border: none;
+    /* white-space: pre-wrap; */
+    border: solid;
+    border-color: rgba(128, 128, 128, 0.329);
+    border-width: 1px;
 }
 
 .eventCardDetailsFooter {
@@ -215,7 +218,7 @@
 
 .warningToast {
     border: none;
-    background-color: rgba(255, 255, 255, 0.836);
+    background-color: rgb(255, 255, 255);
     backdrop-filter: blur(10px);
     border-left-style: solid !important;
     border-left-color: #efa31d !important;
@@ -224,8 +227,7 @@
 
 .successToast {
     border: none;
-    background-color: rgba(255, 255, 255, 0.836);
-    backdrop-filter: blur(10px);
+    background-color: rgb(255, 255, 255);
     border-left-style: solid !important;
     border-left-color: #13b955 !important;
     border-left-width: 10px !important;
@@ -233,7 +235,7 @@
 
 .errorToast {
     border: none;
-    background-color: rgba(255, 255, 255, 0.836);
+    background-color: rgb(255, 255, 255);
     backdrop-filter: blur(10px);
     border-left-style: solid !important;
     border-left-color: #fc3939 !important;
