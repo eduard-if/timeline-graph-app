@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Col, Container, Form, Modal, Row } from 'react-bootstrap';
+import { Accordion, Button, Col, Container, Form, Modal, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { CompactPicker } from 'react-color';
 import { FaBrush } from 'react-icons/fa6';
+
 
 import { FaFloppyDisk } from 'react-icons/fa6'
 import { updateTimeline } from '../../actions/timelineActions';
@@ -96,88 +97,53 @@ const TimelineEditModal = ({ itemId, showEdit, handleCloseEdit }) => {
             />
           </Form.Group>
           <div className='modalInputs'>
-            <div className='fs-5 fw-light text-center my-3 ' > <FaBrush />  Card Styling</div>
+            <div className='fs-5 fw-light text-center my-3 ' > <FaBrush />  Card Color Styling</div>
 
-            <Form.Group
-              className='mb-3 '
-              controlId='bgColor'
-            >
-              <Row className='justify-content-center text-center '>
-                <Col xs={12}>
-                  <Form.Label className='mt-2'>Background color</Form.Label>
-
-                </Col>
-                <Col xs={12} className=''>
-                  {/* <Form.Control
-                    type='color'
-                    value={bgColor}
-                    onChange={(e) => setBgColor(e.target.value)}
-                  /> */}
-                  <CompactPicker color={editBackgroundColor} onChangeComplete={(e) => { setEditBackgroundColor(e.hex) }} />
-                </Col>
-              </Row>
-            </Form.Group>
-
-            <Form.Group
-              className='mb-3'
-              controlId='textColor'
-            >
-              <Row className='justify-content-center text-center'>
-                <Col xs={12}>
-                  <Form.Label className='mt-2'>Text color</Form.Label>
-
-                </Col>
-                <Col xs={12}>
-                  {/* <Form.Control
-                    type='color'
-                    value={textColor}
-                    onChange={(e) => setTextColor(e.target.value)}
-                  /> */}
-                  <CompactPicker color={editTextColor} onChangeComplete={(e) => { setEditTextColor(e.hex) }} />
-                </Col>
-              </Row>
-            </Form.Group>
-
-            <Form.Group
-              className='mb-3'
-              controlId='titleColor'
-            >
-              <Row className='justify-content-center text-center'>
-                <Col xs={12}>
-                  <Form.Label className='mt-2'>Title color</Form.Label>
-
-                </Col>
-                <Col xs={12}>
-                  {/* <Form.Control
-                    type='color'
-                    value={titleColor}
-                    onChange={(e) => setTitleColor(e.target.value)}
-
-                  /> */}
+            <Accordion className='text-center mx-3 mb-3 shadow-sm'  >
+              <Accordion.Item eventKey='titleColor'>
+                <Accordion.Header >Title</Accordion.Header>
+                <Accordion.Body>
                   <CompactPicker color={editTitleColor} onChangeComplete={(e) => { setEditTitleColor(e.hex) }} />
-                </Col>
-              </Row>
-            </Form.Group>
+                  <div className='d-flex justify-content-center mt-3' >
+                    Customize: <Form.Control className='mx-2' type='color' value={editTitleColor} onChange={(e) => setEditTitleColor(e.target.value)}
+                    />
+                  </div>
+                </Accordion.Body>
+              </Accordion.Item>
 
-            <Form.Group
-              className='mb-3'
-              controlId='borderColor'
-            >
-              <Row className='justify-content-center text-center'>
-                <Col xs={12}>
-                  <Form.Label className='mt-2'>Border color</Form.Label>
+              <Accordion.Item eventKey='bgColor'>
+                <Accordion.Header>Background</Accordion.Header>
+                <Accordion.Body>
+                  <CompactPicker color={editBackgroundColor} onChangeComplete={(e) => { setEditBackgroundColor(e.hex) }} />
+                  <div className='d-flex justify-content-center mt-3' >
+                    Customize: <Form.Control className='mx-2' type='color' value={editBackgroundColor} onChange={(e) => setEditBackgroundColor(e.target.value)}
+                    />
+                  </div>
+                </Accordion.Body>
+              </Accordion.Item>
 
-                </Col>
-                <Col xs={12}>
-                  {/* <Form.Control
-                    type='color'
-                    value={borderColor}
-                    onChange={(e) => setBorderColor(e.target.value)}
-                  /> */}
+              <Accordion.Item eventKey='textColor' >
+                <Accordion.Header>Description Text</Accordion.Header>
+                <Accordion.Body>
+                  <CompactPicker color={editTextColor} onChangeComplete={(e) => { setEditTextColor(e.hex) }} />
+                  <div className='d-flex justify-content-center mt-3' >
+                    Customize: <Form.Control className='mx-2' type='color' value={editTextColor} onChange={(e) => setEditTextColor(e.target.value)}
+                    />
+                  </div>
+                </Accordion.Body>
+              </Accordion.Item>
+
+              <Accordion.Item eventKey='borderColor' >
+                <Accordion.Header>Border</Accordion.Header>
+                <Accordion.Body>
                   <CompactPicker color={editBorderColor} onChangeComplete={(e) => { setEditBorderColor(e.hex) }} />
-                </Col>
-              </Row>
-            </Form.Group>
+                  <div className='d-flex justify-content-center mt-3' >
+                    Customize: <Form.Control className='mx-2' type='color' value={editBorderColor} onChange={(e) => setEditBorderColor(e.target.value)}
+                    />
+                  </div>
+                </Accordion.Body>
+              </Accordion.Item>
+            </Accordion>
           </div>
         </Form>
       </Modal.Body>
