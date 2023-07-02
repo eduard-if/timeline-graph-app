@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { CirclePicker, CompactPicker, GithubPicker, SketchPicker, SliderPicker } from 'react-color';
 import { createEvent } from '../../actions/timelineActions';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 const EventsCreateModal = ({ showEventsCreateModal, handleCloseEventsCreateModal }) => {
   const [title, setTitle] = useState('');
@@ -34,7 +36,8 @@ const EventsCreateModal = ({ showEventsCreateModal, handleCloseEventsCreateModal
     const id = data.timeline.timeline.id
     console.log(id)
 
-    dispatch(createEvent(title, content, start, end, type, bgColor, textColor, borderColor, notesDetails, id))
+    dispatch(createEvent(title, fontSize, fontStyle, fontWeight,
+      content, start, end, type, bgColor, textColor, borderColor, notesDetails, id))
     if (!loading) {
       handleCloseEventsCreateModal()
     }
@@ -116,7 +119,7 @@ const EventsCreateModal = ({ showEventsCreateModal, handleCloseEventsCreateModal
                     </Form.Select>
                   </Col>
                   <Col>
-                    <Form.Label
+                    {/* <Form.Label
                       style={stylePreview}>Line Decoration</Form.Label>
                     <Form.Select
                       className='rounded'
@@ -126,7 +129,7 @@ const EventsCreateModal = ({ showEventsCreateModal, handleCloseEventsCreateModal
                       <option value='overline' style={{ textDecorationLine: 'overline' }} >Overline</option>
                       <option value='line-through' style={{ textDecorationLine: 'line-through' }} >Line-through</option>
 
-                    </Form.Select>
+                    </Form.Select> */}
                   </Col>
                 </Row>
               </Form.Group>
@@ -271,47 +274,51 @@ const EventsCreateModal = ({ showEventsCreateModal, handleCloseEventsCreateModal
                   )}
 
               </div>
+
+
             </Col>
 
           </Row>
-        </Form>
-        <Card>
-          <Card.Header>
-            Details
-          </Card.Header>
-          <Card.Body>
-            <Form.Group className='mb-3' controlId='imageUrl'>
-              <Form.Label>Image</Form.Label>
-              <Form.Control
-                type='text'
-                placeholder='Your URL goes here'
-                value={imageUrl}
-                onChange={(e) => setImageUrl(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group
-              className="mb-3"
-              controlId='notesDetails'
-            >
-              <Form.Label>Notes</Form.Label>
-              <Form.Control
-                as='textarea'
-                rows={7}
-                placeholder='Type something...'
-                value={notesDetails}
-                onChange={(e) => setNotesDetails(e.target.value)}
-              />
-              <span style={{ fontSize: 'smaller', fontWeight: 'lighter', opacity: '50%' }} className='ms-1'> {notesDetails.length}</span>
-            </Form.Group>
-          </Card.Body>
+          <Card className='rounded'>
+            <Card.Header>
+              Details
+            </Card.Header>
+            <Card.Body>
+              <Form.Group className='mb-3' controlId='imageUrl'>
+                <Form.Label>Image</Form.Label>
+                <Form.Control
+                  type='text'
+                  placeholder='Your URL goes here'
+                  value={imageUrl}
+                  onChange={(e) => setImageUrl(e.target.value)}
+                />
+              </Form.Group>
+              <Form.Group
+                className="mb-3"
+                controlId='notesDetails'
+              >
+                <Form.Label>Notes</Form.Label>
+                <Form.Control
+                  as='textarea'
+                  rows={7}
+                  placeholder='Type something...'
+                  value={notesDetails}
+                  onChange={(e) => setNotesDetails(e.target.value)}
+                />
+                <span style={{ fontSize: 'smaller', fontWeight: 'lighter', opacity: '50%' }} className='ms-1'> {notesDetails.length}</span>
+              </Form.Group>
+              {/* <ReactQuill theme="snow" value={notesDetails} onChange={setNotesDetails} /> */}
+            </Card.Body>
 
-        </Card>
+          </Card>
+        </Form>
+
       </Modal.Body>
       <Modal.Footer className='justify-content-center'>
-        <Button variant='danger' className='rounded' type='submit' onClick={handleCloseEventsCreateModal}>
-          Cancel
+        <Button variant='light' className='rounded shadow-sm' onClick={handleCloseEventsCreateModal}>
+          Cancel <i className='bi bi-x-lg' ></i>
         </Button>
-        <Button variant='success' className='rounded' onClick={handleSubmit} >
+        <Button variant='success' className='rounded shadow-sm' onClick={handleSubmit} >
           Create <i className='ps-1  bi bi-plus-lg'></i>
         </Button>
 

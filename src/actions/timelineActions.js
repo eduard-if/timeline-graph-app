@@ -39,6 +39,7 @@ import {
 
 import axios from 'axios';
 
+// get all the timelines for the home page
 export const listTimelines = () => async (dispatch) => {
   try {
     dispatch({ type: TIMELINE_LIST_REQUEST });
@@ -58,7 +59,7 @@ export const listTimelines = () => async (dispatch) => {
   };
 };
 
-
+// get all the items of a timeline
 export const openTimeline = (id) => async (dispatch) => {
   try {
     dispatch({ type: TIMELINE_OPEN_CLEAR })
@@ -100,7 +101,6 @@ export const createTimeline = ({
         title, description, imageUrl, bgColor, textColor, titleColor, borderColor,
       }
     );
-
 
     dispatch({
       type: TIMELINE_CREATE_SUCCESS,
@@ -182,7 +182,8 @@ export const updateTimeline = ({
 };
 
 export const createEvent = (
-  title, content, start, end, type, bgColor, textColor, borderColor, notesDetails, id
+  title, fontSize, fontStyle, fontWeight,
+  content, start, end, type, bgColor, textColor, borderColor, notesDetails, id
 ) => async (dispatch) => {
   try {
     dispatch({ type: EVENT_CREATE_REQUEST });
@@ -201,7 +202,7 @@ export const createEvent = (
         'start': start,
         'end': end,
         'type': type,
-        'style': `background-color: ${bgColor}; color: ${textColor}; border-color: ${borderColor}; border-radius: 7px;`,
+        'style': `background-color: ${bgColor}; color: ${textColor}; border-color: ${borderColor}; border-radius: 7px; font-size: ${fontSize}; font-style: ${fontStyle}; font-weight: ${fontWeight}; `,
         'notesDetails': notesDetails
       }
     );
