@@ -13,45 +13,37 @@ const DeleteTimelineToastToast = ({ showDeleteToast, setShowDeleteToast }) => {
     }, [timelineDelete])
 
     return (
-        <ToastContainer
-            className='mb-4 mx-auto'
-            style={{
-                zIndex: 2,
-                position: 'fixed',
-                bottom: 0,
-                left: '50%',
-                transform: 'translateX(-50%)',
-            }} >
-            <Toast
-                onClose={() => setShowDeleteToast(false)}
-                show={showDeleteToast}
-                delay={3000}
-                autohide
-                className={!error ? 'warningToast' : 'errorToast'}
-                style={{
-                    borderRadius: '10px',
-                }}>
-                <Toast.Header className='bg-transparent border-0' >
-                    {!error ? (
-                        <>
-                            <BsRecycle className='fs-4 me-2' />
-                            <span className='me-auto fw-light text-dark fs-5'>Timeline deleted</span>
-                        </>
-                    )
-                        : <>
-                            <HiOutlineExclamationTriangle className='fs-2 me-1 text-danger' />
-                            <span className='me-auto fw-light text-dark fs-5'>Something went wrong</span>
-                        </>
-                    }
-                </Toast.Header>
-                {error && (
-                    <Toast.Body className='bg-transparent  text-center rounded m-2 pt-1'>
-                        <span className='text-danger fw-bold' >{error}</span>
-                    </Toast.Body>
-                )}
 
-            </Toast>
-        </ToastContainer>
+        <Toast
+            onClose={() => setShowDeleteToast(false)}
+            show={showDeleteToast}
+            delay={3000}
+            autohide
+            className={!error ? 'warningToast' : 'errorToast'}
+            style={{
+                borderRadius: '10px',
+            }}>
+            <Toast.Header className='bg-transparent border-0' >
+                {!error ? (
+                    <>
+                        <BsRecycle className='fs-4 me-2' />
+                        <span className='me-auto fw-light text-dark fs-5'>Timeline deleted</span>
+                    </>
+                )
+                    : <>
+                        <HiOutlineExclamationTriangle className='fs-2 me-1 text-danger' />
+                        <span className='me-auto fw-light text-dark fs-5'>Something went wrong</span>
+                    </>
+                }
+            </Toast.Header>
+            {error && (
+                <Toast.Body className='bg-transparent  text-center rounded m-2 pt-1'>
+                    <span className='text-danger fw-bold' >{error}</span>
+                </Toast.Body>
+            )}
+
+        </Toast>
+
     )
 }
 
