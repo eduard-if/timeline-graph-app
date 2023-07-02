@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { PuffLoader } from 'react-spinners';
 import { createTimeline } from '../../actions/timelineActions';
+import { CompactPicker } from 'react-color';
+import { FaBrush } from 'react-icons/fa6';
 
 const CreateTimelineModal = ({ showCreateTimelineModal, handleCloseCreateTimelineModal, setShowToast }) => {
   const [title, setTitle] = useState('');
@@ -46,7 +48,7 @@ const CreateTimelineModal = ({ showCreateTimelineModal, handleCloseCreateTimelin
       className=''
       scrollable='true'>
 
-      <Modal.Header closeButton className='bg-transparent text-dark border-0 shadow-sm'>
+      <Modal.Header closeButton className='bg-dark text-light border-0 shadow-sm'>
         <Modal.Title>
           <i className='bi bi-calendar-range-fill pe-2' ></i>
           New Timeline
@@ -74,7 +76,7 @@ const CreateTimelineModal = ({ showCreateTimelineModal, handleCloseCreateTimelin
             <Form.Control
               as='textarea'
               rows={3}
-              placeholder='Details or keywords for easier searching'
+              placeholder='Type something...'
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             />
@@ -89,23 +91,26 @@ const CreateTimelineModal = ({ showCreateTimelineModal, handleCloseCreateTimelin
               onChange={(e) => setImageUrl(e.target.value)}
             />
           </Form.Group>
-          <div className='p-2 mb-3 modalInputs' >
+
+          <div className='modalInputs'>
+            <div className='fs-5 fw-light text-center my-3 ' > <FaBrush />  Card Styling</div>
+
             <Form.Group
               className='mb-3 '
               controlId='bgColor'
             >
-              <Row className='justify-content-start'>
-                <Col xs={4}>
+              <Row className='justify-content-center text-center '>
+                <Col xs={12}>
                   <Form.Label className='mt-2'>Background color</Form.Label>
 
                 </Col>
-                <Col xs={1}>
-                  <Form.Control
+                <Col xs={12} className=''>
+                  {/* <Form.Control
                     type='color'
                     value={bgColor}
                     onChange={(e) => setBgColor(e.target.value)}
-                  />
-
+                  /> */}
+                  <CompactPicker color={bgColor} onChangeComplete={(e) => { setBgColor(e.hex) }} />
                 </Col>
               </Row>
             </Form.Group>
@@ -114,17 +119,18 @@ const CreateTimelineModal = ({ showCreateTimelineModal, handleCloseCreateTimelin
               className='mb-3'
               controlId='textColor'
             >
-              <Row className='justify-content-start'>
-                <Col xs={4}>
+              <Row className='justify-content-center text-center'>
+                <Col xs={12}>
                   <Form.Label className='mt-2'>Text color</Form.Label>
 
                 </Col>
-                <Col xs={1}>
-                  <Form.Control
+                <Col xs={12}>
+                  {/* <Form.Control
                     type='color'
                     value={textColor}
                     onChange={(e) => setTextColor(e.target.value)}
-                  />
+                  /> */}
+                  <CompactPicker color={textColor} onChangeComplete={(e) => { setTextColor(e.hex) }} />
                 </Col>
               </Row>
             </Form.Group>
@@ -133,18 +139,19 @@ const CreateTimelineModal = ({ showCreateTimelineModal, handleCloseCreateTimelin
               className='mb-3'
               controlId='titleColor'
             >
-              <Row className='justify-content-start'>
-                <Col xs={4}>
+              <Row className='justify-content-center text-center'>
+                <Col xs={12}>
                   <Form.Label className='mt-2'>Title color</Form.Label>
 
                 </Col>
-                <Col xs={1}>
-                  <Form.Control
+                <Col xs={12}>
+                  {/* <Form.Control
                     type='color'
                     value={titleColor}
                     onChange={(e) => setTitleColor(e.target.value)}
 
-                  />
+                  /> */}
+                  <CompactPicker color={titleColor} onChangeComplete={(e) => { setTitleColor(e.hex) }} />
                 </Col>
               </Row>
             </Form.Group>
@@ -153,21 +160,23 @@ const CreateTimelineModal = ({ showCreateTimelineModal, handleCloseCreateTimelin
               className='mb-3'
               controlId='borderColor'
             >
-              <Row className='justify-content-start'>
-                <Col xs={4}>
+              <Row className='justify-content-center text-center'>
+                <Col xs={12}>
                   <Form.Label className='mt-2'>Border color</Form.Label>
 
                 </Col>
-                <Col xs={1}>
-                  <Form.Control
+                <Col xs={12}>
+                  {/* <Form.Control
                     type='color'
                     value={borderColor}
                     onChange={(e) => setBorderColor(e.target.value)}
-                  />
+                  /> */}
+                  <CompactPicker color={borderColor} onChangeComplete={(e) => { setBorderColor(e.hex) }} />
                 </Col>
               </Row>
             </Form.Group>
           </div>
+
         </Form>
 
       </Modal.Body>
@@ -175,7 +184,7 @@ const CreateTimelineModal = ({ showCreateTimelineModal, handleCloseCreateTimelin
       <Modal.Footer className='justify-content-center border-0' >
         {timelineCreate.loading ? <PuffLoader color='#17141f' role='status' className='mx-auto my-3' speedMultiplier={2} />
           : (<>
-            <Button variant='light' className='rounded shadow-sm' type='submit' onClick={handleCloseCreateTimelineModal}>
+            <Button variant='light' className='rounded shadow-sm' onClick={handleCloseCreateTimelineModal}>
               Cancel <i className='bi bi-x-lg' ></i>
             </Button>
             <Button variant='primary' className='rounded shadow-sm' onClick={handleSubmit} >
