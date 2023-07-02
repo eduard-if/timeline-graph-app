@@ -116,7 +116,7 @@ const HomePage = () => {
 
                       <Col xs={12}>
                         <Tab.Content>
-                          <Tab.Pane eventKey='grid' >
+                          <Tab.Pane eventKey='grid' transition={false} >
                             <Row >
                               {timelines.map((timeline, index) => (
 
@@ -133,7 +133,7 @@ const HomePage = () => {
                             </Row>
                           </Tab.Pane>
 
-                          <Tab.Pane eventKey='list' >
+                          <Tab.Pane eventKey='list' transition={false} >
                             <div className='d-flex justify-content-center'>
                               <ListGroup variant='flush' className={!md ? 'w-50' : 'w-100'} >
                                 {timelines.map((timeline, index) => (
@@ -188,8 +188,19 @@ const HomePage = () => {
         <i className='bi bi-plus-lg' ></i>
       </Button>
 
-      <CreateTimelineToast showToast={showToast} setShowToast={setShowToast} />
-      <DeleteTimelineToast showDeleteToast={showDeleteToast} setShowDeleteToast={setShowDeleteToast} />
+      <ToastContainer
+        className='mb-4 mx-auto'
+        style={{
+          zIndex: 2,
+          position: 'fixed',
+          bottom: 0,
+          left: '50%',
+          transform: 'translateX(-50%)',
+        }} >
+        <CreateTimelineToast showToast={showToast} setShowToast={setShowToast} />
+        <DeleteTimelineToast showDeleteToast={showDeleteToast} setShowDeleteToast={setShowDeleteToast} />
+      </ToastContainer>
+
 
       <CreateTimelineModal
         showCreateTimelineModal={showCreateTimelineModal}
