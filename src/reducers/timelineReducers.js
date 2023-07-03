@@ -130,12 +130,12 @@ export const timelineDeleteReducer = (state = {}, action) => {
   }
 }
 
-export const timelineUpdateReducer = (state = {}, action) => {
+export const timelineUpdateReducer = (state = { timeline: {} }, action) => {
   switch (action.type) {
     case TIMELINE_UPDATE_REQUEST:
       return { loading: true, };
     case TIMELINE_UPDATE_SUCCESS:
-      return { loading: false, };
+      return { loading: false, timeline: action.payload };
     case TIMELINE_UPDATE_FAIL:
       return { loading: false, error: action.payload };
     default:
