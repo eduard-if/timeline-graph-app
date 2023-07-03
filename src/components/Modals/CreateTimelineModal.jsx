@@ -6,6 +6,9 @@ import { PuffLoader } from 'react-spinners';
 import { createTimeline } from '../../actions/timelineActions';
 import { CompactPicker } from 'react-color';
 import { FaBrush } from 'react-icons/fa6';
+import { BiImageAdd } from 'react-icons/bi'
+import { BsCardText, BsFillRecordCircleFill } from 'react-icons/bs';
+import { MdTitle } from 'react-icons/md';
 
 const CreateTimelineModal = ({ showCreateTimelineModal, handleCloseCreateTimelineModal, setShowToast }) => {
   const [title, setTitle] = useState('');
@@ -58,7 +61,7 @@ const CreateTimelineModal = ({ showCreateTimelineModal, handleCloseCreateTimelin
 
         <Form>
           <Form.Group className='mb-3 p-2 modalInputs' controlId='title'>
-            <Form.Label>Title</Form.Label>
+            <Form.Label> <MdTitle className='mb-1' /> Title</Form.Label>
             <Form.Control
               type='text'
               placeholder='Your title here'
@@ -72,7 +75,7 @@ const CreateTimelineModal = ({ showCreateTimelineModal, handleCloseCreateTimelin
             className='mb-3 p-2 modalInputs'
             controlId='description'
           >
-            <Form.Label>Description</Form.Label>
+            <Form.Label> <BsCardText className='mb-1' /> Description</Form.Label>
             <Form.Control
               as='textarea'
               rows={3}
@@ -83,7 +86,7 @@ const CreateTimelineModal = ({ showCreateTimelineModal, handleCloseCreateTimelin
           </Form.Group>
 
           <Form.Group className='mb-3 p-2 modalInputs' controlId='imageUrl'>
-            <Form.Label>Image</Form.Label>
+            <Form.Label> <BiImageAdd className='mb-1' /> Image</Form.Label>
             <Form.Control
               type='text'
               placeholder='Your URL goes here'
@@ -93,11 +96,11 @@ const CreateTimelineModal = ({ showCreateTimelineModal, handleCloseCreateTimelin
           </Form.Group>
 
           <div className='modalInputs'>
-            <div className='fs-5 fw-light text-center my-3 ' > <FaBrush />  Card Color Styling</div>
+            <div className='fs-6 fw-light text-center my-3 ' > <FaBrush className='mb-1' />  Card Color Styling</div>
 
             <Accordion className='text-center mx-3 mb-3 shadow-sm'  >
               <Accordion.Item eventKey='titleColor'>
-                <Accordion.Header >Title</Accordion.Header>
+                <Accordion.Header > <BsFillRecordCircleFill style={{ color: titleColor }} className='me-1' /> Title</Accordion.Header>
                 <Accordion.Body>
                   <CompactPicker color={titleColor} onChangeComplete={(e) => { setTitleColor(e.hex) }} />
                   <div className='d-flex justify-content-center mt-3' >
@@ -108,7 +111,7 @@ const CreateTimelineModal = ({ showCreateTimelineModal, handleCloseCreateTimelin
               </Accordion.Item>
 
               <Accordion.Item eventKey='bgColor'>
-                <Accordion.Header>Background</Accordion.Header>
+                <Accordion.Header> <BsFillRecordCircleFill style={{ color: bgColor }} className='me-1' /> Background</Accordion.Header>
                 <Accordion.Body>
                   <CompactPicker color={bgColor} onChangeComplete={(e) => { setBgColor(e.hex) }} />
                   <div className='d-flex justify-content-center mt-3' >
@@ -119,7 +122,7 @@ const CreateTimelineModal = ({ showCreateTimelineModal, handleCloseCreateTimelin
               </Accordion.Item>
 
               <Accordion.Item eventKey='textColor' >
-                <Accordion.Header>Description Text</Accordion.Header>
+                <Accordion.Header> <BsFillRecordCircleFill style={{ color: textColor }} className='me-1' /> Description Text</Accordion.Header>
                 <Accordion.Body>
                   <CompactPicker color={textColor} onChangeComplete={(e) => { setTextColor(e.hex) }} />
                   <div className='d-flex justify-content-center mt-3' >
@@ -130,7 +133,7 @@ const CreateTimelineModal = ({ showCreateTimelineModal, handleCloseCreateTimelin
               </Accordion.Item>
 
               <Accordion.Item eventKey='borderColor' >
-                <Accordion.Header>Border</Accordion.Header>
+                <Accordion.Header>  <BsFillRecordCircleFill style={{ color: borderColor }} className='me-1' /> Border</Accordion.Header>
                 <Accordion.Body>
                   <CompactPicker color={borderColor} onChangeComplete={(e) => { setBorderColor(e.hex) }} />
                   <div className='d-flex justify-content-center mt-3' >

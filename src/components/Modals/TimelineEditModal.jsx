@@ -3,7 +3,9 @@ import { Accordion, Button, Col, Container, Form, Modal, Row } from 'react-boots
 import { useDispatch, useSelector } from 'react-redux';
 import { CompactPicker } from 'react-color';
 import { FaBrush } from 'react-icons/fa6';
-
+import { BiImageAdd } from 'react-icons/bi'
+import { BsCardText, BsFillRecordCircleFill } from 'react-icons/bs';
+import { MdTitle } from 'react-icons/md';
 
 import { FaFloppyDisk } from 'react-icons/fa6'
 import { updateTimeline } from '../../actions/timelineActions';
@@ -66,7 +68,7 @@ const TimelineEditModal = ({ itemId, showEdit, handleCloseEdit }) => {
       <Modal.Body>
         <Form>
           <Form.Group className='mb-3 p-2 mb-3 modalInputs' controlId='title'>
-            <Form.Label>Title</Form.Label>
+            <Form.Label> <MdTitle className='mb-1' /> Title</Form.Label>
             <Form.Control
               type='text'
               value={editTitle}
@@ -77,18 +79,18 @@ const TimelineEditModal = ({ itemId, showEdit, handleCloseEdit }) => {
             className='mb-3 p-2 mb-3 modalInputs'
             controlId='description'
           >
-            <Form.Label>Description</Form.Label>
+            <Form.Label> <BsCardText className='mb-1' /> Description</Form.Label>
             <Form.Control
               as='textarea'
               rows={3}
-              placeholder='Details or keywords for easier searching'
+              placeholder='Type something...'
               value={editDescription}
               onChange={(e) => setEditDescription(e.target.value)}
             />
           </Form.Group>
 
           <Form.Group className='mb-3 p-2 mb-3 modalInputs' controlId='image'>
-            <Form.Label>Image</Form.Label>
+            <Form.Label> <BiImageAdd className='mb-1' /> Image</Form.Label>
             <Form.Control
               type='text'
               placeholder='Your URL goes here'
@@ -101,7 +103,7 @@ const TimelineEditModal = ({ itemId, showEdit, handleCloseEdit }) => {
 
             <Accordion className='text-center mx-3 mb-3 shadow-sm'  >
               <Accordion.Item eventKey='titleColor'>
-                <Accordion.Header >Title</Accordion.Header>
+                <Accordion.Header > <BsFillRecordCircleFill style={{ color: editTitleColor }} className='me-1' /> Title</Accordion.Header>
                 <Accordion.Body>
                   <CompactPicker color={editTitleColor} onChangeComplete={(e) => { setEditTitleColor(e.hex) }} />
                   <div className='d-flex justify-content-center mt-3' >
@@ -112,7 +114,7 @@ const TimelineEditModal = ({ itemId, showEdit, handleCloseEdit }) => {
               </Accordion.Item>
 
               <Accordion.Item eventKey='bgColor'>
-                <Accordion.Header>Background</Accordion.Header>
+                <Accordion.Header> <BsFillRecordCircleFill style={{ color: editBackgroundColor }} className='me-1' /> Background</Accordion.Header>
                 <Accordion.Body>
                   <CompactPicker color={editBackgroundColor} onChangeComplete={(e) => { setEditBackgroundColor(e.hex) }} />
                   <div className='d-flex justify-content-center mt-3' >
@@ -123,7 +125,7 @@ const TimelineEditModal = ({ itemId, showEdit, handleCloseEdit }) => {
               </Accordion.Item>
 
               <Accordion.Item eventKey='textColor' >
-                <Accordion.Header>Description Text</Accordion.Header>
+                <Accordion.Header> <BsFillRecordCircleFill style={{ color: editTextColor }} className='me-1' />  Description Text</Accordion.Header>
                 <Accordion.Body>
                   <CompactPicker color={editTextColor} onChangeComplete={(e) => { setEditTextColor(e.hex) }} />
                   <div className='d-flex justify-content-center mt-3' >
@@ -134,7 +136,7 @@ const TimelineEditModal = ({ itemId, showEdit, handleCloseEdit }) => {
               </Accordion.Item>
 
               <Accordion.Item eventKey='borderColor' >
-                <Accordion.Header>Border</Accordion.Header>
+                <Accordion.Header> <BsFillRecordCircleFill style={{ color: editBorderColor }} className='me-1' />  Border</Accordion.Header>
                 <Accordion.Body>
                   <CompactPicker color={editBorderColor} onChangeComplete={(e) => { setEditBorderColor(e.hex) }} />
                   <div className='d-flex justify-content-center mt-3' >
