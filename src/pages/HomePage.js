@@ -16,6 +16,7 @@ import { PuffLoader } from 'react-spinners';
 import TimelineEditModal from '../components/Modals/TimelineEditModal';
 import TimelineDeleteModal from '../components/Modals/TimelineDeleteModal';
 import DeleteTimelineToast from '../components/Toasts/DeleteTimelineToast';
+import UpdateTimelineToast from '../components/Toasts/UpdateTimelineToast';
 
 const HomePage = () => {
   const [showCreateTimelineModal, setShowCreateTimelineModal] = useState(false);
@@ -62,6 +63,8 @@ const HomePage = () => {
   const [showToast, setShowToast] = useState(false);
 
   const [showDeleteToast, setShowDeleteToast] = useState(false);
+
+  const [showUpdateToast, setShowUpdateToast] = useState(false);
 
   const handleScrollToTop = () => {
     window.scrollTo(0, 0);
@@ -199,6 +202,7 @@ const HomePage = () => {
         }} >
         <CreateTimelineToast showToast={showToast} setShowToast={setShowToast} />
         <DeleteTimelineToast showDeleteToast={showDeleteToast} setShowDeleteToast={setShowDeleteToast} />
+        <UpdateTimelineToast showUpdateToast={showUpdateToast} setShowUpdateToast={setShowUpdateToast} />
       </ToastContainer>
 
 
@@ -212,6 +216,7 @@ const HomePage = () => {
       {itemIdtoEdit !== '' && (
         <>
           <TimelineEditModal
+            setShowUpdateToast={setShowUpdateToast}
             showEdit={showEdit}
             handleCloseEdit={handleCloseEdit}
             itemId={itemIdtoEdit}

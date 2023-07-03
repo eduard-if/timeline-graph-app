@@ -10,7 +10,7 @@ import { MdTitle } from 'react-icons/md';
 import { FaFloppyDisk } from 'react-icons/fa6'
 import { updateTimeline } from '../../actions/timelineActions';
 
-const TimelineEditModal = ({ itemId, showEdit, handleCloseEdit }) => {
+const TimelineEditModal = ({ itemId, showEdit, handleCloseEdit, setShowUpdateToast }) => {
   const dispatch = useDispatch();
 
   const timelineList = useSelector(state => state.timelineList);
@@ -53,6 +53,7 @@ const TimelineEditModal = ({ itemId, showEdit, handleCloseEdit }) => {
       'titleColor': editTitleColor
     }))
     handleCloseEdit();
+    setShowUpdateToast(true);
   }
 
 
