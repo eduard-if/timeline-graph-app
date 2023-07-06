@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Row, Col, ButtonGroup, Button, Card, Collapse } from 'react-bootstrap';
+import { Row, Col, ButtonGroup, Button, Card } from 'react-bootstrap';
 
 const EventDetailsButtonBar = ({ itemToEdit }) => {
   const [openEventDetails, setOpenEventDetails] = useState(false);
@@ -48,7 +48,7 @@ const EventDetailsButtonBar = ({ itemToEdit }) => {
               {/* card is in a div that stretches over the graph and doesnt allow clicking on it to switch event */}
               {/* should change the position to fixed */}
               <Col className='mt-2' lg={4} md={6} sm={8} xs={12} >
-                <Collapse in={openEventDetails}  >
+                {openEventDetails && (
                   <Card className='eventDetailsCard'  >
                     <Card.Body>
                       <Card.Title  >
@@ -80,7 +80,9 @@ const EventDetailsButtonBar = ({ itemToEdit }) => {
                       </div>
                     </Card.Footer>
                   </Card>
-                </Collapse>
+                )}
+
+
               </Col>
 
               {/* quick fix! - empty column to close the details card when clicked outside of it in the upper portion */}
