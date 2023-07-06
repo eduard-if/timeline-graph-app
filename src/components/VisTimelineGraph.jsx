@@ -4,16 +4,15 @@ import { DataSet } from 'vis-data';
 import { useRef } from 'react';
 import { useState } from 'react';
 import 'vis-timeline/styles/vis-timeline-graph2d.min.css'
-import { Button, ButtonGroup, Card, Collapse, Row, Col } from 'react-bootstrap';
+import { Button, ButtonGroup } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import EventDetailsButtonBar from './Navbars&Toolbars/EventDetailsButtonBar';
-
-
+import TimelineGraphNavigationButtons from './Navbars&Toolbars/TimelineGraphNavigationButtons';
+import EventDetailsButtonBar from '../components/Navbars&Toolbars/EventDetailsButtonBar';
 
 const VisTimelineGraph = ({ items, options }) => {
   const timelineRef = useRef('null')
   const [timeline, setTimeline] = useState('');
-  const [itemToEdit, setItemToEdit] = useState([]);
+
 
   const [showEventsList, setShowEventsList] = useState(false);
 
@@ -85,24 +84,12 @@ const VisTimelineGraph = ({ items, options }) => {
     timeline.moveTo(newStart, { animation: true });
   };
 
+  const [itemToEdit, setItemToEdit] = useState([]);
 
-  // buttons bar border style
-  const leftBorderStyle = {
-    borderTopLeftRadius: '6px',
-    borderBottomLeftRadius: '6px',
-  }
-
-  const rightBorderStyle = {
-    borderTopRightRadius: '6px',
-    borderBottomRightRadius: '6px',
-  }
 
   return (
     <>
-
-      {/* the top buttons bar and the card that show up when an event is clicked */}
       <EventDetailsButtonBar itemToEdit={itemToEdit} />
-
 
       {/* the timeline graph itself */}
       <div>
@@ -114,62 +101,10 @@ const VisTimelineGraph = ({ items, options }) => {
 
       {/* buttons to control the view of the timeline + open events list & groups */}
       <div>
-        <div className='d-flex flex-row justify-content-center fixed-bottom mb-5'>
-          <Link to={`events-list`}  >
-            <Button
-              onClick={handleShowEventsList}
-              variant="light"
-              className='fs-4 py-0 px-2 border-0'
-            >
-              <i className='bi bi-card-list' ></i>
-            </Button>
-          </Link>
-
-          <ButtonGroup className='d-flex mx-1 mb-1'>
-
-            <Button onClick={scrollLeft}
-              variant='light'
-              className='border-0'
-            >
-              <i className='bi bi-chevron-left' ></i>
-            </Button>
-            <Button
-              onClick={zoomIn}
-              variant='light'
-              className='border-0'
-            >
-              <i className='bi bi-zoom-in' ></i>
-            </Button>
-            <Button
-              onClick={fit}
-              variant='light'
-              className='border-0'
-            >
-              Fit
-            </Button>
-            <Button
-              onClick={zoomOut}
-              type='button'
-              variant='light'
-              className='border-0'
-            >
-              <i className='bi bi-zoom-out' ></i>
-            </Button>
-            <Button onClick={scrollRight}
-              variant='light'
-              className='border-0'
-            >
-              <i className='bi bi-chevron-right' ></i>
-            </Button>
-
-          </ButtonGroup>
-          <Button
-            variant="light"
-            className='fs-4 py-0 px-2 border-0'
-          >
-            <i className='bi bi-diagram-3' ></i>
-          </Button>
-        </div>
+        <TimelineGraphNavigationButtons
+          handleShowEventsList={handleShowEventsList}
+          scrollLeft={scrollLeft} scrollRight={scrollRight}
+          zoomIn={zoomIn} zoomOut={zoomOut} fit={fit} />
       </div>
     </>
   );
