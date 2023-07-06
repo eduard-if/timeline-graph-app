@@ -1,18 +1,18 @@
-
-import React, { useState } from 'react';
-import { Button, Card, Col, Container, Form, Modal, Row } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { Accordion, Alert, Button, Card, Col, Container, Form, Modal, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { CirclePicker, CompactPicker, GithubPicker, SketchPicker, SliderPicker } from 'react-color';
+import { CompactPicker } from 'react-color';
 import { createEvent } from '../../actions/timelineActions';
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
+import { BsExclamationCircle, BsFillRecordCircleFill } from 'react-icons/bs';
+import { FaBrush } from 'react-icons/fa6';
+
 
 const EventsCreateModal = ({ showEventsCreateModal, handleCloseEventsCreateModal }) => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  const [start, setStart] = useState('2023-06-19');
-  const [end, setEnd] = useState('2023-06-20');
+  const [start, setStart] = useState('');
+  const [end, setEnd] = useState('');
   const [type, setType] = useState('box');
   const [bgColor, setBgColor] = useState('');
   const [textColor, setTextColor] = useState('');
@@ -23,6 +23,11 @@ const EventsCreateModal = ({ showEventsCreateModal, handleCloseEventsCreateModal
   const [borderColor, setBorderColor] = useState('');
   const [imageUrl, setImageUrl] = useState('');
   const [notesDetails, setNotesDetails] = useState('');
+
+  const [showDateAlert, setShowDateAlert] = useState(false);
+  const [showTopAlert, setShowTopAlert] = useState(false);
+  const [topAlertMessage, setTopAlertMessage] = useState('');
+
 
   const stylePreview = { fontSize: 'small', fontStyle: `${fontStyle}`, fontWeight: `${fontWeight}`, textDecorationLine: `${lineDecoration}` };
 
@@ -36,11 +41,57 @@ const EventsCreateModal = ({ showEventsCreateModal, handleCloseEventsCreateModal
     const id = data.timeline.timeline.id
     console.log(id)
 
+    if (content.trim().length === 0) {
+      setTopAlertMessage("Title can't be empty!")
+      setShowTopAlert(true);
+      return;
+    };
+
+    if (start === '') {
+      setTopAlertMessage("Start date missing!")
+      setShowTopAlert(true);
+      return;
+    }
+
+    if ((type === 'range' || type === 'background') && end === '') {
+      setTopAlertMessage("Range and Background types require an End Date!")
+      setShowTopAlert(true);
+      return;
+    }
+
     dispatch(createEvent(title, fontSize, fontStyle, fontWeight,
       content, start, end, type, bgColor, textColor, borderColor, notesDetails, id))
     if (!loading) {
       handleCloseEventsCreateModal()
+      setContent('');
+      setTitle('')
+      handleCloseTopAlert();
+      setShowDateAlert(false);
     }
+  }
+
+  useEffect(() => {
+    if (type === 'point') {
+      setBorderColor('');
+      setBgColor('');
+      setEnd('')
+    }
+
+    if (type === 'box') {
+      setEnd('')
+    }
+  }, [type])
+
+  useEffect(() => {
+    if (end < start && end !== '') {
+      setShowDateAlert(true)
+    }
+
+  }, [start, end])
+
+  const handleCloseTopAlert = () => {
+    setTopAlertMessage('')
+    setShowTopAlert(false)
   }
 
   return (
@@ -59,6 +110,16 @@ const EventsCreateModal = ({ showEventsCreateModal, handleCloseEventsCreateModal
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className='eventCreateModalBody'   >
+        <Alert
+          className='rounded' dismissible={true}
+          variant='danger' show={showTopAlert} onClose={handleCloseTopAlert}
+        >
+          <Alert.Heading> <BsExclamationCircle className='fs-3 mb-1 me-1' />  Invalid input!</Alert.Heading>
+          <hr></hr>
+          <div className=' fs-3 text-center fw-bold' >
+            {topAlertMessage}
+          </div>
+        </Alert>
         <Form className='p-0 m-0' >
           <Row>
 
@@ -119,17 +180,6 @@ const EventsCreateModal = ({ showEventsCreateModal, handleCloseEventsCreateModal
                     </Form.Select>
                   </Col>
                   <Col>
-                    {/* <Form.Label
-                      style={stylePreview}>Line Decoration</Form.Label>
-                    <Form.Select
-                      className='rounded'
-                      size='sm' aria-label='select-font-line' onChange={(e) => setLineDecoration(e.target.value)} value={lineDecoration}>
-                      <option value='none' style={{ textDecorationLine: 'none' }} >None</option>
-                      <option value='underline' style={{ textDecorationLine: 'underline' }} >Underline</option>
-                      <option value='overline' style={{ textDecorationLine: 'overline' }} >Overline</option>
-                      <option value='line-through' style={{ textDecorationLine: 'line-through' }} >Line-through</option>
-
-                    </Form.Select> */}
                   </Col>
                 </Row>
               </Form.Group>
@@ -182,6 +232,9 @@ const EventsCreateModal = ({ showEventsCreateModal, handleCloseEventsCreateModal
                     disabled={type === 'box' || type === 'point' && true}
                   />
                 </Form.Group>
+                <Alert dismissible={true} show={showDateAlert} onClose={() => setShowDateAlert(false)} className='rounded mt-2' >
+                  <BsExclamationCircle className='mb-1' /> End date cannot be set <strong>before</strong> start date!
+                </Alert>
               </div>
               <Form.Group
                 className='mb-3   p-2 modalInputs'
@@ -199,82 +252,52 @@ const EventsCreateModal = ({ showEventsCreateModal, handleCloseEventsCreateModal
             </Col>
 
             <Col>
-              <div
-                className='  p-2 mb-3 modalInputs' >
-                {type !== 'point' &&
-                  (
-                    <Form.Group
-                      className='mb-3'
-                      controlId='bgColor'
-                    >
-                      <Form.Label className='mt-2'>Background color</Form.Label>
-                      {/* <CirclePicker /> */}
-                      <Row className='justify-content-start'>
-                        <Col xs={4}>
+              <div className='modalInputs'>
+                <div className='fs-6 fw-light text-center my-3 ' > <FaBrush className='mb-1' />  Event Color Styling</div>
 
-                        </Col>
-                        <Col xs={1}>
-                          <Form.Control
-                            type='color'
-                            value={bgColor}
-                            onChange={(e) => setBgColor(e.target.value)}
-                          />
-                        </Col>
-                        <Col>
+                <Accordion className='text-center mx-3 mb-3 shadow-sm'  >
+                  <Accordion.Item eventKey='textColor'>
+                    <Accordion.Header > <BsFillRecordCircleFill style={{ color: textColor }} className='me-1' /> Text</Accordion.Header>
+                    <Accordion.Body>
+                      <CompactPicker color={textColor} onChangeComplete={(e) => { setTextColor(e.hex) }} />
+                      <div className='d-flex justify-content-center mt-3' >
+                        Customize: <Form.Control className='mx-2' type='color' value={textColor} onChange={(e) => setTextColor(e.target.value)}
+                        />
+                      </div>
+                    </Accordion.Body>
+                  </Accordion.Item>
 
-                        </Col>
-                      </Row>
-                    </Form.Group>
-                  )
-                }
+                  {type !== 'point' &&
+                    (
+                      <>
+                        <Accordion.Item eventKey='bgColor'>
+                          <Accordion.Header> <BsFillRecordCircleFill style={{ color: bgColor }} className='me-1' /> Background</Accordion.Header>
+                          <Accordion.Body>
+                            <CompactPicker color={bgColor} onChangeComplete={(e) => { setBgColor(e.hex) }} />
+                            <div className='d-flex justify-content-center mt-3' >
+                              Customize: <Form.Control className='mx-2' type='color' value={bgColor} onChange={(e) => setBgColor(e.target.value)}
+                              />
+                            </div>
+                          </Accordion.Body>
+                        </Accordion.Item>
 
-                <Form.Group
-                  className='mb-3'
-                  controlId='textColor'
-                >
-                  <Form.Label className='mt-2'>Text color</Form.Label>
-                  {/* <SliderPicker /> */}
-                  <Row className='justify-content-start'>
-                    <Col xs={4}>
+                        <Accordion.Item eventKey='borderColor' >
+                          <Accordion.Header>  <BsFillRecordCircleFill style={{ color: borderColor }} className='me-1' /> Border</Accordion.Header>
+                          <Accordion.Body>
+                            <CompactPicker color={borderColor} onChangeComplete={(e) => { setBorderColor(e.hex) }} />
+                            <div className='d-flex justify-content-center mt-3' >
+                              Customize: <Form.Control className='mx-2' type='color' value={borderColor} onChange={(e) => setBorderColor(e.target.value)}
+                              />
+                            </div>
+                          </Accordion.Body>
+                        </Accordion.Item>
+                      </>
 
+                    )}
 
-                    </Col>
-                    <Col xs={1}>
-                      <Form.Control
-                        type='color'
-                        value={textColor}
-                        onChange={(e) => setTextColor(e.target.value)}
-                      />
-                    </Col>
-                  </Row>
-                </Form.Group>
-
-                {type !== 'point' &&
-                  (
-                    <Form.Group
-                      className='mb-3'
-                      controlId='borderColor'
-                    >
-                      <Form.Label className='mt-2'>Border color</Form.Label>
-                      {/* <SketchPicker /> */}
-                      <Row className='justify-content-start'>
-                        <Col xs={4}>
-
-
-                        </Col>
-                        <Col xs={1}>
-                          <Form.Control
-                            type='color'
-                            value={borderColor}
-                            onChange={(e) => setBorderColor(e.target.value)}
-                          />
-                        </Col>
-                      </Row>
-                    </Form.Group>
-                  )}
+                </Accordion>
 
               </div>
-
 
             </Col>
 
