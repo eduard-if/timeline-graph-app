@@ -49,6 +49,21 @@ const HomePage = () => {
   const [showDelete, setShowDelete] = useState(false);
   const [showInfoDetails, setShowInfoDetails] = useState(false);
 
+  const [showToast, setShowToast] = useState(false);
+  const [showDeleteToast, setShowDeleteToast] = useState(false);
+  const [showUpdateToast, setShowUpdateToast] = useState(false);
+
+  const dispatch = useDispatch();
+  const location = useLocation();
+
+  const timelineList = useSelector((state) => state.timelineList);
+  const { error, loading, timelines } = timelineList;
+
+  const [orderBy, setOrderBy] = useState('-lastUpdated');
+  const [search, setSearch] = useState('');
+
+  const [activeTab, setActiveTab] = useState('grid');
+
   const handleCloseInfoDetails = () => {
     setShowInfoDetails(false);
     setItemIdtoEdit('');
@@ -91,24 +106,9 @@ const HomePage = () => {
     setShowToast(false);
   };
 
-  const [showToast, setShowToast] = useState(false);
-
-  const [showDeleteToast, setShowDeleteToast] = useState(false);
-
-  const [showUpdateToast, setShowUpdateToast] = useState(false);
-
   const handleScrollToTop = () => {
     window.scrollTo(0, 0);
   };
-
-  const dispatch = useDispatch();
-  const location = useLocation();
-
-  const timelineList = useSelector((state) => state.timelineList);
-  const { error, loading, timelines } = timelineList;
-
-  const [orderBy, setOrderBy] = useState('-lastUpdated');
-  const [search, setSearch] = useState('');
 
   useEffect(() => {
     dispatch(listTimelines(orderBy, search));
@@ -147,7 +147,7 @@ const HomePage = () => {
               <h1 className='text-center'>No Timelines</h1>
             </Message>
           ) : (
-            <Tab.Container defaultActiveKey='grid'>
+            <Tab.Container defaultActiveKey={activeTab}>
               {/*timelines grid card and list card tabs*/}
               <Row>
                 <Col xs={12} className='mb-5'>
@@ -184,16 +184,16 @@ const HomePage = () => {
                           </Dropdown.Item>
                           <Dropdown.Item
                             className='fw-light mb-1 rounded'
-                            active={orderBy === '-createdAt' ? true : false}
-                            onClick={() => setOrderBy('-createdAt')}
+                            active={orderBy === 'createdAt' ? true : false}
+                            onClick={() => setOrderBy('createdAt')}
                           >
                             <BsSortNumericUpAlt className='fs-5 me-1' />
                             Created Ascending
                           </Dropdown.Item>
                           <Dropdown.Item
                             className='fw-light mt-1 rounded'
-                            active={orderBy === 'createdAt' ? true : false}
-                            onClick={() => setOrderBy('createdAt')}
+                            active={orderBy === '-createdAt' ? true : false}
+                            onClick={() => setOrderBy('-createdAt')}
                           >
                             <BsSortNumericDownAlt className='fs-5 me-1' />
                             Created Descending
@@ -202,13 +202,21 @@ const HomePage = () => {
                       </Dropdown>
                     </Nav.Item>
                     <Nav.Item>
-                      <Nav.Link eventKey='grid' className='px-3'>
+                      <Nav.Link
+                        eventKey='grid'
+                        className='px-3'
+                        onClick={() => setActiveTab('grid')}
+                      >
                         <i className='bi bi-grid'></i>
                       </Nav.Link>
                     </Nav.Item>
 
                     <Nav.Item>
-                      <Nav.Link eventKey='list' className='px-3'>
+                      <Nav.Link
+                        eventKey='list'
+                        className='px-3'
+                        onClick={() => setActiveTab('list')}
+                      >
                         <i className='bi bi-list'></i>
                       </Nav.Link>
                     </Nav.Item>
