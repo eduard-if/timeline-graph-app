@@ -32,11 +32,28 @@ import UpdateTimelineToast from '../components/Toasts/UpdateTimelineToast';
 import { MdRefresh } from 'react-icons/md';
 import DropdownToggle from 'react-bootstrap/esm/DropdownToggle';
 import { BsSortNumericDownAlt, BsSortNumericUp } from 'react-icons/bs';
+import TimelineInfoDetailsModal from '../components/Modals/TimelineInfoDetailsModal';
 
 const HomePage = () => {
   const [showCreateTimelineModal, setShowCreateTimelineModal] = useState(false);
   const md = useMediaQuery({ maxWidth: 992 });
   const lg = useMediaQuery({ minWidth: 1200 });
+
+  const [itemIdtoEdit, setItemIdtoEdit] = useState('');
+
+  const [showEdit, setShowEdit] = useState(false);
+  const [showDelete, setShowDelete] = useState(false);
+  const [showInfoDetails, setShowInfoDetails] = useState(false);
+
+  const handleCloseInfoDetails = () => {
+    setShowInfoDetails(false);
+    setItemIdtoEdit('');
+  };
+
+  const handleShowInfoDetails = (id) => {
+    setItemIdtoEdit(id);
+    setShowInfoDetails(true);
+  };
 
   const handleCloseCreateTimelineModal = () =>
     setShowCreateTimelineModal(false);
@@ -46,10 +63,6 @@ const HomePage = () => {
     setShowToast(false);
     setShowCreateTimelineModal(true);
   };
-
-  const [itemIdtoEdit, setItemIdtoEdit] = useState('');
-
-  const [showEdit, setShowEdit] = useState(false);
 
   const handleCloseEdit = () => {
     setShowEdit(false);
@@ -62,8 +75,6 @@ const HomePage = () => {
     setShowDeleteToast(false);
     setShowToast(false);
   };
-
-  const [showDelete, setShowDelete] = useState(false);
 
   const handleCloseDelete = () => {
     setShowDelete(false);
@@ -243,6 +254,7 @@ const HomePage = () => {
                                 data={timeline}
                                 handleShowDelete={handleShowDelete}
                                 handleShowEdit={handleShowEdit}
+                                handleShowInfoDetails={handleShowInfoDetails}
                               />
                             </Col>
                           ))}
@@ -354,6 +366,12 @@ const HomePage = () => {
             setShowDeleteToast={setShowDeleteToast}
             showDelete={showDelete}
             handleCloseDelete={handleCloseDelete}
+            itemId={itemIdtoEdit}
+          />
+
+          <TimelineInfoDetailsModal
+            showInfoDetails={showInfoDetails}
+            handleCloseInfoDetails={handleCloseInfoDetails}
             itemId={itemIdtoEdit}
           />
         </>
