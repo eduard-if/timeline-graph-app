@@ -9,6 +9,7 @@ const HomeTimelineGridCard = ({
   handleShowDelete,
   handleShowEdit,
   handleShowInfoDetails,
+  orderBy,
 }) => {
   const md = useMediaQuery({ maxWidth: 992 });
 
@@ -21,6 +22,7 @@ const HomeTimelineGridCard = ({
     borderColor,
     lastUpdated,
     id,
+    createdAt,
   } = data;
 
   return (
@@ -72,12 +74,34 @@ const HomeTimelineGridCard = ({
               style={{ cursor: 'pointer' }}
             >
               <BsInfoCircle className='mb-1 me-1' />
-              Last Updated:{' '}
-              {
-                new Date(lastUpdated)
-                  .toLocaleString('en-GB', { hour12: false })
-                  .split(',')[0]
-              }
+              {orderBy === '-lastUpdated' || orderBy === 'lastUpdated' ? (
+                <>
+                  Last Updated:{' '}
+                  {
+                    new Date(lastUpdated)
+                      .toLocaleString('en-GB', { hour12: false })
+                      .split(',')[0]
+                  }
+                </>
+              ) : orderBy === '-createdAt' || orderBy === 'createdAt' ? (
+                <>
+                  Created:{' '}
+                  {
+                    new Date(createdAt)
+                      .toLocaleString('en-GB', { hour12: false })
+                      .split(',')[0]
+                  }
+                </>
+              ) : (
+                <>
+                  Last Updated:{' '}
+                  {
+                    new Date(lastUpdated)
+                      .toLocaleString('en-GB', { hour12: false })
+                      .split(',')[0]
+                  }
+                </>
+              )}
             </Col>
             <Col xs={3} className='d-flex  ps-3 pe-1 justify-content-end'>
               <Button
