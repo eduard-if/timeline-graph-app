@@ -16,7 +16,7 @@ import {
 import CreateTimelineModal from '../components/Modals/CreateTimelineModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { listTimelines } from '../actions/timelineActions';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
@@ -131,12 +131,6 @@ const HomePage = () => {
             <Message variant='secondary'>
               <h1 className='text-center'>No Timelines</h1>
             </Message>
-          ) : error ? (
-            <Message variant='danger'>
-              <h1 className='text-center fw-bold'>
-                <HiExclamationCircle className='mb-2' /> {error}
-              </h1>
-            </Message>
           ) : (
             <Tab.Container defaultActiveKey='grid'>
               {/*timelines grid card and list card tabs*/}
@@ -217,26 +211,41 @@ const HomePage = () => {
                 </Col>
 
                 <Col xs={12}>
+                  {timelines.details && (
+                    <>
+                      <Message variant='info'>
+                        <h1 className='text-center fw-bold'>
+                          <HiExclamationCircle className='mb-2' />{' '}
+                          {timelines.details}
+                        </h1>
+
+                        <div className='text-center'>
+                          <Link to={'/'}>Go Back</Link>
+                        </div>
+                      </Message>
+                    </>
+                  )}
                   <Tab.Content>
                     <Tab.Pane eventKey='grid' transition={false}>
                       <Row>
-                        {timelines.map((timeline, index) => (
-                          <Col
-                            xs={12}
-                            sm={12}
-                            md={6}
-                            lg={4}
-                            xl={3}
-                            className='mb-4'
-                            key={index}
-                          >
-                            <HomeTimelineGridCard
-                              data={timeline}
-                              handleShowDelete={handleShowDelete}
-                              handleShowEdit={handleShowEdit}
-                            />
-                          </Col>
-                        ))}
+                        {!timelines.details &&
+                          timelines.map((timeline, index) => (
+                            <Col
+                              xs={12}
+                              sm={12}
+                              md={6}
+                              lg={4}
+                              xl={3}
+                              className='mb-4'
+                              key={index}
+                            >
+                              <HomeTimelineGridCard
+                                data={timeline}
+                                handleShowDelete={handleShowDelete}
+                                handleShowEdit={handleShowEdit}
+                              />
+                            </Col>
+                          ))}
                       </Row>
                     </Tab.Pane>
 
@@ -246,18 +255,19 @@ const HomePage = () => {
                           variant='flush'
                           className={!md ? 'w-50' : 'w-100'}
                         >
-                          {timelines.map((timeline, index) => (
-                            <ListGroup.Item
-                              key={index}
-                              className='py-3 bg-transparent'
-                            >
-                              <HomeTimelineListCard
-                                data={timeline}
-                                handleShowDelete={handleShowDelete}
-                                handleShowEdit={handleShowEdit}
-                              />
-                            </ListGroup.Item>
-                          ))}
+                          {!timelines.details &&
+                            timelines.map((timeline, index) => (
+                              <ListGroup.Item
+                                key={index}
+                                className='py-3 bg-transparent'
+                              >
+                                <HomeTimelineListCard
+                                  data={timeline}
+                                  handleShowDelete={handleShowDelete}
+                                  handleShowEdit={handleShowEdit}
+                                />
+                              </ListGroup.Item>
+                            ))}
                         </ListGroup>
                       </div>
                     </Tab.Pane>
