@@ -29,8 +29,9 @@ import TimelineEditModal from '../components/Modals/TimelineEditModal';
 import TimelineDeleteModal from '../components/Modals/TimelineDeleteModal';
 import DeleteTimelineToast from '../components/Toasts/DeleteTimelineToast';
 import UpdateTimelineToast from '../components/Toasts/UpdateTimelineToast';
-import { FaSort } from 'react-icons/fa6';
+import { MdRefresh } from 'react-icons/md';
 import DropdownToggle from 'react-bootstrap/esm/DropdownToggle';
+import { BsSortNumericDownAlt, BsSortNumericUp } from 'react-icons/bs';
 
 const HomePage = () => {
   const [showCreateTimelineModal, setShowCreateTimelineModal] = useState(false);
@@ -92,15 +93,29 @@ const HomePage = () => {
   const { error, loading, timelines } = timelineList;
 
   const [orderBy, setOrderBy] = useState('-lastUpdated');
+  const [search, setSearch] = useState('');
 
   useEffect(() => {
-    dispatch(listTimelines(orderBy));
+    dispatch(listTimelines(orderBy, search));
   }, [dispatch, location, orderBy]);
+
+  const handleSearch = () => {
+    dispatch(listTimelines(orderBy, search));
+    setSearch('');
+  };
+
+  const handleRefresh = () => {
+    setSearch('');
+    dispatch(listTimelines(orderBy));
+  };
 
   return (
     <>
       <HomeNavbar
         handleShowCreateTimelineModal={handleShowCreateTimelineModal}
+        search={search}
+        setSearch={setSearch}
+        handleSearch={handleSearch}
       />
       <main className='pb-5 '>
         <Container className=' px-4 pb-4'>
@@ -137,29 +152,41 @@ const HomePage = () => {
                           <i className='bi bi-funnel'></i>
                         </Dropdown.Toggle>
 
-                        <Dropdown.Menu className='rounded'>
+                        <Dropdown.Menu
+                          className='rounded shadow border-0 px-2'
+                          variant=''
+                        >
+                          <Dropdown.Header>Sort by</Dropdown.Header>
                           <Dropdown.Item
+                            className='fw-light my-1 rounded'
                             active={orderBy === 'lastUpdated' ? true : false}
                             onClick={() => setOrderBy('lastUpdated')}
                           >
+                            <BsSortNumericUp className='fs-5 me-1' />
                             Last Updated Ascending
                           </Dropdown.Item>
                           <Dropdown.Item
+                            className='fw-light mb-1 rounded'
                             active={orderBy === '-lastUpdated' ? true : false}
                             onClick={() => setOrderBy('-lastUpdated')}
                           >
+                            <BsSortNumericDownAlt className='fs-5 me-1' />
                             Last Updated Descending
                           </Dropdown.Item>
                           <Dropdown.Item
+                            className='fw-light mb-1 rounded'
                             active={orderBy === 'createdAt' ? true : false}
                             onClick={() => setOrderBy('createdAt')}
                           >
+                            <BsSortNumericUp className='fs-5 me-1' />
                             Created Ascending
                           </Dropdown.Item>
                           <Dropdown.Item
+                            className='fw-light mt-1 rounded'
                             active={orderBy === '-createdAt' ? true : false}
                             onClick={() => setOrderBy('-createdAt')}
                           >
+                            <BsSortNumericDownAlt className='fs-5 me-1' />
                             Created Descending
                           </Dropdown.Item>
                         </Dropdown.Menu>
@@ -175,6 +202,16 @@ const HomePage = () => {
                       <Nav.Link eventKey='list' className='px-3'>
                         <i className='bi bi-list'></i>
                       </Nav.Link>
+                    </Nav.Item>
+
+                    <Nav.Item>
+                      <Button
+                        variant='dark'
+                        className='bg-transparent border-0 text-primary'
+                        onClick={handleRefresh}
+                      >
+                        <MdRefresh />
+                      </Button>
                     </Nav.Item>
                   </Nav>
                 </Col>
