@@ -1,12 +1,24 @@
 import React, { useState } from 'react';
 import { Button, Card, Col, Row } from 'react-bootstrap';
-import { Link } from "react-router-dom";
+import { BsInfoCircle } from 'react-icons/bs';
+import { Link } from 'react-router-dom';
 
-
-const HomeTimelineListCard = ({ data, handleShowDelete, handleShowEdit }) => {
-
-
-  const { title, description, bgColor, textColor, titleColor, borderColor, lastUpdated, id } = data;
+const HomeTimelineListCard = ({
+  data,
+  handleShowDelete,
+  handleShowEdit,
+  handleShowInfoDetails,
+}) => {
+  const {
+    title,
+    description,
+    bgColor,
+    textColor,
+    titleColor,
+    borderColor,
+    lastUpdated,
+    id,
+  } = data;
 
   return (
     <>
@@ -16,13 +28,15 @@ const HomeTimelineListCard = ({ data, handleShowDelete, handleShowEdit }) => {
         style={{
           backgroundColor: bgColor,
           color: textColor,
-          borderColor: borderColor
+          borderColor: borderColor,
         }}
       >
         <Card.Body>
-          <Link to={`timeline/${id}`}
+          <Link
+            to={`timeline/${id}`}
             className='titleRouterLink '
-            style={{ color: `${titleColor}` }}>
+            style={{ color: `${titleColor}` }}
+          >
             <Card.Title className='mb-0 cardTitle'>
               {title}
               <hr className='m-0 mt-1 cardTitleDivider' />
@@ -30,15 +44,27 @@ const HomeTimelineListCard = ({ data, handleShowDelete, handleShowEdit }) => {
           </Link>
 
           <Card.Text>
-            {description && description.length > 200 ? description.slice(0, 200) + '...' : description}
+            {description && description.length > 200
+              ? description.slice(0, 200) + '...'
+              : description}
           </Card.Text>
         </Card.Body>
 
         <Card.Footer className='py-1'>
           <Row className='justify-content-between fst-italic fw-light opacity-50 homeCardFooter'>
-            <Col xs={8}
-              className='pt-1'>
-              Last Updated: {new Date(lastUpdated).toLocaleString('en-US', { hour12: false })}
+            <Col
+              xs={8}
+              className='pt-1'
+              onClick={() => handleShowInfoDetails(id)}
+              style={{ cursor: 'pointer' }}
+            >
+              <BsInfoCircle className='mb-1 me-1' />
+              Last Updated:{' '}
+              {
+                new Date(lastUpdated)
+                  .toLocaleString('en-US', { hour12: false })
+                  .split(',')[0]
+              }
             </Col>
             <Col xs={3} className='d-flex  ps-3 pe-1 justify-content-end'>
               <Button
@@ -54,10 +80,10 @@ const HomeTimelineListCard = ({ data, handleShowDelete, handleShowEdit }) => {
                   marginRight: '0.3rem',
                   backgroundColor: 'transparent',
                   border: 'none',
-                  color: textColor
+                  color: textColor,
                 }}
               >
-                <i className='bi bi-x-lg' ></i>
+                <i className='bi bi-x-lg'></i>
               </Button>
               <Button
                 onClick={() => handleShowEdit(id)}
@@ -71,17 +97,15 @@ const HomeTimelineListCard = ({ data, handleShowDelete, handleShowEdit }) => {
                   fontSize: 'large',
                   backgroundColor: 'transparent',
                   border: 'none',
-                  color: textColor
+                  color: textColor,
                 }}
               >
-                <i className='bi bi-three-dots' ></i>
+                <i className='bi bi-three-dots'></i>
               </Button>
             </Col>
           </Row>
         </Card.Footer>
       </Card>
-
-
     </>
   );
 };

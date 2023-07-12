@@ -277,6 +277,7 @@ const HomePage = () => {
                                   data={timeline}
                                   handleShowDelete={handleShowDelete}
                                   handleShowEdit={handleShowEdit}
+                                  handleShowInfoDetails={handleShowInfoDetails}
                                 />
                               </ListGroup.Item>
                             ))}
