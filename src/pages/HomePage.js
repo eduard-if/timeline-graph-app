@@ -31,7 +31,11 @@ import DeleteTimelineToast from '../components/Toasts/DeleteTimelineToast';
 import UpdateTimelineToast from '../components/Toasts/UpdateTimelineToast';
 import { MdRefresh } from 'react-icons/md';
 import DropdownToggle from 'react-bootstrap/esm/DropdownToggle';
-import { BsSortNumericDownAlt, BsSortNumericUp } from 'react-icons/bs';
+import {
+  BsSortNumericDownAlt,
+  BsSortNumericUp,
+  BsSortNumericUpAlt,
+} from 'react-icons/bs';
 import TimelineInfoDetailsModal from '../components/Modals/TimelineInfoDetailsModal';
 
 const HomePage = () => {
@@ -167,7 +171,7 @@ const HomePage = () => {
                             active={orderBy === 'lastUpdated' ? true : false}
                             onClick={() => setOrderBy('lastUpdated')}
                           >
-                            <BsSortNumericUp className='fs-5 me-1' />
+                            <BsSortNumericUpAlt className='fs-5 me-1' />
                             Last Updated Ascending
                           </Dropdown.Item>
                           <Dropdown.Item
@@ -180,16 +184,16 @@ const HomePage = () => {
                           </Dropdown.Item>
                           <Dropdown.Item
                             className='fw-light mb-1 rounded'
-                            active={orderBy === 'createdAt' ? true : false}
-                            onClick={() => setOrderBy('createdAt')}
+                            active={orderBy === '-createdAt' ? true : false}
+                            onClick={() => setOrderBy('-createdAt')}
                           >
-                            <BsSortNumericUp className='fs-5 me-1' />
+                            <BsSortNumericUpAlt className='fs-5 me-1' />
                             Created Ascending
                           </Dropdown.Item>
                           <Dropdown.Item
                             className='fw-light mt-1 rounded'
-                            active={orderBy === '-createdAt' ? true : false}
-                            onClick={() => setOrderBy('-createdAt')}
+                            active={orderBy === 'createdAt' ? true : false}
+                            onClick={() => setOrderBy('createdAt')}
                           >
                             <BsSortNumericDownAlt className='fs-5 me-1' />
                             Created Descending
@@ -255,6 +259,7 @@ const HomePage = () => {
                                 handleShowDelete={handleShowDelete}
                                 handleShowEdit={handleShowEdit}
                                 handleShowInfoDetails={handleShowInfoDetails}
+                                orderBy={orderBy}
                               />
                             </Col>
                           ))}
@@ -278,6 +283,7 @@ const HomePage = () => {
                                   handleShowDelete={handleShowDelete}
                                   handleShowEdit={handleShowEdit}
                                   handleShowInfoDetails={handleShowInfoDetails}
+                                  orderBy={orderBy}
                                 />
                               </ListGroup.Item>
                             ))}
