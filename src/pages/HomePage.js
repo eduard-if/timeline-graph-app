@@ -1,6 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import HomeNavbar from '../components/Navbars&Toolbars/HomeNavbar';
-import { Button, Col, Container, ListGroup, Nav, Row, Tab, Tabs, ToastContainer } from 'react-bootstrap';
+import {
+  Button,
+  Col,
+  Container,
+  Dropdown,
+  DropdownButton,
+  ListGroup,
+  Nav,
+  Row,
+  Tab,
+  Tabs,
+  ToastContainer,
+} from 'react-bootstrap';
 import CreateTimelineModal from '../components/Modals/CreateTimelineModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
@@ -17,48 +29,51 @@ import TimelineEditModal from '../components/Modals/TimelineEditModal';
 import TimelineDeleteModal from '../components/Modals/TimelineDeleteModal';
 import DeleteTimelineToast from '../components/Toasts/DeleteTimelineToast';
 import UpdateTimelineToast from '../components/Toasts/UpdateTimelineToast';
+import { FaSort } from 'react-icons/fa6';
+import DropdownToggle from 'react-bootstrap/esm/DropdownToggle';
 
 const HomePage = () => {
   const [showCreateTimelineModal, setShowCreateTimelineModal] = useState(false);
-  const md = useMediaQuery({ maxWidth: 992 })
-  const lg = useMediaQuery({ minWidth: 1200 })
+  const md = useMediaQuery({ maxWidth: 992 });
+  const lg = useMediaQuery({ minWidth: 1200 });
 
-  const handleCloseCreateTimelineModal = () => setShowCreateTimelineModal(false);
+  const handleCloseCreateTimelineModal = () =>
+    setShowCreateTimelineModal(false);
   const handleShowCreateTimelineModal = () => {
     setShowToast(false);
     setShowDeleteToast(false);
     setShowToast(false);
     setShowCreateTimelineModal(true);
-  }
+  };
 
-  const [itemIdtoEdit, setItemIdtoEdit] = useState('')
+  const [itemIdtoEdit, setItemIdtoEdit] = useState('');
 
   const [showEdit, setShowEdit] = useState(false);
 
   const handleCloseEdit = () => {
     setShowEdit(false);
     setItemIdtoEdit('');
-  }
+  };
 
   const handleShowEdit = (id) => {
-    setItemIdtoEdit(id)
+    setItemIdtoEdit(id);
     setShowEdit(true);
     setShowDeleteToast(false);
     setShowToast(false);
-  }
+  };
 
   const [showDelete, setShowDelete] = useState(false);
 
   const handleCloseDelete = () => {
     setShowDelete(false);
     setItemIdtoEdit('');
-  }
+  };
   const handleShowDelete = (id) => {
-    setItemIdtoEdit(id)
+    setItemIdtoEdit(id);
     setShowDelete(true);
     setShowDeleteToast(false);
     setShowToast(false);
-  }
+  };
 
   const [showToast, setShowToast] = useState(false);
 
@@ -68,99 +83,157 @@ const HomePage = () => {
 
   const handleScrollToTop = () => {
     window.scrollTo(0, 0);
-  }
+  };
 
   const dispatch = useDispatch();
   const location = useLocation();
 
-  const timelineList = useSelector(state => state.timelineList);
+  const timelineList = useSelector((state) => state.timelineList);
   const { error, loading, timelines } = timelineList;
 
+  const [orderBy, setOrderBy] = useState('-lastUpdated');
 
   useEffect(() => {
-    dispatch(listTimelines());
-  }, [dispatch, location]);
-
-
+    dispatch(listTimelines(orderBy));
+  }, [dispatch, location, orderBy]);
 
   return (
-    < >
-      <HomeNavbar handleShowCreateTimelineModal={handleShowCreateTimelineModal} />
+    <>
+      <HomeNavbar
+        handleShowCreateTimelineModal={handleShowCreateTimelineModal}
+      />
       <main className='pb-5 '>
-        <Container
-          className=' px-4 pb-4'>
+        <Container className=' px-4 pb-4'>
+          {loading ? (
+            <PuffLoader
+              color='#17141f'
+              role='status'
+              className='mx-auto'
+              speedMultiplier={2}
+              size={100}
+            />
+          ) : timelines && timelines.length === 0 ? (
+            <Message variant='secondary'>
+              <h1 className='text-center'>No Timelines</h1>
+            </Message>
+          ) : error ? (
+            <Message variant='danger'>
+              <h1 className='text-center fw-bold'>
+                <HiExclamationCircle className='mb-2' /> {error}
+              </h1>
+            </Message>
+          ) : (
+            <Tab.Container defaultActiveKey='grid'>
+              {/*timelines grid card and list card tabs*/}
+              <Row>
+                <Col xs={12} className='mb-5'>
+                  <Nav variant='underline' className='justify-content-center'>
+                    <Nav.Item>
+                      <Dropdown>
+                        <Dropdown.Toggle
+                          variant='dark'
+                          className='bg-transparent border-0 text-primary'
+                        >
+                          <i className='bi bi-funnel'></i>
+                        </Dropdown.Toggle>
 
-          {loading ? <PuffLoader color='#17141f' role='status' className='mx-auto' speedMultiplier={2} size={100} /> :
+                        <Dropdown.Menu className='rounded'>
+                          <Dropdown.Item
+                            active={orderBy === 'lastUpdated' ? true : false}
+                            onClick={() => setOrderBy('lastUpdated')}
+                          >
+                            Last Updated Ascending
+                          </Dropdown.Item>
+                          <Dropdown.Item
+                            active={orderBy === '-lastUpdated' ? true : false}
+                            onClick={() => setOrderBy('-lastUpdated')}
+                          >
+                            Last Updated Descending
+                          </Dropdown.Item>
+                          <Dropdown.Item
+                            active={orderBy === 'createdAt' ? true : false}
+                            onClick={() => setOrderBy('createdAt')}
+                          >
+                            Created Ascending
+                          </Dropdown.Item>
+                          <Dropdown.Item
+                            active={orderBy === '-createdAt' ? true : false}
+                            onClick={() => setOrderBy('-createdAt')}
+                          >
+                            Created Descending
+                          </Dropdown.Item>
+                        </Dropdown.Menu>
+                      </Dropdown>
+                    </Nav.Item>
+                    <Nav.Item>
+                      <Nav.Link eventKey='grid' className='px-3'>
+                        <i className='bi bi-grid'></i>
+                      </Nav.Link>
+                    </Nav.Item>
 
-            timelines && timelines.length === 0 ? <Message variant='secondary' >
-              <h1 className='text-center' >No Timelines</h1>
-            </Message> :
-              error ? <Message variant='danger' >
-                <h1 className='text-center fw-bold' ><HiExclamationCircle className='mb-2' /> {error}</h1>
-              </Message> :
-                (
-                  <Tab.Container defaultActiveKey='grid'>
-                    {/*timelines grid card and list card tabs*/}
-                    <Row>
-                      <Col xs={12} className='mb-5' >
-                        <Nav variant='underline' className='justify-content-center' >
-                          <Nav.Item>
-                            <Nav.Link eventKey='grid' className='px-3' >
-                              <i className='bi bi-grid' ></i>
-                            </Nav.Link>
-                          </Nav.Item>
-                          <Nav.Item>
-                            <Nav.Link eventKey='list' className='px-3'>
-                              <i className='bi bi-list' ></i>
-                            </Nav.Link>
-                          </Nav.Item>
-                        </Nav>
-                      </Col>
+                    <Nav.Item>
+                      <Nav.Link eventKey='list' className='px-3'>
+                        <i className='bi bi-list'></i>
+                      </Nav.Link>
+                    </Nav.Item>
+                  </Nav>
+                </Col>
 
-                      <Col xs={12}>
-                        <Tab.Content>
-                          <Tab.Pane eventKey='grid' transition={false} >
-                            <Row >
-                              {timelines.map((timeline, index) => (
+                <Col xs={12}>
+                  <Tab.Content>
+                    <Tab.Pane eventKey='grid' transition={false}>
+                      <Row>
+                        {timelines.map((timeline, index) => (
+                          <Col
+                            xs={12}
+                            sm={12}
+                            md={6}
+                            lg={4}
+                            xl={3}
+                            className='mb-4'
+                            key={index}
+                          >
+                            <HomeTimelineGridCard
+                              data={timeline}
+                              handleShowDelete={handleShowDelete}
+                              handleShowEdit={handleShowEdit}
+                            />
+                          </Col>
+                        ))}
+                      </Row>
+                    </Tab.Pane>
 
-                                <Col xs={12} sm={12} md={6} lg={4} xl={3} className='mb-4' key={index} >
-                                  <HomeTimelineGridCard
-                                    data={timeline}
-                                    handleShowDelete={handleShowDelete}
-                                    handleShowEdit={handleShowEdit}
-                                  />
-                                </Col>
-
-                              ))}
-
-                            </Row>
-                          </Tab.Pane>
-
-                          <Tab.Pane eventKey='list' transition={false} >
-                            <div className='d-flex justify-content-center'>
-                              <ListGroup variant='flush' className={!md ? 'w-50' : 'w-100'} >
-                                {timelines.map((timeline, index) => (
-                                  <ListGroup.Item key={index} className='py-3 bg-transparent'>
-                                    <HomeTimelineListCard
-                                      data={timeline}
-                                      handleShowDelete={handleShowDelete}
-                                      handleShowEdit={handleShowEdit}
-                                    />
-                                  </ListGroup.Item>
-                                ))}
-                              </ListGroup>
-                            </div>
-                          </Tab.Pane>
-                        </Tab.Content>
-                      </Col>
-                    </Row>
-                  </Tab.Container>
-                )}
-
+                    <Tab.Pane eventKey='list' transition={false}>
+                      <div className='d-flex justify-content-center'>
+                        <ListGroup
+                          variant='flush'
+                          className={!md ? 'w-50' : 'w-100'}
+                        >
+                          {timelines.map((timeline, index) => (
+                            <ListGroup.Item
+                              key={index}
+                              className='py-3 bg-transparent'
+                            >
+                              <HomeTimelineListCard
+                                data={timeline}
+                                handleShowDelete={handleShowDelete}
+                                handleShowEdit={handleShowEdit}
+                              />
+                            </ListGroup.Item>
+                          ))}
+                        </ListGroup>
+                      </div>
+                    </Tab.Pane>
+                  </Tab.Content>
+                </Col>
+              </Row>
+            </Tab.Container>
+          )}
         </Container>
       </main>
 
       {/*create timeline and scroll to top buttons */}
+
       <Button
         variant='secondary'
         className=' rounded-circle px-2 py-1 me-4 fs-6 shadow-sm'
@@ -170,10 +243,10 @@ const HomePage = () => {
           bottom: 0,
           right: 0,
           scale: '1.2',
-          marginBottom: '6rem'
+          marginBottom: '6rem',
         }}
       >
-        <i className='bi bi-chevron-up' ></i>
+        <i className='bi bi-chevron-up'></i>
       </Button>
 
       <Button
@@ -188,7 +261,7 @@ const HomePage = () => {
           marginBottom: '2rem',
         }}
       >
-        <i className='bi bi-plus-lg' ></i>
+        <i className='bi bi-plus-lg'></i>
       </Button>
 
       <ToastContainer
@@ -199,12 +272,21 @@ const HomePage = () => {
           bottom: 0,
           left: '50%',
           transform: 'translateX(-50%)',
-        }} >
-        <CreateTimelineToast showToast={showToast} setShowToast={setShowToast} />
-        <DeleteTimelineToast showDeleteToast={showDeleteToast} setShowDeleteToast={setShowDeleteToast} />
-        <UpdateTimelineToast showUpdateToast={showUpdateToast} setShowUpdateToast={setShowUpdateToast} />
+        }}
+      >
+        <CreateTimelineToast
+          showToast={showToast}
+          setShowToast={setShowToast}
+        />
+        <DeleteTimelineToast
+          showDeleteToast={showDeleteToast}
+          setShowDeleteToast={setShowDeleteToast}
+        />
+        <UpdateTimelineToast
+          showUpdateToast={showUpdateToast}
+          setShowUpdateToast={setShowUpdateToast}
+        />
       </ToastContainer>
-
 
       <CreateTimelineModal
         showCreateTimelineModal={showCreateTimelineModal}
@@ -220,7 +302,6 @@ const HomePage = () => {
             showEdit={showEdit}
             handleCloseEdit={handleCloseEdit}
             itemId={itemIdtoEdit}
-
           />
           <TimelineDeleteModal
             setShowDeleteToast={setShowDeleteToast}
@@ -230,8 +311,7 @@ const HomePage = () => {
           />
         </>
       )}
-
-    </ >
+    </>
   );
 };
 
