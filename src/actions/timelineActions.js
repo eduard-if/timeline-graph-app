@@ -32,10 +32,11 @@ import {
 import axios from 'axios';
 
 // get all the timelines for the home page
-export const listTimelines = (orderBy) => async (dispatch) => {
+export const listTimelines = (orderBy, search) => async (dispatch) => {
   try {
     dispatch({ type: TIMELINE_LIST_REQUEST });
-    const { data } = await axios.get(`/api/timelines/${orderBy}`);
+    const params = { orderBy, search };
+    const { data } = await axios.get('/api/timelines', { params });
     console.log(data);
     dispatch({
       type: TIMELINE_LIST_SUCCESS,
