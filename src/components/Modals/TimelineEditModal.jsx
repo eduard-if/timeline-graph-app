@@ -1,24 +1,46 @@
 import React, { useEffect, useState } from 'react';
-import { Accordion, Button, Col, Container, Form, Modal, Row } from 'react-bootstrap';
+import {
+  Accordion,
+  Button,
+  Col,
+  Container,
+  Form,
+  Modal,
+  Row,
+} from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { CompactPicker } from 'react-color';
 import { FaBrush } from 'react-icons/fa6';
-import { BiImageAdd } from 'react-icons/bi'
+import { BiImageAdd } from 'react-icons/bi';
 import { BsCardText, BsFillRecordCircleFill } from 'react-icons/bs';
 import { MdTitle } from 'react-icons/md';
 
-import { FaFloppyDisk } from 'react-icons/fa6'
+import { FaFloppyDisk } from 'react-icons/fa6';
 import { updateTimeline } from '../../actions/timelineActions';
 
-const TimelineEditModal = ({ itemId, showEdit, handleCloseEdit, setShowUpdateToast }) => {
+const TimelineEditModal = ({
+  itemId,
+  showEdit,
+  handleCloseEdit,
+  setShowUpdateToast,
+}) => {
   const dispatch = useDispatch();
 
-  const timelineList = useSelector(state => state.timelineList);
+  const timelineList = useSelector((state) => state.timelineList);
   const { timelines } = timelineList;
-  const timeline = timelines.filter(timeline => timeline.id === itemId);
-  const { title, description, imageUrl, id, bgColor, textColor, titleColor, borderColor } = timeline[0];
+  const timeline = timelines.filter((timeline) => timeline.id === itemId);
+  const {
+    title,
+    description,
+    imageUrl,
+    id,
+    bgColor,
+    textColor,
+    titleColor,
+    borderColor,
+  } = timeline[0];
 
-  const [editTitle, setEditTitle] = useState('')
+  const [editTitle, setEditTitle] = useState('');
   const [editDescription, setEditDescription] = useState('');
   const [editBackgroundColor, setEditBackgroundColor] = useState('');
   const [editBorderColor, setEditBorderColor] = useState('');
@@ -36,40 +58,47 @@ const TimelineEditModal = ({ itemId, showEdit, handleCloseEdit, setShowUpdateToa
       setEditTitleColor(titleColor);
       setEditImage(imageUrl);
     }
-
-  }, [itemId])
+  }, [itemId]);
 
   const handleSubmitEdit = () => {
-    console.log('submitted edit!')
-    console.log(timeline)
-    dispatch(updateTimeline({
-      id,
-      'title': editTitle,
-      'description': editDescription,
-      'imageUrl': editImage,
-      'bgColor': editBackgroundColor,
-      'borderColor': editBorderColor,
-      'textColor': editTextColor,
-      'titleColor': editTitleColor
-    }))
+    console.log('submitted edit!');
+    console.log(timeline);
+    dispatch(
+      updateTimeline({
+        id,
+        'title': editTitle,
+        'description': editDescription,
+        'imageUrl': editImage,
+        'bgColor': editBackgroundColor,
+        'borderColor': editBorderColor,
+        'textColor': editTextColor,
+        'titleColor': editTitleColor,
+      })
+    );
     handleCloseEdit();
     setShowUpdateToast(true);
-  }
-
+  };
 
   return (
-
-    <Modal show={showEdit} onHide={handleCloseEdit} className='' scrollable='true'>
+    <Modal
+      show={showEdit}
+      onHide={handleCloseEdit}
+      className=''
+      scrollable='true'
+      animation={false}
+    >
       <Modal.Header closeButton className='bg-info text-light shadow-sm'>
         <Modal.Title>
-          <i className='bi-pencil-square pe-2' ></i>
+          <i className='bi-pencil-square pe-2'></i>
           Edit Timeline
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form>
           <Form.Group className='mb-3 p-2 mb-3 modalInputs' controlId='title'>
-            <Form.Label> <MdTitle className='mb-1' /> Title</Form.Label>
+            <Form.Label>
+              <MdTitle className='mb-1' /> Title
+            </Form.Label>
             <Form.Control
               type='text'
               value={editTitle}
@@ -80,18 +109,22 @@ const TimelineEditModal = ({ itemId, showEdit, handleCloseEdit, setShowUpdateToa
             className='mb-3 p-2 mb-3 modalInputs'
             controlId='description'
           >
-            <Form.Label> <BsCardText className='mb-1' /> Description</Form.Label>
+            <Form.Label>
+              <BsCardText className='mb-1' /> Description
+            </Form.Label>
             <Form.Control
               as='textarea'
               rows={3}
-              placeholder='Type something...'
+              placeholder='Keywords or details for easier searching...'
               value={editDescription}
               onChange={(e) => setEditDescription(e.target.value)}
             />
           </Form.Group>
 
           <Form.Group className='mb-3 p-2 mb-3 modalInputs' controlId='image'>
-            <Form.Label> <BiImageAdd className='mb-1' /> Image</Form.Label>
+            <Form.Label>
+              <BiImageAdd className='mb-1' /> Image
+            </Form.Label>
             <Form.Control
               type='text'
               placeholder='Your URL goes here'
@@ -100,48 +133,114 @@ const TimelineEditModal = ({ itemId, showEdit, handleCloseEdit, setShowUpdateToa
             />
           </Form.Group>
           <div className='modalInputs'>
-            <div className='fs-5 fw-light text-center my-3 ' > <FaBrush />  Card Color Styling</div>
+            <div className='fs-5 fw-light text-center my-3 '>
+              <FaBrush /> Card Color Styling
+            </div>
 
-            <Accordion className='text-center mx-3 mb-3 shadow-sm'  >
+            <Accordion className='text-center mx-3 mb-3 shadow-sm'>
               <Accordion.Item eventKey='titleColor'>
-                <Accordion.Header > <BsFillRecordCircleFill style={{ color: editTitleColor }} className='me-1' /> Title</Accordion.Header>
+                <Accordion.Header>
+                  <BsFillRecordCircleFill
+                    style={{ color: editTitleColor }}
+                    className='me-1'
+                  />
+                  Title
+                </Accordion.Header>
                 <Accordion.Body>
-                  <CompactPicker color={editTitleColor} onChangeComplete={(e) => { setEditTitleColor(e.hex) }} />
-                  <div className='d-flex justify-content-center mt-3' >
-                    Customize: <Form.Control className='mx-2' type='color' value={editTitleColor} onChange={(e) => setEditTitleColor(e.target.value)}
+                  <CompactPicker
+                    color={editTitleColor}
+                    onChangeComplete={(e) => {
+                      setEditTitleColor(e.hex);
+                    }}
+                  />
+                  <div className='d-flex justify-content-center mt-3'>
+                    Customize:
+                    <Form.Control
+                      className='mx-2'
+                      type='color'
+                      value={editTitleColor}
+                      onChange={(e) => setEditTitleColor(e.target.value)}
                     />
                   </div>
                 </Accordion.Body>
               </Accordion.Item>
 
               <Accordion.Item eventKey='bgColor'>
-                <Accordion.Header> <BsFillRecordCircleFill style={{ color: editBackgroundColor }} className='me-1' /> Background</Accordion.Header>
+                <Accordion.Header>
+                  <BsFillRecordCircleFill
+                    style={{ color: editBackgroundColor }}
+                    className='me-1'
+                  />
+                  Background
+                </Accordion.Header>
                 <Accordion.Body>
-                  <CompactPicker color={editBackgroundColor} onChangeComplete={(e) => { setEditBackgroundColor(e.hex) }} />
-                  <div className='d-flex justify-content-center mt-3' >
-                    Customize: <Form.Control className='mx-2' type='color' value={editBackgroundColor} onChange={(e) => setEditBackgroundColor(e.target.value)}
+                  <CompactPicker
+                    color={editBackgroundColor}
+                    onChangeComplete={(e) => {
+                      setEditBackgroundColor(e.hex);
+                    }}
+                  />
+                  <div className='d-flex justify-content-center mt-3'>
+                    Customize:
+                    <Form.Control
+                      className='mx-2'
+                      type='color'
+                      value={editBackgroundColor}
+                      onChange={(e) => setEditBackgroundColor(e.target.value)}
                     />
                   </div>
                 </Accordion.Body>
               </Accordion.Item>
 
-              <Accordion.Item eventKey='textColor' >
-                <Accordion.Header> <BsFillRecordCircleFill style={{ color: editTextColor }} className='me-1' />  Description Text</Accordion.Header>
+              <Accordion.Item eventKey='textColor'>
+                <Accordion.Header>
+                  <BsFillRecordCircleFill
+                    style={{ color: editTextColor }}
+                    className='me-1'
+                  />
+                  Description Text
+                </Accordion.Header>
                 <Accordion.Body>
-                  <CompactPicker color={editTextColor} onChangeComplete={(e) => { setEditTextColor(e.hex) }} />
-                  <div className='d-flex justify-content-center mt-3' >
-                    Customize: <Form.Control className='mx-2' type='color' value={editTextColor} onChange={(e) => setEditTextColor(e.target.value)}
+                  <CompactPicker
+                    color={editTextColor}
+                    onChangeComplete={(e) => {
+                      setEditTextColor(e.hex);
+                    }}
+                  />
+                  <div className='d-flex justify-content-center mt-3'>
+                    Customize:
+                    <Form.Control
+                      className='mx-2'
+                      type='color'
+                      value={editTextColor}
+                      onChange={(e) => setEditTextColor(e.target.value)}
                     />
                   </div>
                 </Accordion.Body>
               </Accordion.Item>
 
-              <Accordion.Item eventKey='borderColor' >
-                <Accordion.Header> <BsFillRecordCircleFill style={{ color: editBorderColor }} className='me-1' />  Border</Accordion.Header>
+              <Accordion.Item eventKey='borderColor'>
+                <Accordion.Header>
+                  <BsFillRecordCircleFill
+                    style={{ color: editBorderColor }}
+                    className='me-1'
+                  />
+                  Border
+                </Accordion.Header>
                 <Accordion.Body>
-                  <CompactPicker color={editBorderColor} onChangeComplete={(e) => { setEditBorderColor(e.hex) }} />
-                  <div className='d-flex justify-content-center mt-3' >
-                    Customize: <Form.Control className='mx-2' type='color' value={editBorderColor} onChange={(e) => setEditBorderColor(e.target.value)}
+                  <CompactPicker
+                    color={editBorderColor}
+                    onChangeComplete={(e) => {
+                      setEditBorderColor(e.hex);
+                    }}
+                  />
+                  <div className='d-flex justify-content-center mt-3'>
+                    Customize:
+                    <Form.Control
+                      className='mx-2'
+                      type='color'
+                      value={editBorderColor}
+                      onChange={(e) => setEditBorderColor(e.target.value)}
                     />
                   </div>
                 </Accordion.Body>
@@ -150,19 +249,23 @@ const TimelineEditModal = ({ itemId, showEdit, handleCloseEdit, setShowUpdateToa
           </div>
         </Form>
       </Modal.Body>
-      <Modal.Footer className='justify-content-center border-0' >
-        <Button variant='light' className='rounded shadow-sm' onClick={handleCloseEdit}>
-          Cancel <i className='bi bi-x-lg' ></i>
+      <Modal.Footer className='justify-content-center border-0'>
+        <Button
+          variant='light'
+          className='rounded shadow-sm'
+          onClick={handleCloseEdit}
+        >
+          Cancel <i className='bi bi-x-lg'></i>
         </Button>
-        <Button variant='info' className='rounded shadow-sm' onClick={handleSubmitEdit}>
+        <Button
+          variant='info'
+          className='rounded shadow-sm'
+          onClick={handleSubmitEdit}
+        >
           Save Changes <FaFloppyDisk className='align-top mt-1' />
         </Button>
       </Modal.Footer>
     </Modal>
-
-
-
-
   );
 };
 
