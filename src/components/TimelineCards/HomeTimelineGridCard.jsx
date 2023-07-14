@@ -42,7 +42,7 @@ const HomeTimelineGridCard = ({
               src={data.imageUrl}
               className='overflow-hidden homeCardImg shadow-sm'
               style={{
-                maxHeight: md ? '50vh' : '30vh',
+                maxHeight: md ? '35vh' : '25vh',
               }}
             />
           </Link>
